@@ -1,27 +1,21 @@
-
-
 #include <Arduboy2.h>
 #include <ArduboyTones.h>
-
-#include "guy.h"
-#include "menu.h"
-#include "music.h"
+#include "GameStateManager.h"
+#include "StartMenuState.h"
+#include "CharacterSelectionState.h"
 
 Arduboy2 arduboy;
-//ArduboyTones sound(arduboy.audio.enabled);
+ArduboyTones sound(arduboy.audio.enabled);
 
-Menu _mainmenu = Menu(arduboy);
-Guy _character = Guy(arduboy);
-
-int state = 0;
-int action = -1;
-
+GameStateManager stateManager;
+StartMenuState startMenuState;
+CharacterSelectionState characterSelectionState;
 
 void setup() {
   arduboy.begin();
-  arduboy.setFrameRate(15);
+  arduboy.setFrameRate(60);
 
-  //sound.tones(score);
+  stateManager.setState(&startMenuState);
 }
 
 void loop() {
@@ -31,15 +25,25 @@ void loop() {
   arduboy.clear();
   arduboy.pollButtons();
 
-  if (state == 0) {
-    menuUpdate();
-  } else {
-    gameUpdate();
-  }
+  stateManager.update(arduboy);
+  stateManager.draw(arduboy);
 
   arduboy.display();
 }
 
+void changeGameState(GameStateID newState) {
+    switch (newState) {
+        case STATE_START_MENU:
+            stateManager.setState(&startMenuState);
+            break;
+        case STATE_CHARACTER_SELECTION:
+            stateManager.setState(&characterSelectionState);
+            break;
+    }
+}
+
+
+/*
 void menuUpdate() {
   Sprites::drawOverwrite (0, 0, title, 0);
 
@@ -68,3 +72,4 @@ void gameUpdate() {
   _character.draw();
   _mainmenu.draw();
 }
+*/
