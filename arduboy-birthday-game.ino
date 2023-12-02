@@ -12,8 +12,13 @@ StartMenuState startMenuState;
 CharacterSelectionState characterSelectionState;
 
 void setup() {
+  Serial.begin(9600);
+
   arduboy.begin();
   arduboy.setFrameRate(60);
+
+  startMenuState.setStateChangeCallback(changeGameState);
+  characterSelectionState.setStateChangeCallback(changeGameState);
 
   stateManager.setState(&startMenuState);
 }
@@ -41,35 +46,3 @@ void changeGameState(GameStateID newState) {
             break;
     }
 }
-
-
-/*
-void menuUpdate() {
-  Sprites::drawOverwrite (0, 0, title, 0);
-
-  if (arduboy.justPressed(A_BUTTON)) {
-    state = 1;
-  }
-}
-
-void gameUpdate() {
-  
-  if(arduboy.justPressed(LEFT_BUTTON)) {
-      _mainmenu.prev();
-  }
-  
-  if(arduboy.justPressed(RIGHT_BUTTON)) {
-      _mainmenu.next();
-  }
-  
-  if (arduboy.justPressed(A_BUTTON)) {
-    //beep.tone(beep.freq(1000), 100);
-    action = _mainmenu.value();
-    _character.apply(action);
-  }
-  
-  _character.update();
-  _character.draw();
-  _mainmenu.draw();
-}
-*/

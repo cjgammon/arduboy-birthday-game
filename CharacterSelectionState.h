@@ -1,4 +1,4 @@
-// CharacterSelectionState.h
+// StartMenuState.h
 #ifndef CHARACTERSELECTIONSTATE_H
 #define CHARACTERSELECTIONSTATE_H
 

@@ -10,6 +10,9 @@ public:
     virtual void init() = 0;
     virtual void update(Arduboy2 &arduboy) = 0;
     virtual void draw(Arduboy2 &arduboy) = 0;
+    virtual void setStateChangeCallback(void (*callback)(GameStateID newState)) {
+        stateChangeCallback = callback;
+    }
 protected:
     void (*stateChangeCallback)(GameStateID newState);
 };
