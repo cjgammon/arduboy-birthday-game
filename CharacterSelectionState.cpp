@@ -2,6 +2,7 @@
 #include "CharacterSelectionState.h"
 #include "sprites.h"
 #include "Character.h"
+#include "Character0.h"
 
 int numCharacters = 5;
 Character** playerCharacters; // Declare an array of character pointers
@@ -13,7 +14,7 @@ void CharacterSelectionState::init() {
     for (int i = 0; i < numCharacters; i++) {
       int initialX = i * 20; // Adjust the X position as needed
       int initialY = 20;    // Set the Y position as needed
-      playerCharacters[i] = new Character(initialX, initialY);
+      playerCharacters[i] = new Character0(initialX, initialY);
       playerCharacters[i]->init(character0idle, 2, 10); // Use the appropriate sprite for each character
     }
 }
