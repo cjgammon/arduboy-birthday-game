@@ -27,17 +27,17 @@ void loop() {
   if (!(arduboy.nextFrame()))
     return;
 
-  arduboy.clear();
   arduboy.pollButtons();
+  arduboy.clear();
 
   stateManager.update(arduboy);
   stateManager.draw(arduboy);
 
-  arduboy.display();
+  arduboy.display(CLEAR_BUFFER);
 }
 
 void changeGameState(GameStateID newState) {
-      stateManager.getCurrentState()->cleanup(); // Add a cleanup method in your GameState base class
+      stateManager.getCurrentState()->cleanup();
 
     switch (newState) {
         case STATE_START_MENU:
