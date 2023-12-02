@@ -5,7 +5,7 @@
 
 class Character {
 public:
-    Character();
+    Character(int initialX, int initialY);
     virtual ~Character();
 
     enum CharacterState {
@@ -18,6 +18,13 @@ public:
     void update(Arduboy2 &arduboy);
     void setState(CharacterState newState);
     void draw(Arduboy2 &arduboy);
+        // Getter methods for x and y
+    int getX() const { return x; }
+    int getY() const { return y; }
+
+    // Setter methods for x and y
+    void setX(int newX) { x = newX; }
+    void setY(int newY) { y = newY; }
 
 protected:
     const uint8_t* sprite;
@@ -26,6 +33,8 @@ protected:
     int currentFrame;
     int frameChangeInterval;
     CharacterState state;
+    int x; // X coordinate
+    int y; // Y coordinate
 };
 
 #endif // CHARACTER_H

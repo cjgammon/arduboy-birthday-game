@@ -1,7 +1,10 @@
 #include "Character.h"
 #include "sprites.h"
 
-Character::Character() {}
+Character::Character(int initialX, int initialY) {
+    x = initialX;
+    y = initialY;
+}
 
 Character::~Character() {}
 
@@ -11,6 +14,7 @@ void Character::init(const uint8_t* sprite, int frameCount, int frameChangeInter
     this->sprite = sprite;
     this->frameCount = frameCount;
     this->frameChangeInterval = frameChangeInterval;
+    this->state = CharacterState::IDLE; // Use '::' instead of '.'
 }
 
 void Character::update(Arduboy2 &arduboy) {
@@ -29,6 +33,6 @@ void Character::setState(CharacterState newState) {
 }
 
 void Character::draw(Arduboy2 &arduboy) {
-    Sprites::drawOverwrite(0, 0, sprite, currentFrame);
+    Sprites::drawOverwrite(x, y, sprite, currentFrame);
 }
 
