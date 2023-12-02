@@ -9,10 +9,6 @@ public:
     Character1(int initialX, int initialY);
     ~Character1();
 
-    // You can add any additional methods or properties specific to Character0 here
-
-private:
-    const uint8_t* predefinedSprite;
 };
 
 #endif // CHARACTER1_H
