@@ -33,7 +33,7 @@ void loop() {
   stateManager.update(arduboy);
   stateManager.draw(arduboy);
 
-  arduboy.display(CLEAR_BUFFER);
+  arduboy.display();
 }
 
 void changeGameState(GameStateID newState) {
