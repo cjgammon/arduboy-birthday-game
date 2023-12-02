@@ -1,6 +1,5 @@
 // CharacterSelectionState.cpp
 #include "CharacterSelectionState.h"
-#include "sprites.h"
 #include "Character.h"
 #include "Character0.h"
 #include "Character1.h"

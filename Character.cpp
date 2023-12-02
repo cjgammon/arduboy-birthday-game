@@ -1,5 +1,4 @@
 #include "Character.h"
-#include "sprites.h"
 
 Character::Character(int initialX, int initialY) {
     x = initialX;
