@@ -5,6 +5,10 @@
 Character0::Character0(int initialX, int initialY) : Character(initialX, initialY) {
     this->predefinedSprite = character0idle;
     // You can add any additional initialization specific to Character0 here
+    this->sprite = character0idle;
+    this->frameCount = 2;
+    this->frameChangeInterval = 10;
+    this->state = CharacterState::IDLE; // Use '::' instead of '.'
 }
 
 Character0::~Character0() {
