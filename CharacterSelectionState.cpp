@@ -5,7 +5,7 @@
 #include "Character0.h"
 #include "Character1.h"
 
-int numCharacters = 5;
+int numCharacters = 1;
 Character** playerCharacters; // Declare an array of character pointers
 
 
