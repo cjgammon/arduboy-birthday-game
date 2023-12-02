@@ -37,7 +37,7 @@ void loop() {
 }
 
 void changeGameState(GameStateID newState) {
-      stateManager.getCurrentState()->cleanup();
+      //stateManager.getCurrentState()->cleanup();
 
     switch (newState) {
         case STATE_START_MENU:
