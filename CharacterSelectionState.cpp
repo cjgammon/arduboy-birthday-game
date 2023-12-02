@@ -3,31 +3,38 @@
 #include "sprites.h"
 #include "Character.h"
 
-Character* playerCharacter; // Declare a pointer to a character object
-
+int numCharacters = 5;
+Character** playerCharacters; // Declare an array of character pointers
 
 void CharacterSelectionState::init() {
     // Initialization code
-    
-    // Create an instance of MyCharacter
-    playerCharacter = new Character(0, 20);
-    playerCharacter->init(character0idle, 2, 10);
+    playerCharacters = new Character*[numCharacters]; // Allocate memory for the array
+
+    for (int i = 0; i < numCharacters; i++) {
+      int initialX = i * 20; // Adjust the X position as needed
+      int initialY = 20;    // Set the Y position as needed
+      playerCharacters[i] = new Character(initialX, initialY);
+      playerCharacters[i]->init(character0idle, 2, 10); // Use the appropriate sprite for each character
+    }
 }
 
 void CharacterSelectionState::update(Arduboy2 &arduboy) {
     // Update logic
-    
     if (arduboy.justPressed(A_BUTTON)) {
-        if (stateChangeCallback != nullptr) {
-            stateChangeCallback(STATE_START_MENU);
-        }
+      if (stateChangeCallback != nullptr) {
+          stateChangeCallback(STATE_START_MENU);
+      }
     }
 
-    playerCharacter->update(arduboy);
+    for (int i = 0; i < numCharacters; i++) {
+      playerCharacters[i]->update(arduboy);
+    }
 
 }
 
 void CharacterSelectionState::draw(Arduboy2 &arduboy) {
     // Drawing code
-    playerCharacter->draw(arduboy);
+    for (int i = 0; i < numCharacters; i++) {
+        playerCharacters[i]->draw(arduboy);
+    }
 }
