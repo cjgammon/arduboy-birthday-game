@@ -9,6 +9,7 @@ public:
     void init() override;
     void update(Arduboy2 &arduboy) override;
     void draw(Arduboy2 &arduboy) override;
+    void cleanup() override;
 };
 
 #endif

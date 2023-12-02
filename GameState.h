@@ -13,6 +13,7 @@ public:
     virtual void setStateChangeCallback(void (*callback)(GameStateID newState)) {
         stateChangeCallback = callback;
     }
+    virtual void cleanup() {} // Add a cleanup method
 protected:
     void (*stateChangeCallback)(GameStateID newState);
 };

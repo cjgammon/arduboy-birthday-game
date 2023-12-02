@@ -6,7 +6,7 @@ Character0::Character0(int initialX, int initialY) : Character(initialX, initial
     this->sprite = character0idle;
     this->frameCount = 2;
     this->frameChangeInterval = 10;
-    this->state = CharacterState::IDLE; // Use '::' instead of '.'
+    this->state = CharacterState::IDLE;
 }
 
 Character0::~Character0() {

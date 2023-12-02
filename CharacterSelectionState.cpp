@@ -8,6 +8,7 @@
 int numCharacters = 5;
 Character** playerCharacters; // Declare an array of character pointers
 
+
 void CharacterSelectionState::init() {
     // Initialization code
     playerCharacters = new Character*[numCharacters]; // Allocate memory for the array
@@ -20,8 +21,6 @@ void CharacterSelectionState::init() {
       } else {
         playerCharacters[i] = new Character1(initialX, initialY);
       }
-      //playerCharacters[i] = new Character0(initialX, initialY);
-      //playerCharacters[i]->init(character0idle, 2, 10); // Use the appropriate sprite for each character
     }
 }
 
@@ -44,4 +43,12 @@ void CharacterSelectionState::draw(Arduboy2 &arduboy) {
     for (int i = 0; i < numCharacters; i++) {
         playerCharacters[i]->draw(arduboy);
     }
+}
+
+void CharacterSelectionState::cleanup() {
+    // Drawing code
+    for (int i = 0; i < numCharacters; i++) {
+        delete playerCharacters[i]; // Delete each character instance
+    }
+    delete[] playerCharacters; // Delete the array of character pointers
 }

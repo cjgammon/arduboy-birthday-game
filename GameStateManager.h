@@ -12,6 +12,7 @@ public:
     void setState(GameState *state);
     void update(Arduboy2 &arduboy);
     void draw(Arduboy2 &arduboy);
+    GameState* getCurrentState();
 };
 
 #endif

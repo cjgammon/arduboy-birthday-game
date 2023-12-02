@@ -37,6 +37,8 @@ void loop() {
 }
 
 void changeGameState(GameStateID newState) {
+      stateManager.getCurrentState()->cleanup(); // Add a cleanup method in your GameState base class
+
     switch (newState) {
         case STATE_START_MENU:
             stateManager.setState(&startMenuState);

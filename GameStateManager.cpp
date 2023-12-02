@@ -13,3 +13,7 @@ void GameStateManager::update(Arduboy2 &arduboy) {
 void GameStateManager::draw(Arduboy2 &arduboy) {
     currentState->draw(arduboy);
 }
+
+GameState* GameStateManager::getCurrentState() {
+    return currentState;
+}
