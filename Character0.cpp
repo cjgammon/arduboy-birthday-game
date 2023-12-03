@@ -11,7 +11,7 @@ Character0::Character0(int initialX, int initialY) : Character(initialX, initial
     this->walkSprite = character0walk;
     this->walkFrameCount = 9;
 
-    this->frameChangeInterval = 10;
+    this->frameChangeInterval = 6;  //this impacts the perceived frame rate of the animation
     this->state = CharacterState::IDLE;
 }
 

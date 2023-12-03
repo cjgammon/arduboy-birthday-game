@@ -11,7 +11,8 @@ bool showText = true; // Initial state is to show the text
 
 void StartMenuState::init() {
     // Initialization code
-    
+    showText = true;
+    lastBlinkTime = millis(); // Reset lastBlinkTime to the current time
 }
 
 void StartMenuState::update(Arduboy2 &arduboy) {

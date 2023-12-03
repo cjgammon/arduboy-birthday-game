@@ -11,7 +11,7 @@ Character1::Character1(int initialX, int initialY) : Character(initialX, initial
     this->walkSprite = character1walk;
     this->walkFrameCount = 9;
     
-    this->frameChangeInterval = 10;
+    this->frameChangeInterval = 6;
     this->state = CharacterState::IDLE;
 }
 
