@@ -32,7 +32,7 @@ void Character::setState(CharacterState newState) {
 }
 
 void Character::draw(Arduboy2 &arduboy) {
-    Sprites::drawOverwrite(x, y, sprite, 0);
+    Sprites::drawOverwrite(x, y, sprite, currentFrame);
     //Sprites::drawSelfMasked(x, y, sprite, currentFrame);
 }
 
