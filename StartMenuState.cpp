@@ -7,7 +7,7 @@
 #define CHAR_WIDTH 6 // character width in pixels including inter-character spacing
 
 unsigned long lastBlinkTime = 0;
-bool showText = false; // Initial state is to show the text
+bool showText = true; // Initial state is to show the text
 
 void StartMenuState::init() {
     // Initialization code
