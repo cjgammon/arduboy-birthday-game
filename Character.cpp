@@ -4,6 +4,7 @@ Character::Character(int initialX, int initialY) {
   x = initialX;
   y = initialY;
   currentFrame = 0;
+  lives = 3;
 }
 
 Character::~Character() {}

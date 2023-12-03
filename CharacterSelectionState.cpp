@@ -14,8 +14,6 @@ Character** playerCharacters; // Declare an array of character pointers
 
 int currentCharacter = 0;
 
-GameModel& gameModel = GameModel::getInstance();
-
 void CharacterSelectionState::init() {
     // Initialization code
     playerCharacters = new Character*[numCharacters]; // Allocate memory for the array
@@ -35,7 +33,7 @@ void CharacterSelectionState::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justPressed(A_BUTTON)) {
       if (stateChangeCallback != nullptr) {
-          gameModel.setSelectedCharacter(currentCharacter);
+          gameModel.setSelectedCharacter(playerCharacters[currentCharacter]);
           stateChangeCallback(STATE_GAME_PLAY);
       }
     }

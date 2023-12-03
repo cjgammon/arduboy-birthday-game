@@ -3,6 +3,7 @@
 #define GAMEPLAYSTATE_H
 
 #include "GameState.h"
+#include "GameUI.h"
 
 class GamePlayState : public GameState {
 public:
@@ -10,6 +11,10 @@ public:
     void update(Arduboy2 &arduboy) override;
     void draw(Arduboy2 &arduboy) override;
     void cleanup() override;
+private:
+    GameUI gameUI; // Create an instance of the GameUI class 
 };
+
+
 
 #endif
