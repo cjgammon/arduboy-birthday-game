@@ -40,5 +40,4 @@ void GamePlayState::draw(Arduboy2 &arduboy) {
 
 void GamePlayState::cleanup() {
     // Drawing code
-    delete playerCharacter; // Delete character instance
 }
