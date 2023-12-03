@@ -27,7 +27,7 @@ void CharacterSelectionState::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justPressed(A_BUTTON)) {
       if (stateChangeCallback != nullptr) {
-          stateChangeCallback(STATE_START_MENU);
+          stateChangeCallback(STATE_GAME_PLAY);
       }
     }
 

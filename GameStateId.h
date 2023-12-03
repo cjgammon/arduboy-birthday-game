@@ -1,5 +1,5 @@
 enum GameStateID {
     STATE_START_MENU,
     STATE_CHARACTER_SELECTION,
-    STATE_GAME,
+    STATE_GAME_PLAY,
 };

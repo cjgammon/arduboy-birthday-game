@@ -3,8 +3,12 @@
 #include "Character0.h"
 
 Character0::Character0(int initialX, int initialY) : Character(initialX, initialY) {
-    this->sprite = character0idle;
-    this->frameCount = 2;
+    this->idleSprite = character0idle;
+    this->idleFrameCount = 2;
+
+    this->walkSprite = character0walk;
+    this->walkFrameCount = 9;
+
     this->frameChangeInterval = 10;
     this->state = CharacterState::IDLE;
 }

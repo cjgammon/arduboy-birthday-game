@@ -14,7 +14,6 @@ public:
         JUMPING,
     };
 
-    void init(const uint8_t* sprite, int frameCount, int frameChangeInterval);
     void update(Arduboy2 &arduboy);
     void setState(CharacterState newState);
     void draw(Arduboy2 &arduboy);
@@ -27,8 +26,13 @@ public:
     void setY(int newY) { y = newY; }
 
 protected:
-    const uint8_t* sprite;
-    int frameCount;
+    const uint8_t* idleSprite;
+    const uint8_t* walkSprite;
+
+    int idleFrameCount;
+    int walkFrameCount;
+
+    //int frameCount;
     int frameCounter;
     int currentFrame;
     int frameChangeInterval;
