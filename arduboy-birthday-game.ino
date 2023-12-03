@@ -11,7 +11,6 @@ ArduboyTones sound(arduboy.audio.enabled);
 GameStateManager stateManager;
 
 //states
-
 StartMenuState startMenuState;
 CharacterSelectionState characterSelectionState;
 GamePlayState gamePlayState;
@@ -30,11 +29,6 @@ void setup() {
   arduboy.begin();
   arduboy.setFrameRate(60);
 
-  /*
-  startMenuState.setStateChangeCallback(changeGameState);
-  characterSelectionState.setStateChangeCallback(changeGameState);
-  gamePlayState.setStateChangeCallback(changeGameState);
-  */
   for (int i = 0; i < numGameStates; i++) {
     gameStates[i]->setStateChangeCallback(changeGameState);
   }

@@ -3,6 +3,8 @@
 #include "Character0.h"
 
 Character0::Character0(int initialX, int initialY) : Character(initialX, initialY) {
+    this->name = "JONAS";
+
     this->idleSprite = character0idle;
     this->idleFrameCount = 2;
 

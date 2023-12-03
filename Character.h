@@ -20,12 +20,14 @@ public:
         // Getter methods for x and y
     int getX() const { return x; }
     int getY() const { return y; }
+    const char* getName() const { return name; } // Getter for the character's name
 
     // Setter methods for x and y
     void setX(int newX) { x = newX; }
     void setY(int newY) { y = newY; }
 
 protected:
+
     const uint8_t* idleSprite;
     const uint8_t* walkSprite;
 
@@ -39,6 +41,7 @@ protected:
     CharacterState state;
     int x; // X coordinate
     int y; // Y coordinate
+    const char* name; // Character's name
 };
 
 #endif // CHARACTER_H

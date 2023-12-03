@@ -10,7 +10,7 @@ void GamePlayState::init() {
     // Initialization code
 
     //TODO:: define which character in a model somewhere to keep track of and use here.
-    playerCharacter = new Character0(0, 0);
+    playerCharacter = new Character0(0, 30);
     playerCharacter->setState(Character::WALKING);
 }
 
