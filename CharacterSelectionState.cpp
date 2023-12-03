@@ -2,9 +2,9 @@
 #include "CharacterSelectionState.h"
 #include "Character.h"
 #include "Character0.h"
-//#include "Character1.h"
+#include "Character1.h"
 
-int numCharacters = 1;
+int numCharacters = 5;
 Character** playerCharacters; // Declare an array of character pointers
 
 
@@ -15,7 +15,11 @@ void CharacterSelectionState::init() {
     for (int i = 0; i < numCharacters; i++) {
       int initialX = i * 20; // Adjust the X position as needed
       int initialY = 20;    // Set the Y position as needed
-      playerCharacters[i] = new Character0(initialX, initialY);
+      if (i == 0) {
+        playerCharacters[i] = new Character0(initialX, initialY);
+      } else {
+        playerCharacters[i] = new Character1(initialX, initialY);
+      }
     }
 }
 
