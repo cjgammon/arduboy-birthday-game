@@ -31,7 +31,6 @@ void GamePlayState::update(Arduboy2 &arduboy) {
 }
 
 void GamePlayState::draw(Arduboy2 &arduboy) {
-    //arduboy.clear();
 
     // Drawing code
     playerCharacter->draw(arduboy);

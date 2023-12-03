@@ -43,7 +43,11 @@ void GameUI::drawLives(Arduboy2 &arduboy) {
 
   int x = startX;
   for (int i = 0; i < totalLives; i++) {
-    Sprites::drawOverwrite(x, 0, uiheartfull, 0);
+    if (i < currentLives) {
+      Sprites::drawOverwrite(x, 0, uiheartfull, 0);
+    } else {
+      Sprites::drawOverwrite(x, 0, uiheartempty, 0);
+    }
     x += 6;
   }
 }
