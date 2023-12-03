@@ -4,6 +4,7 @@
 #include "Character.h"
 #include "Character0.h"
 #include "Character1.h"
+#include "GameModel.h"
 
 #define CHAR_WIDTH 6 // character width in pixels including inter-character spacing
 #define SCREEN_WIDTH 128 // character width in pixels including inter-character spacing
@@ -12,6 +13,8 @@ int numCharacters = 5;
 Character** playerCharacters; // Declare an array of character pointers
 
 int currentCharacter = 0;
+
+GameModel& gameModel = GameModel::getInstance();
 
 void CharacterSelectionState::init() {
     // Initialization code
@@ -32,6 +35,7 @@ void CharacterSelectionState::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justPressed(A_BUTTON)) {
       if (stateChangeCallback != nullptr) {
+          gameModel.setSelectedCharacter(currentCharacter);
           stateChangeCallback(STATE_GAME_PLAY);
       }
     }

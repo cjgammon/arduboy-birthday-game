@@ -25,6 +25,22 @@ const uint8_t PROGMEM environmentgroundmiddle[] = {
 0x06, 0x03, 0x01, 0x05, 0x01, 0x03, 
 };
 
+
+//UI
+
+const uint8_t PROGMEM uiheartfull[] = {
+6, 6,
+0x06, 0x0f, 0x1e, 0x0f, 0x06, 0x00, 
+};
+
+const uint8_t PROGMEM uiheartempty[] = {
+6, 6,
+0x06, 0x09, 0x12, 0x09, 0x06, 0x00, 
+};
+
+
+
+
 //CHARACTER0
 
 const unsigned char PROGMEM character0idle[] =
