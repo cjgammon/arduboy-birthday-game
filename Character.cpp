@@ -1,7 +1,7 @@
 #include "Character.h"
 
 const float gravity = 0.3;
-const float jumpPower = -3.0;
+const float jumpPower = -5.0;
 
 Character::Character(int initialX, int initialY) {
   x = initialX;

@@ -24,7 +24,7 @@ void EntityManager::update(Arduboy2 &arduboy, int xDelta) {
           entities[i]->move(xDelta, 0);
           
           if (entities[i]->getX() + entities[i]->getWidth() < 0) {
-            entities[i]->setX(xDelta + entities[i]->getWidth() + 10);
+            entities[i]->setX(entities[i]->getX() + entities[i]->getWidth() + SCREEN_WIDTH);
             //recycleEntity(i); // Recycle the entity if it goes off-screen
           }
           

@@ -40,7 +40,6 @@ void GamePlayState::update(Arduboy2 &arduboy) {
     }
 
     offset = -speed;
-    arduboy.println(offset);
     entityManager.update(arduboy, offset);
     playerCharacter->update(arduboy);
 }
@@ -49,7 +48,7 @@ void GamePlayState::draw(Arduboy2 &arduboy) {
 
     entityManager.draw(arduboy);
     playerCharacter->draw(arduboy);
-    //gameUI.draw(arduboy);
+    gameUI.draw(arduboy);
 }
 
 void GamePlayState::cleanup() {
