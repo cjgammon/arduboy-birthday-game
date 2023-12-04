@@ -38,6 +38,9 @@ protected:
     int idleFrameCount;
     int walkFrameCount;
 
+    int groundLevel;
+    float velocityY = 0;
+
     //int frameCount;
     int frameCounter;
     int currentFrame;

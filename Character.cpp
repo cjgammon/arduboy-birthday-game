@@ -1,8 +1,15 @@
 #include "Character.h"
 
+const float gravity = 0.3;
+const float jumpPower = -3.0;
+
 Character::Character(int initialX, int initialY) {
   x = initialX;
   y = initialY;
+
+  groundLevel = initialY;
+
+  velocityY = 0;
   currentFrame = 0;
   lives = 3;
 }
@@ -18,6 +25,9 @@ void Character::update(Arduboy2 &arduboy) {
       frameCount = idleFrameCount;
       break;
     case WALKING:
+      frameCount = walkFrameCount;
+      break;
+    case JUMPING:
       frameCount = walkFrameCount;
       break;
   }
@@ -40,8 +50,8 @@ void Character::setState(CharacterState newState) {
 
 void Character::startJump() {
   if (state != JUMPING) {
-        velocityY = -jumpPower; // Negative value for upward movement
-        state = JUMPING;
+      velocityY = jumpPower; // Negative value for upward movement
+      setState(JUMPING);
     }
 }
 
@@ -55,6 +65,16 @@ void Character::draw(Arduboy2 &arduboy) {
         case WALKING:
             currentSprite = walkSprite;
             break;
+        case JUMPING:
+          currentSprite = walkSprite;
+
+          y += velocityY; // Move the character up or down
+          velocityY += gravity; // Apply gravity
+          if (y >= groundLevel) { // Check if character lands
+            y = groundLevel; // Reset position to ground
+            setState(WALKING);
+          }
+          break;
     }
 
     if (currentSprite != nullptr) {
