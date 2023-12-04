@@ -16,22 +16,7 @@ Character::Character(int initialX, int initialY) {
 
 Character::~Character() {}
 
-int frameCounter = 0;
-
 void Character::update(Arduboy2 &arduboy) {
-  int frameCount = 0;
-  switch (state) {
-    case IDLE:
-      frameCount = idleFrameCount;
-      break;
-    case WALKING:
-      frameCount = walkFrameCount;
-      break;
-    case JUMPING:
-      frameCount = walkFrameCount;
-      break;
-  }
-
   frameCounter++;
   if (frameCounter >= frameChangeInterval) {
     currentFrame++;
@@ -46,6 +31,20 @@ void Character::setState(CharacterState newState) {
   currentFrame = 0;
   frameCounter = 0;
   state = newState;
+  switch (state) {
+      case IDLE:
+          frameCount = frameCount_Idle;
+          frameChangeInterval = frameChangeInterval_Idle;
+          break;
+      case WALKING:
+          frameCount = frameCount_Walking;
+          frameChangeInterval = frameChangeInterval_Walking;
+          break;
+      case JUMPING:
+          frameCount = frameCount_Jump;
+          frameChangeInterval = frameChangeInterval_Jump;
+          break;
+  }
 }
 
 void Character::startJump() {
