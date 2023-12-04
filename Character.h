@@ -12,6 +12,7 @@ public:
         IDLE,
         WALKING,
         JUMPING,
+        FALL,
     };
 
     void update(Arduboy2 &arduboy);

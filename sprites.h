@@ -20,11 +20,20 @@ const uint8_t PROGMEM titlescreensuper[] = {
 
 //ENVIRONMENT
 
+const uint8_t PROGMEM environmentgroundstart[] = {
+6, 6,
+0x1e, 0x03, 0x01, 0x05, 0x01, 0x03, 
+};
+
 const uint8_t PROGMEM environmentgroundmiddle[] = {
 6, 6,
 0x06, 0x03, 0x01, 0x05, 0x01, 0x03, 
 };
 
+const uint8_t PROGMEM environmentgroundend[] = {
+6, 6,
+0x1e, 0x00, 0x00, 0x00, 0x00, 0x00, 
+};
 
 //UI
 

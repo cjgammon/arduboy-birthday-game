@@ -4,6 +4,7 @@
 
 #include "Entity.h"
 #include <Arduboy2.h>
+#include "sprites.h"
 
 class Ground : public Entity {
 public:
