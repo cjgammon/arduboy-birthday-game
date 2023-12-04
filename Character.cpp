@@ -38,6 +38,13 @@ void Character::setState(CharacterState newState) {
   state = newState;
 }
 
+void Character::startJump() {
+  if (state != JUMPING) {
+        velocityY = -jumpPower; // Negative value for upward movement
+        state = JUMPING;
+    }
+}
+
 void Character::draw(Arduboy2 &arduboy) {
     const uint8_t* currentSprite = nullptr;
 

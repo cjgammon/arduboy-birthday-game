@@ -19,14 +19,6 @@ private:
     GameUI gameUI; // Create an instance of the GameUI class 
     Character* playerCharacter;
     EntityManager entityManager;
-
-  /*
-    // Use an array to store Ground objects
-    static const int maxGroundObjects = 10; // Adjust the maximum number as needed
-    Ground groundObjects[maxGroundObjects]; // Store multiple Ground objects
-
-    int numGroundObjects; // Keep track of the number of ground objects
-  */
 };
 
 

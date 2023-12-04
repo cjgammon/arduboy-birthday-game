@@ -6,15 +6,14 @@ Ground::Ground(): Entity() {
     // Constructor code, initialize variables
 }
 
-Ground::Ground(int initialX, int initialY, int initialWidth, int initialSpeed)
-    : Entity(initialX, initialY, initialWidth, 1, initialSpeed) {
+Ground::Ground(int initialX, int initialY, int initialWidth)
+    : Entity(initialX, initialY, initialWidth, 1) {
     // Constructor code, initialize variables
     type = "ground";
 }
 
 void Ground::update() {
     // Update the position of the ground based on speed
-    //x -= speed;
 }
 
 void Ground::draw(Arduboy2 &arduboy) {

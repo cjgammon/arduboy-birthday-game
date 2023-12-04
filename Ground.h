@@ -8,7 +8,7 @@
 class Ground : public Entity {
 public:
     Ground();
-    Ground(int initialX, int initialY, int initialWidth, int initialSpeed);
+    Ground(int initialX, int initialY, int initialWidth);
     void update() override;
     void draw(Arduboy2 &arduboy) override;
 };

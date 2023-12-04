@@ -28,6 +28,8 @@ public:
     const char* getName() const { return name; } // Getter for the character's name
     int getLives() const { return lives; }
 
+    void startJump();
+
 protected:
 
     const uint8_t* idleSprite;

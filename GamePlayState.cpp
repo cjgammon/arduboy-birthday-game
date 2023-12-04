@@ -4,9 +4,12 @@
 #include "Character1.h"
 #include "GameModel.h"
 
+int offset = 0;
+int speed = 2;
 
 void GamePlayState::init() {
     // Initialization code
+    offset = 0;
 
     //playerCharacter = new Character0(0, 30);
     playerCharacter = gameModel.getSelectedCharacter();
@@ -18,7 +21,7 @@ void GamePlayState::init() {
 
     entityManager.init();
 
-    Ground* groundObject = new Ground(0, 60, 40, 1);
+    Ground* groundObject = new Ground(0, 60, 200);
     entityManager.addEntity(groundObject);
 
     //entityManager.addEntity(playerCharacter);
@@ -33,10 +36,12 @@ void GamePlayState::update(Arduboy2 &arduboy) {
     }
 
     if (arduboy.justPressed(A_BUTTON)) {
-
+      playerCharacter->startJump();
     }
 
-    entityManager.update();
+    offset = -speed;
+    arduboy.println(offset);
+    entityManager.update(arduboy, offset);
     playerCharacter->update(arduboy);
 }
 
@@ -44,7 +49,7 @@ void GamePlayState::draw(Arduboy2 &arduboy) {
 
     entityManager.draw(arduboy);
     playerCharacter->draw(arduboy);
-    gameUI.draw(arduboy);
+    //gameUI.draw(arduboy);
 }
 
 void GamePlayState::cleanup() {

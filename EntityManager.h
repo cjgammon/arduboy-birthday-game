@@ -9,7 +9,7 @@ class EntityManager {
 public:
     EntityManager(); // Constructor
     void init(); // Initialize the entities
-    void update(); // Update all entities
+    void update(Arduboy2 &arduboy, int xDelta); // Update all entities
     void draw(Arduboy2 &arduboy); // Draw all entities
 
     // Add a new entity to the manager

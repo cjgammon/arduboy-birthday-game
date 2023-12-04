@@ -1,6 +1,9 @@
 // EntityManager.cpp
 #include "EntityManager.h"
 
+#define SCREEN_WIDTH 128 // character width in pixels including inter-character spacing
+
+
 EntityManager::EntityManager() {
     init();
 }
@@ -12,13 +15,20 @@ void EntityManager::init() {
     numEntities = 0;
 }
 
-void EntityManager::update() {
+void EntityManager::update(Arduboy2 &arduboy, int xDelta) {
     unsigned long currentTime = millis();
     unsigned long elapsedTime = currentTime - lastUpdateTime;
 
     for (int i = 0; i < numEntities; i++) {
         if (entities[i] != nullptr) {
-            entities[i]->update();
+          entities[i]->move(xDelta, 0);
+          
+          if (entities[i]->getX() + entities[i]->getWidth() < 0) {
+            entities[i]->setX(xDelta + entities[i]->getWidth() + 10);
+            //recycleEntity(i); // Recycle the entity if it goes off-screen
+          }
+          
+          entities[i]->update();
         }
     }
 
