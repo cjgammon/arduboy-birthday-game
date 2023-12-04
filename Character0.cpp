@@ -6,13 +6,17 @@ Character0::Character0(int initialX, int initialY) : Character(initialX, initial
     this->name = "JONAS";
 
     this->idleSprite = character0idle;
-    this->idleFrameCount = 2;
-
     this->walkSprite = character0walk;
-    this->walkFrameCount = 9;
 
-    this->frameChangeInterval = 6;  //this impacts the perceived frame rate of the animation
-    this->state = CharacterState::IDLE;
+    this->frameCount_Idle = 2;
+    this->frameCount_Walking = 9;
+    this->frameCount_Jump = 1;
+
+    this->frameChangeInterval_Idle = 10;
+    this->frameChangeInterval_Walking = 6;
+    this->frameChangeInterval_Jump = 1;
+
+    setState(CharacterState::IDLE);
 }
 
 Character0::~Character0() {
