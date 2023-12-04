@@ -25,6 +25,8 @@ public:
     // Setter methods for x and y
     void setX(int newX) { x = newX; }
     void setY(int newY) { y = newY; }
+
+    void setGround(int newGround) {groundLevel = newGround;}
     
     const char* getName() const { return name; } // Getter for the character's name
     int getLives() const { return lives; }

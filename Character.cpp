@@ -75,6 +75,9 @@ void Character::draw(Arduboy2 &arduboy) {
             setState(WALKING);
           }
           break;
+        case FALL:
+          y += gravity;
+          break;
     }
 
     if (currentSprite != nullptr) {

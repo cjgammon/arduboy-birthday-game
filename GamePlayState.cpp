@@ -6,6 +6,7 @@
 
 int offset = 0;
 int speed = 2;
+int groundLevel = 60;
 
 void GamePlayState::init() {
     // Initialization code
@@ -14,6 +15,8 @@ void GamePlayState::init() {
     //playerCharacter = new Character0(0, 30);
     playerCharacter = gameModel.getSelectedCharacter();
     playerCharacter->setX(0);
+    playerCharacter->setY(groundLevel);
+    playerCharacter->setGround(groundLevel);
     playerCharacter->setState(Character::WALKING);
     gameModel.setLives(playerCharacter->getLives());
 
@@ -42,6 +45,8 @@ void GamePlayState::update(Arduboy2 &arduboy) {
     offset = -speed;
     entityManager.update(arduboy, offset);
     playerCharacter->update(arduboy);
+
+    //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT X
 }
 
 void GamePlayState::draw(Arduboy2 &arduboy) {
