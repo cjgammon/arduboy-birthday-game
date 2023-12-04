@@ -1,6 +1,6 @@
-// CharacterSelectionState.cpp
+// GameState_CharacterSelection.cpp
 #include "sprites.h"
-#include "CharacterSelectionState.h"
+#include "GameState_CharacterSelection.h"
 #include "Character.h"
 #include "Character0.h"
 #include "Character1.h"
@@ -14,7 +14,7 @@ Character** playerCharacters; // Declare an array of character pointers
 
 int currentCharacter = 0;
 
-void CharacterSelectionState::init() {
+void GameState_CharacterSelection::init() {
     // Initialization code
     playerCharacters = new Character*[numCharacters]; // Allocate memory for the array
 
@@ -29,7 +29,7 @@ void CharacterSelectionState::init() {
     }
 }
 
-void CharacterSelectionState::update(Arduboy2 &arduboy) {
+void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justPressed(A_BUTTON)) {
       if (stateChangeCallback != nullptr) {
@@ -58,7 +58,7 @@ void CharacterSelectionState::update(Arduboy2 &arduboy) {
 
 }
 
-void CharacterSelectionState::draw(Arduboy2 &arduboy) {
+void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     // Drawing code
 
     size_t name = playerCharacters[currentCharacter]->getName();
@@ -78,7 +78,7 @@ void CharacterSelectionState::draw(Arduboy2 &arduboy) {
     }
 }
 
-void CharacterSelectionState::cleanup() {
+void GameState_CharacterSelection::cleanup() {
     // Drawing code
     for (int i = 0; i < numCharacters; i++) {
         delete playerCharacters[i]; // Delete each character instance

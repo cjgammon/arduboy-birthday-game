@@ -1,9 +1,9 @@
 #include <Arduboy2.h>
 #include <ArduboyTones.h>
 #include "GameStateManager.h"
-#include "StartMenuState.h"
-#include "CharacterSelectionState.h"
-#include "GamePlayState.h"
+#include "GameState_Titlescreen.h"
+#include "GameState_CharacterSelection.h"
+#include "GameState_Play.h"
 
 Arduboy2 arduboy;
 ArduboyTones sound(arduboy.audio.enabled);
@@ -11,9 +11,9 @@ ArduboyTones sound(arduboy.audio.enabled);
 GameStateManager stateManager;
 
 //states
-StartMenuState startMenuState;
-CharacterSelectionState characterSelectionState;
-GamePlayState gamePlayState;
+GameState_Titlescreen startMenuState;
+GameState_CharacterSelection characterSelectionState;
+GameState_Play gamePlayState;
 
 GameState* gameStates[] = {
   &startMenuState,

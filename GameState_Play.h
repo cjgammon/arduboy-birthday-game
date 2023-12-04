@@ -1,4 +1,4 @@
-// GamePlayState.h
+// GameState_Play.h
 #ifndef GAMEPLAYSTATE_H
 #define GAMEPLAYSTATE_H
 
@@ -9,7 +9,7 @@
 #include "EntityManager.h"
 
 
-class GamePlayState : public GameState {
+class GameState_Play : public GameState {
 public:
     void init() override;
     void update(Arduboy2 &arduboy) override;
