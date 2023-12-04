@@ -6,7 +6,7 @@
 
 int offset = 0;
 int speed = 2;
-int groundLevel = 30;
+int groundLevel = 28;
 
 void GamePlayState::init() {
     // Initialization code

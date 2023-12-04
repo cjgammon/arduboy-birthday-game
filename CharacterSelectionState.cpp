@@ -20,7 +20,7 @@ void CharacterSelectionState::init() {
 
     for (int i = 0; i < numCharacters; i++) {
       int x = (SCREEN_WIDTH / 2) - 16;
-      int y = 30;
+      int y = 28;
       if (i == 0) {
         playerCharacters[i] = new Character0(x, y);
       } else {
