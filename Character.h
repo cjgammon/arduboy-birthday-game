@@ -38,16 +38,21 @@ protected:
     const uint8_t* idleSprite;
     const uint8_t* walkSprite;
 
-    int idleFrameCount;
-    int walkFrameCount;
+    int frameCount;
+    int frameCount_Idle;
+    int frameCount_Walking;
+    int frameCount_Jump;
 
     int groundLevel;
     float velocityY = 0;
 
-    //int frameCount;
     int frameCounter;
     int currentFrame;
     int frameChangeInterval;
+    int frameChangeInterval_Idle;
+    int frameChangeInterval_Walking;
+    int frameChangeInterval_Jump;
+
     CharacterState state;
     int x; // X coordinate
     int y; // Y coordinate
