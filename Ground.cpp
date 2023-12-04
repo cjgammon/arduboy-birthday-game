@@ -9,6 +9,7 @@ Ground::Ground(): Entity() {
 Ground::Ground(int initialX, int initialY, int initialWidth, int initialSpeed)
     : Entity(initialX, initialY, initialWidth, 1, initialSpeed) {
     // Constructor code, initialize variables
+    type = "ground";
 }
 
 void Ground::update() {

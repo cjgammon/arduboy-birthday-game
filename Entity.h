@@ -18,12 +18,16 @@ public:
     int getWidth() const { return width; }
     int getHeight() const { return height; }
 
+    const char* getType() const { return type; }
+
 protected:
     int x;
     int y;
     int width;
     int height;
     int speed;
+    const char* type;
+
 };
 
 inline Entity::Entity() {};

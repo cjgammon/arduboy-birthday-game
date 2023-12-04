@@ -18,8 +18,9 @@ void GamePlayState::init() {
 
     entityManager.init();
 
+    Ground* groundObject = new Ground(0, 60, 40, 1);
+    entityManager.addEntity(groundObject);
 
-    
     //entityManager.addEntity(playerCharacter);
 }
 
@@ -36,13 +37,13 @@ void GamePlayState::update(Arduboy2 &arduboy) {
     }
 
     entityManager.update();
-    //playerCharacter->update(arduboy);
+    playerCharacter->update(arduboy);
 }
 
 void GamePlayState::draw(Arduboy2 &arduboy) {
 
     entityManager.draw(arduboy);
-    //playerCharacter->draw(arduboy);
+    playerCharacter->draw(arduboy);
     gameUI.draw(arduboy);
 }
 
