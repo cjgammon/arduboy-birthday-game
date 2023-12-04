@@ -16,15 +16,11 @@ void GamePlayState::init() {
 
     gameUI.init();
 
-    
-   // Initialize Ground objects
-    numGroundObjects = 3; // Adjust as needed
+    entityManager.init();
 
-    // Define Ground objects' positions, widths, and speeds here
-    groundObjects[0] = Ground(0, 60, 40, 1);
-    groundObjects[1] = Ground(50, 60, 30, 2);
-    groundObjects[2] = Ground(90, 60, 40, 3);
+
     
+    //entityManager.addEntity(playerCharacter);
 }
 
 void GamePlayState::update(Arduboy2 &arduboy) {
@@ -39,27 +35,15 @@ void GamePlayState::update(Arduboy2 &arduboy) {
 
     }
 
-
-    playerCharacter->update(arduboy);
-
-        // Update Ground objects
-    for (int i = 0; i < numGroundObjects; i++) {
-        groundObjects[i].update();
-    }
-    
+    entityManager.update();
+    //playerCharacter->update(arduboy);
 }
 
 void GamePlayState::draw(Arduboy2 &arduboy) {
 
-    // Drawing code
-    playerCharacter->draw(arduboy);
+    entityManager.draw(arduboy);
+    //playerCharacter->draw(arduboy);
     gameUI.draw(arduboy);
-
-        // Draw Ground objects
-    for (int i = 0; i < numGroundObjects; i++) {
-        groundObjects[i].draw(arduboy);
-    }
-    
 }
 
 void GamePlayState::cleanup() {
