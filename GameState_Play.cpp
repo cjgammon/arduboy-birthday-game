@@ -1,7 +1,5 @@
 // GameState_Play.cpp
 #include "GameState_Play.h"
-#include "Character0.h"
-#include "Character1.h"
 #include "GameModel.h"
 
 int offset = 0; // Offset for scrolling
@@ -55,10 +53,9 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 }
 
 void GameState_Play::draw(Arduboy2 &arduboy) {
-
+    gameUI.draw(arduboy);
     entityManager.draw(arduboy);
     playerCharacter->draw(arduboy);
-    gameUI.draw(arduboy);
 }
 
 void GameState_Play::cleanup() {

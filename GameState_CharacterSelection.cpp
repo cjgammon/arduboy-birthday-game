@@ -2,8 +2,16 @@
 #include "sprites.h"
 #include "GameState_CharacterSelection.h"
 #include "Character.h"
-#include "Character0.h"
-#include "Character1.h"
+#include "Character_Henry.h"
+#include "Character_Jaxon.h"
+#include "Character_Jonas.h"
+#include "Character_Lyle.h"
+#include "Character_Mason.h"
+#include "Character_Nola.h"
+#include "Character_PineappleMurphy.h"
+#include "Character_RobotSteve.h"
+#include "Character_Ruhaan.h"
+#include "Character_Val.h"
 #include "GameModel.h"
 
 int numCharacters = 5;
@@ -15,15 +23,19 @@ void GameState_CharacterSelection::init() {
     // Initialization code
     playerCharacters = new Character*[numCharacters]; // Allocate memory for the array
 
-    for (int i = 0; i < numCharacters; i++) {
-      int x = (SCREEN_WIDTH / 2) - 16;
-      int y = 28;
-      if (i == 0) {
-        playerCharacters[i] = new Character0(x, y);
-      } else {
-        playerCharacters[i] = new Character1(x, y);
-      }
-    }
+    int wideCharacterX = (SCREEN_WIDTH / 2) - 16;
+    int skinnyCharacterX = (SCREEN_WIDTH / 2) - 8;
+    int y = 28;
+    playerCharacters[0] = new Character_Jonas(skinnyCharacterX, y);
+    playerCharacters[1] = new Character_Henry(wideCharacterX, y);
+    playerCharacters[2] = new Character_Jaxon(wideCharacterX, y);
+    playerCharacters[3] = new Character_Lyle(skinnyCharacterX, y);
+    playerCharacters[4] = new Character_Mason(wideCharacterX, y);
+    //playerCharacters[5] = new Character_Nola(wideCharacterX, y);
+    //playerCharacters[6] = new Character_PineappleMurphy(wideCharacterX, y);
+    //playerCharacters[7] = new Character_RobotSteve(wideCharacterX, y);
+    //playerCharacters[8] = new Character_Ruhaan(wideCharacterX, y);
+    //playerCharacters[9] = new Character_Val(wideCharacterX, y);
 }
 
 void GameState_CharacterSelection::update(Arduboy2 &arduboy) {

@@ -33,20 +33,24 @@ void Character::setState(CharacterState newState) {
   state = newState;
   switch (state) {
       case IDLE:
+          currentSprite = idleSprite;
           frameCount = frameCount_Idle;
           frameChangeInterval = frameChangeInterval_Idle;
           break;
       case WALK:
+          currentSprite = walkSprite;
           frameCount = frameCount_Walking;
           frameChangeInterval = frameChangeInterval_Walking;
           break;
       case JUMP:
+          currentSprite = jumpSprite;
           frameCount = frameCount_Jump;
           frameChangeInterval = frameChangeInterval_Jump;
           break;
       case FALL:
-          frameCount = frameCount_Jump;
-          frameChangeInterval = frameChangeInterval_Jump;
+          currentSprite = fallSprite;
+          frameCount = frameCount_Fall;
+          frameChangeInterval = frameChangeInterval_Fall;
           break;
 
   }
@@ -60,18 +64,13 @@ void Character::startJump() {
 }
 
 void Character::draw(Arduboy2 &arduboy) {
-    const uint8_t* currentSprite = nullptr;
 
     switch (state) {
         case IDLE:
-            currentSprite = idleSprite;
             break;
         case WALK:
-            currentSprite = walkSprite;
             break;
         case JUMP:
-          currentSprite = walkSprite;
-
           y += velocityY; // Move the character up or down
           velocityY += gravity; // Apply gravity
           if (y >= groundLevel) { // Check if character lands
@@ -80,7 +79,6 @@ void Character::draw(Arduboy2 &arduboy) {
           }
           break;
         case FALL:
-          currentSprite = walkSprite;
           y += velocityY;
           velocityY += gravity;
           break;
