@@ -15,7 +15,7 @@ Character_Lyle::Character_Lyle(int initialX, int initialY) : Character(initialX,
   this->frameCount_Jump = 1;
   this->frameCount_Fall = 1;
 
-  this->frameChangeInterval_Idle = 10;
+  this->frameChangeInterval_Idle = 50;
   this->frameChangeInterval_Walking = 6;
   this->frameChangeInterval_Jump = 1;
   this->frameChangeInterval_Fall = 1;
