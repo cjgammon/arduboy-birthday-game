@@ -56,6 +56,15 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 }
 
 void GameState_Play::createGroundEntities() {
+  //TODO:: reference the array by index..
+
+  int lastX = 0;
+  for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
+    Entity_Ground* newGround = new Entity_Ground(lastX, 60, i);
+    entityManager.addEntity(newGround);
+    lastX += GROUND_DEFINITION_SIZE * GROUND_SIZE;
+  }
+  
   /*
   Entity_Ground* groundObject = new Entity_Ground(0, 60, 200);
   entityManager.addEntity(groundObject);
@@ -67,6 +76,7 @@ void GameState_Play::createGroundEntities() {
   entityManager.addEntity(groundObject3);
   */
   
+  /*
   int lastX = 0;
   for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
     //int groundDef = pgm_read_byte(&(groundDefinitions[i]));
@@ -76,6 +86,7 @@ void GameState_Play::createGroundEntities() {
     entityManager.addEntity(newGround);
     lastX += GROUND_DEFINITION_SIZE * GROUND_SIZE;
   }
+  */
   
   /*
   int lastX = 0;

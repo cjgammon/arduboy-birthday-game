@@ -6,12 +6,16 @@ Entity_Ground::Entity_Ground(): Entity() {
     type = EntityType::GROUND;
 }
 
-Entity_Ground::Entity_Ground(int initialX, int initialY, int initialWidth)
-    : Entity(initialX, initialY, initialWidth, 1) {
+Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
+    : Entity(initialX, initialY, GROUND_DEFINITION_SIZE * GROUND_SIZE, 1) {
     // Constructor code, initialize variables
     type = EntityType::GROUND;
+    for (int i = 0; i < GROUND_DEFINITION_SIZE; ++i) {
+        groundArray[i] = groundDefinitions[arrayIndex][i];
+    }
 }
 
+/*
 Entity_Ground::Entity_Ground(int initialX, int initialY, const int inputArray[GROUND_DEFINITION_SIZE])
     : Entity(initialX, initialY, GROUND_DEFINITION_SIZE * GROUND_SIZE, 1), groundArray() {
     // Constructor implementation
@@ -20,7 +24,7 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, const int inputArray[GR
         groundArray[i] = inputArray[i];
     }
 }
-
+*/
 void Entity_Ground::update() {
     // Update the position of the ground based on speed
 }
