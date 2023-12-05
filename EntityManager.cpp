@@ -62,3 +62,20 @@ bool EntityManager::isGroundAt(int x) {
     }
     return false;
 }
+
+void EntityManager::cleanup() {
+    // Iterate through the array of entity pointers
+    for (int i = 0; i < numEntities; i++) {
+        // Check if the pointer is not null
+        if (entities[i] != nullptr) {
+            // Delete the entity object
+            delete entities[i];
+
+            // Set the pointer to null to avoid dangling references
+            entities[i] = nullptr;
+        }
+    }
+
+    // Reset the number of entities to 0
+    numEntities = 0;
+}

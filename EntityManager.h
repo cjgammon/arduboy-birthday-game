@@ -16,6 +16,8 @@ public:
     void addEntity(Entity* entity);
 
     bool isGroundAt(int x); // Check if there is ground at the given coordinates
+    
+    void cleanup();
 
 private:
     static const int MAX_ENTITIES = 10; // Maximum number of entities (adjust as needed)

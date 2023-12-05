@@ -63,4 +63,5 @@ void GameState_Play::draw(Arduboy2 &arduboy) {
 
 void GameState_Play::cleanup() {
     // Drawing code
+    entityManager.cleanup();
 }
