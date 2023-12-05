@@ -1,10 +1,10 @@
-// StartMenuState.h
+// GameState_Titlescreen.h
 #ifndef STARTMENUSTATE_H
 #define STARTMENUSTATE_H
 
 #include "GameState.h"
 
-class StartMenuState : public GameState {
+class GameState_Titlescreen : public GameState {
 public:
     void init() override;
     void update(Arduboy2 &arduboy) override;

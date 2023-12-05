@@ -1,5 +1,5 @@
-// GamePlayState.cpp
-#include "GamePlayState.h"
+// GameState_Play.cpp
+#include "GameState_Play.h"
 #include "Character0.h"
 #include "Character1.h"
 #include "GameModel.h"
@@ -8,7 +8,7 @@ int offset = 0;
 int speed = 2;
 int groundLevel = 28;
 
-void GamePlayState::init() {
+void GameState_Play::init() {
     // Initialization code
     offset = 0;
 
@@ -30,7 +30,7 @@ void GamePlayState::init() {
     //entityManager.addEntity(playerCharacter);
 }
 
-void GamePlayState::update(Arduboy2 &arduboy) {
+void GameState_Play::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justPressed(B_BUTTON)) {
       if (stateChangeCallback != nullptr) {
@@ -49,13 +49,13 @@ void GamePlayState::update(Arduboy2 &arduboy) {
     //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT X
 }
 
-void GamePlayState::draw(Arduboy2 &arduboy) {
+void GameState_Play::draw(Arduboy2 &arduboy) {
 
     entityManager.draw(arduboy);
     playerCharacter->draw(arduboy);
     gameUI.draw(arduboy);
 }
 
-void GamePlayState::cleanup() {
+void GameState_Play::cleanup() {
     // Drawing code
 }

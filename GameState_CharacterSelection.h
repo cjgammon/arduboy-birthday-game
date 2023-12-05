@@ -1,10 +1,10 @@
-// StartMenuState.h
+// GameState_Titlescreen.h
 #ifndef CHARACTERSELECTIONSTATE_H
 #define CHARACTERSELECTIONSTATE_H
 
 #include "GameState.h"
 
-class CharacterSelectionState : public GameState {
+class GameState_CharacterSelection : public GameState {
 public:
     void init() override;
     void update(Arduboy2 &arduboy) override;
