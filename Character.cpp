@@ -36,21 +36,26 @@ void Character::setState(CharacterState newState) {
           frameCount = frameCount_Idle;
           frameChangeInterval = frameChangeInterval_Idle;
           break;
-      case WALKING:
+      case WALK:
           frameCount = frameCount_Walking;
           frameChangeInterval = frameChangeInterval_Walking;
           break;
-      case JUMPING:
+      case JUMP:
           frameCount = frameCount_Jump;
           frameChangeInterval = frameChangeInterval_Jump;
           break;
+      case FALL:
+          frameCount = frameCount_Jump;
+          frameChangeInterval = frameChangeInterval_Jump;
+          break;
+
   }
 }
 
 void Character::startJump() {
-  if (state != JUMPING) {
+  if (state != JUMP) {
       velocityY = jumpPower; // Negative value for upward movement
-      setState(JUMPING);
+      setState(JUMP);
     }
 }
 
@@ -61,24 +66,26 @@ void Character::draw(Arduboy2 &arduboy) {
         case IDLE:
             currentSprite = idleSprite;
             break;
-        case WALKING:
+        case WALK:
             currentSprite = walkSprite;
             break;
-        case JUMPING:
+        case JUMP:
           currentSprite = walkSprite;
 
           y += velocityY; // Move the character up or down
           velocityY += gravity; // Apply gravity
           if (y >= groundLevel) { // Check if character lands
             y = groundLevel; // Reset position to ground
-            setState(WALKING);
+            setState(WALK);
           }
           break;
         case FALL:
-          y += gravity;
+          currentSprite = walkSprite;
+          y += velocityY;
+          velocityY += gravity;
           break;
     }
-
+  
     if (currentSprite != nullptr) {
       Sprites::drawSelfMasked(x, y, currentSprite, currentFrame);
     }

@@ -10,8 +10,8 @@ public:
 
     enum CharacterState {
         IDLE,
-        WALKING,
-        JUMPING,
+        WALK,
+        JUMP,
         FALL,
     };
 

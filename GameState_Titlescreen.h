@@ -2,6 +2,7 @@
 #ifndef STARTMENUSTATE_H
 #define STARTMENUSTATE_H
 
+#include "Vars.h"
 #include "GameState.h"
 
 class GameState_Titlescreen : public GameState {

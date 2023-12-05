@@ -3,6 +3,12 @@
 
 #include <Arduboy2.h>
 
+enum EntityType {
+    GROUND,
+    COIN,
+    ENEMY,
+};
+
 class Entity {
 public:
     Entity();
@@ -17,7 +23,7 @@ public:
     int getY() const { return y; }
     int getWidth() const { return width; }
     int getHeight() const { return height; }
-    const char* getType() const { return type; }
+    EntityType getType() const { return type; }
 
     void setX(int newX) { x = newX; }
     void setY(int newY) { y = newY; }
@@ -27,7 +33,7 @@ protected:
     int y;
     int width;
     int height;
-    const char* type;
+    EntityType type;
 
 };
 

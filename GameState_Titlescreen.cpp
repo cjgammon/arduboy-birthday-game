@@ -2,10 +2,6 @@
 #include "GameState_Titlescreen.h"
 #include "sprites.h"
 
-#define SCREEN_WIDTH 128 // character width in pixels including inter-character spacing
-#define SCREEN_HEIGHT 64
-#define CHAR_WIDTH 6 // character width in pixels including inter-character spacing
-
 unsigned long lastBlinkTime = 0;
 bool showText = true; // Initial state is to show the text
 

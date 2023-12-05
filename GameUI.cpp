@@ -2,8 +2,6 @@
 #include "GameModel.h"
 #include "sprites.h"
 
-#define CHAR_WIDTH 6 // character width in pixels including inter-character spacing
-
 GameUI::GameUI() {
 
 }

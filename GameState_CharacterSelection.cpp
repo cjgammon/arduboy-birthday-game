@@ -6,9 +6,6 @@
 #include "Character1.h"
 #include "GameModel.h"
 
-#define CHAR_WIDTH 6 // character width in pixels including inter-character spacing
-#define SCREEN_WIDTH 128 // character width in pixels including inter-character spacing
-
 int numCharacters = 5;
 Character** playerCharacters; // Declare an array of character pointers
 

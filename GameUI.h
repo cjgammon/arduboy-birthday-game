@@ -1,6 +1,7 @@
 #ifndef GAME_UI_H
 #define GAME_UI_H
 
+#include "Vars.h"
 #include <Arduboy2.h>
 
 class GameUI {

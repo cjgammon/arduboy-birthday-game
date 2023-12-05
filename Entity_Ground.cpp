@@ -1,21 +1,21 @@
-// Ground.cpp
-#include "Ground.h"
+// Entity_Ground.cpp
+#include "Entity_Ground.h"
 
-Ground::Ground(): Entity() {
+Entity_Ground::Entity_Ground(): Entity() {
     // Constructor code, initialize variables
 }
 
-Ground::Ground(int initialX, int initialY, int initialWidth)
+Entity_Ground::Entity_Ground(int initialX, int initialY, int initialWidth)
     : Entity(initialX, initialY, initialWidth, 1) {
     // Constructor code, initialize variables
-    type = "ground";
+    type = EntityType::GROUND;
 }
 
-void Ground::update() {
+void Entity_Ground::update() {
     // Update the position of the ground based on speed
 }
 
-void Ground::draw(Arduboy2 &arduboy) {
+void Entity_Ground::draw(Arduboy2 &arduboy) {
     // Draw the ground segment
     int max = floor(width / 6);
 

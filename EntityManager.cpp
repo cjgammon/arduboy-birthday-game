@@ -48,3 +48,17 @@ void EntityManager::addEntity(Entity* entity) {
         numEntities++;
     }
 }
+
+bool EntityManager::isGroundAt(int x) {
+    for (int i = 0; i < numEntities; i++) {
+        if (entities[i] != nullptr) {
+            if (entities[i] -> getType() == EntityType::GROUND) {
+                //check if x position is within the ground x and width
+                if (x >= entities[i]->getX() && x <= entities[i]->getX() + entities[i]->getWidth()) {
+                  return true;
+                }
+            }
+        }
+    }
+    return false;
+}

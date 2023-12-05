@@ -5,7 +5,7 @@
 #include "GameState.h"
 #include "GameUI.h"
 #include "Character.h"
-#include "Ground.h"
+#include "Entity_Ground.h"
 #include "EntityManager.h"
 
 
