@@ -5,10 +5,10 @@
 Character_Jaxon::Character_Jaxon(int initialX, int initialY) : Character(initialX, initialY) {
   this->name = "JAXON";
 
-  this->idleSprite = character_Jaxon_idle;
-  this->walkSprite = character_Jaxon_run;
-  this->jumpSprite = character_Jaxon_jump;
-  this->fallSprite = character_Jaxon_fall;
+  this->idleSprite = character_jaxon_idle;
+  this->walkSprite = character_jaxon_run;
+  this->jumpSprite = character_jaxon_jump;
+  this->fallSprite = character_jaxon_fall;
 
   this->frameCount_Idle = 2;
   this->frameCount_Walking = 9;

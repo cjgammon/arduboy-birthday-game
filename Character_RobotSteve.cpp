@@ -5,10 +5,10 @@
 Character_RobotSteve::Character_RobotSteve(int initialX, int initialY) : Character(initialX, initialY) {
   this->name = "ROBOT STEVE";
 
-  this->idleSprite = character_Robotsteve_idle;
-  this->walkSprite = character_Robotsteve_run;
-  this->jumpSprite = character_Robotsteve_jump;
-  this->fallSprite = character_Robotsteve_fall;
+  this->idleSprite = character_robotsteve_idle;
+  this->walkSprite = character_robotsteve_run;
+  this->jumpSprite = character_robotsteve_jump;
+  this->fallSprite = character_robotsteve_fall;
 
   this->frameCount_Idle = 2;
   this->frameCount_Walking = 9;

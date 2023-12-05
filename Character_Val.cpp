@@ -5,10 +5,10 @@
 Character_Val::Character_Val(int initialX, int initialY) : Character(initialX, initialY) {
   this->name = "VAL";
 
-  this->idleSprite = character_Val_idle;
-  this->walkSprite = character_Val_run;
-  this->jumpSprite = character_Val_jump;
-  this->fallSprite = character_Val_fall;
+  this->idleSprite = character_val_idle;
+  this->walkSprite = character_val_run;
+  this->jumpSprite = character_val_jump;
+  this->fallSprite = character_val_fall;
 
   this->frameCount_Idle = 2;
   this->frameCount_Walking = 9;

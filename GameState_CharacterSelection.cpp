@@ -14,7 +14,7 @@
 #include "Character_Val.h"
 #include "GameModel.h"
 
-int numCharacters = 5;
+int numCharacters = 7;
 Character** playerCharacters; // Declare an array of character pointers
 
 int currentCharacter = 0;
@@ -27,15 +27,15 @@ void GameState_CharacterSelection::init() {
     int skinnyCharacterX = (SCREEN_WIDTH / 2) - 8;
     int y = 28;
     playerCharacters[0] = new Character_Jonas(skinnyCharacterX, y);
-    playerCharacters[1] = new Character_Henry(wideCharacterX, y);
-    playerCharacters[2] = new Character_Jaxon(wideCharacterX, y);
+    playerCharacters[1] = new Character_Henry(skinnyCharacterX, y);
+    playerCharacters[2] = new Character_Jaxon(skinnyCharacterX, y);
     playerCharacters[3] = new Character_Lyle(skinnyCharacterX, y);
-    playerCharacters[4] = new Character_Mason(wideCharacterX, y);
-    //playerCharacters[5] = new Character_Nola(wideCharacterX, y);
-    //playerCharacters[6] = new Character_PineappleMurphy(wideCharacterX, y);
-    //playerCharacters[7] = new Character_RobotSteve(wideCharacterX, y);
-    //playerCharacters[8] = new Character_Ruhaan(wideCharacterX, y);
-    //playerCharacters[9] = new Character_Val(wideCharacterX, y);
+    playerCharacters[4] = new Character_Mason(skinnyCharacterX, y);
+    playerCharacters[5] = new Character_Nola(skinnyCharacterX, y);
+    playerCharacters[6] = new Character_PineappleMurphy(skinnyCharacterX, y);
+    //playerCharacters[7] = new Character_RobotSteve(skinnyCharacterX, y);
+    //playerCharacters[8] = new Character_Ruhaan(skinnyCharacterX, y);
+    //playerCharacters[9] = new Character_Val(skinnyCharacterX, y);
 }
 
 void GameState_CharacterSelection::update(Arduboy2 &arduboy) {

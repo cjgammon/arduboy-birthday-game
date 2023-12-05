@@ -5,10 +5,10 @@
 Character_Ruhaan::Character_Ruhaan(int initialX, int initialY) : Character(initialX, initialY) {
   this->name = "RUHAAN";
 
-  this->idleSprite = character_Ruhaan_idle;
-  this->walkSprite = character_Ruhaan_run;
-  this->jumpSprite = character_Ruhaan_jump;
-  this->fallSprite = character_Ruhaan_fall;
+  this->idleSprite = character_ruhaan_idle;
+  this->walkSprite = character_ruhaan_run;
+  this->jumpSprite = character_ruhaan_jump;
+  this->fallSprite = character_ruhaan_fall;
 
   this->frameCount_Idle = 2;
   this->frameCount_Walking = 9;

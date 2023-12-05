@@ -5,10 +5,10 @@
 Character_Nola::Character_Nola(int initialX, int initialY) : Character(initialX, initialY) {
   this->name = "NOLA";
 
-  this->idleSprite = character_Nola_idle;
-  this->walkSprite = character_Nola_run;
-  this->jumpSprite = character_Nola_jump;
-  this->fallSprite = character_Nola_fall;
+  this->idleSprite = character_nola_idle;
+  this->walkSprite = character_nola_run;
+  this->jumpSprite = character_nola_jump;
+  this->fallSprite = character_nola_fall;
 
   this->frameCount_Idle = 2;
   this->frameCount_Walking = 9;
