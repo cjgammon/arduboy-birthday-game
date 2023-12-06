@@ -33,7 +33,6 @@ void Entity_Ground::update() {
 void Entity_Ground::draw(Arduboy2 &arduboy) {
     // Draw the ground segment
     int max = floor(width / 6);
-    arduboy.println(width);
     for (int i = 0; i < width; i += 6) {
       if (i == 0) {
         Sprites::drawOverwrite(x + i, y, environmentgroundstart, 0);
