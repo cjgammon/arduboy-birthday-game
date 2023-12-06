@@ -5,17 +5,13 @@
 #include "GameModel.h"
 
 int numCharacters = 5;
-//Character** playerCharacters; // Declare an array of character pointers
 Character* playerCharacter;
 
 int currentCharacter = 0;
 
 void GameState_CharacterSelection::init() {
-    // Initialization code
-
     int x = (SCREEN_WIDTH / 2) - 16;
     int y = 28;
-
     playerCharacter = new Character(x, y, currentCharacter);
 }
 
@@ -34,6 +30,7 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
       } else {
         currentCharacter = 0;
       }
+      changeCharacter();
     }
 
     if (arduboy.justPressed(LEFT_BUTTON)) {
@@ -42,10 +39,16 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
       } else {
         currentCharacter = numCharacters - 1;
       }
+      changeCharacter();
     }
 
-    playerCharacter->update(arduboy);
 
+    arduboy.println("hmm");
+    playerCharacter->update(arduboy);
+}
+
+void GameState_CharacterSelection::changeCharacter() {
+  playerCharacter->setType(currentCharacter); 
 }
 
 void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {

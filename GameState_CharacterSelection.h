@@ -11,6 +11,9 @@ public:
     void update(Arduboy2 &arduboy) override;
     void draw(Arduboy2 &arduboy) override;
     void cleanup() override;
+
+private:
+    void changeCharacter();
 };
 
 #endif

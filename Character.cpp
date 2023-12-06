@@ -12,9 +12,9 @@ Character::Character(int initialX, int initialY, CharacterType initialType) {
   velocityY = 0;
   currentFrame = 0;
   lives = 3;
-  state = CharacterState::IDLE;
 
   setType(initialType);
+  setState(CharacterState::IDLE);
 }
 
 Character::~Character() {}
