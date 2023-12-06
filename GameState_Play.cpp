@@ -12,7 +12,7 @@ void GameState_Play::init() {
     speed = 2;
 
     CharacterType playerType = gameModel.getSelectedCharacter();
-    playerCharacter = new Character(0, 30, playerType);
+    playerCharacter = new Character(0, 28, playerType);
 
     char* name = playerCharacter->getName();
     int maxLives = playerCharacter->getLives();
