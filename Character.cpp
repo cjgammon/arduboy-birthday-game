@@ -61,10 +61,12 @@ void Character::setType(CharacterType newType) {
     break;
     case CharacterType::JAXON:
       name = "JAXON";
-      idleSprite = character_jaxon_idle;
-      walkSprite = character_jaxon_run;
-      jumpSprite = character_jaxon_jump;
-      fallSprite = character_jaxon_fall;
+      frameCount_Idle = 4;
+      frameChangeInterval_Idle = 16;
+      idleSprite = character_caliban_idle;
+      walkSprite = character_caliban_run;
+      jumpSprite = character_caliban_jump;
+      fallSprite = character_caliban_fall;
     break;
     case CharacterType::MASON:
       name = "MASON";
@@ -75,10 +77,11 @@ void Character::setType(CharacterType newType) {
     break;
     case CharacterType::RUHAAN:
       name = "RUHAAN";
-      idleSprite = character_ruhaan_idle;
-      walkSprite = character_ruhaan_run;
-      jumpSprite = character_ruhaan_jump;
-      fallSprite = character_ruhaan_fall;
+      idleSprite = character_lyle_idle;
+      walkSprite = character_lyle_run;
+      jumpSprite = character_lyle_jump;
+      fallSprite = character_lyle_fall;
+      frameChangeInterval_Idle = 50;
     break;
     case CharacterType::NOLA:
       name = "NOLA";
@@ -93,14 +96,6 @@ void Character::setType(CharacterType newType) {
       walkSprite = character_pineappleMurphy_run;
       jumpSprite = character_pineappleMurphy_jump;
       fallSprite = character_pineappleMurphy_fall;
-    break;
-    case CharacterType::LYLE:
-      name = "LYLE";
-      idleSprite = character_lyle_idle;
-      walkSprite = character_lyle_run;
-      jumpSprite = character_lyle_jump;
-      fallSprite = character_lyle_fall;
-      frameChangeInterval_Idle = 50;
     break;
     case CharacterType::VAL:
       name = "VAL";

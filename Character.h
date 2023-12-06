@@ -11,7 +11,6 @@ enum CharacterType {
   RUHAAN,
   JAXON,
   NOLA,
-  LYLE,
   ROBOT_STEVE,
   PINEAPPLE_MURPHY,
   VAL,
