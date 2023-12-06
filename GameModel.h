@@ -16,7 +16,7 @@ private:
   // Private data members to store game state, variables, and character selection
   int score;
   int lives;
-  Character* selectedCharacter; // Declare a pointer to Character
+  CharacterType selectedCharacter; // Declare a pointer to Character
 
 public:
     // Define accessor and mutator methods for game data
@@ -26,8 +26,8 @@ public:
     int getLives() const;
     void setLives(int score);
 
-    Character* getSelectedCharacter();
-    void setSelectedCharacter(Character* character);
+    CharacterType getSelectedCharacter();
+    void setSelectedCharacter(CharacterType character);
 };
 
 extern GameModel& gameModel; // Declare the global instance

@@ -1,11 +1,20 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+#include "sprites.h"
 #include <Arduboy2.h>
+
+enum CharacterType {
+  JONAS,
+  HENRY,
+  MASON,
+  RUHAAN,
+  JAXON
+};
 
 class Character {
 public:
-    Character(int initialX, int initialY);
+    Character(int initialX, int initialY, CharacterType initialType);
     virtual ~Character();
 
     enum CharacterState {
@@ -15,14 +24,17 @@ public:
         FALL,
     };
 
-    void update(Arduboy2 &arduboy);
     void setState(CharacterState newState);
+
+    CharacterType getType() const { return type; };
+    void setType(CharacterType newType);
+
+    void update(Arduboy2 &arduboy);
     void draw(Arduboy2 &arduboy);
-        // Getter methods for x and y
+
     int getX() const { return x; }
     int getY() const { return y; }
 
-    // Setter methods for x and y
     void setX(int newX) { x = newX; }
     void setY(int newY) { y = newY; }
 
@@ -53,6 +65,7 @@ protected:
     int frameChangeInterval_Walking;
     int frameChangeInterval_Jump;
 
+    CharacterType type;
     CharacterState state;
     int x; // X coordinate
     int y; // Y coordinate

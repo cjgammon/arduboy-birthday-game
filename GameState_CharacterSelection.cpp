@@ -2,35 +2,24 @@
 #include "sprites.h"
 #include "GameState_CharacterSelection.h"
 #include "Character.h"
-#include "Character0.h"
-#include "Character1.h"
 #include "GameModel.h"
 
 int numCharacters = 5;
-Character** playerCharacters; // Declare an array of character pointers
+Character* playerCharacter;
 
 int currentCharacter = 0;
 
 void GameState_CharacterSelection::init() {
-    // Initialization code
-    playerCharacters = new Character*[numCharacters]; // Allocate memory for the array
-
-    for (int i = 0; i < numCharacters; i++) {
-      int x = (SCREEN_WIDTH / 2) - 16;
-      int y = 28;
-      if (i == 0) {
-        playerCharacters[i] = new Character0(x, y);
-      } else {
-        playerCharacters[i] = new Character1(x, y);
-      }
-    }
+    int x = (SCREEN_WIDTH / 2) - 16;
+    int y = 28;
+    playerCharacter = new Character(x, y, currentCharacter);
 }
 
 void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justPressed(A_BUTTON)) {
       if (stateChangeCallback != nullptr) {
-          gameModel.setSelectedCharacter(playerCharacters[currentCharacter]);
+          gameModel.setSelectedCharacter(currentCharacter);
           stateChangeCallback(STATE_GAME_PLAY);
       }
     }
@@ -41,6 +30,7 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
       } else {
         currentCharacter = 0;
       }
+      changeCharacter();
     }
 
     if (arduboy.justPressed(LEFT_BUTTON)) {
@@ -49,23 +39,29 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
       } else {
         currentCharacter = numCharacters - 1;
       }
+      changeCharacter();
     }
 
-    playerCharacters[currentCharacter]->update(arduboy);
 
+    arduboy.println("hmm");
+    playerCharacter->update(arduboy);
+}
+
+void GameState_CharacterSelection::changeCharacter() {
+  playerCharacter->setType(currentCharacter); 
 }
 
 void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     // Drawing code
 
-    size_t name = playerCharacters[currentCharacter]->getName();
+    size_t name = playerCharacter->getName();
     int textWidthInPixels = strlen(name) * CHAR_WIDTH; 
     int textX = (SCREEN_WIDTH / 2) - (textWidthInPixels / 2);
     int textY = 0;
     arduboy.setCursor(textX, textY);
-    arduboy.print(playerCharacters[currentCharacter]->getName());
+    arduboy.print(playerCharacter->getName());
 
-    playerCharacters[currentCharacter]->draw(arduboy);
+    playerCharacter->draw(arduboy);
 
     //draw ground
     int x = 0;
@@ -77,8 +73,5 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
 
 void GameState_CharacterSelection::cleanup() {
     // Drawing code
-    for (int i = 0; i < numCharacters; i++) {
-        delete playerCharacters[i]; // Delete each character instance
-    }
-    delete[] playerCharacters; // Delete the array of character pointers
+    delete playerCharacter; // Delete the array of character pointers
 }

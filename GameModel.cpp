@@ -28,11 +28,11 @@ void GameModel::setScore(int newScore) {
   score = newScore;
 }
 
-Character* GameModel::getSelectedCharacter() {
+CharacterType GameModel::getSelectedCharacter() {
   return selectedCharacter;
 }
 
-void GameModel::setSelectedCharacter(Character* character) {
+void GameModel::setSelectedCharacter(CharacterType character) {
   selectedCharacter = character;
 }
 

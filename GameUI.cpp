@@ -1,17 +1,16 @@
 #include "GameUI.h"
-#include "GameModel.h"
-#include "sprites.h"
 
 GameUI::GameUI() {
 
 }
 
-void GameUI::init() {
-
+void GameUI::init(char *initialName, int initialLives, int initialMaxLives) {
+  name = initialName;
+  lives = initialLives;
+  maxLives = initialMaxLives;
 }
 
 void GameUI::draw(Arduboy2 &arduboy) {
-    // Drawing method - Called to draw UI elements
     drawName(arduboy);
     drawLives(arduboy);
     //drawScore(arduboy);
@@ -19,8 +18,7 @@ void GameUI::draw(Arduboy2 &arduboy) {
 }
 
 void GameUI::drawName(Arduboy2 &arduboy) {
-  Character *currentCharacter = gameModel.getSelectedCharacter();
-  arduboy.print(currentCharacter->getName());
+  arduboy.print(name);
 }
 
 void GameUI::drawScore(Arduboy2 &arduboy) {
@@ -30,14 +28,12 @@ void GameUI::drawScore(Arduboy2 &arduboy) {
 }
 
 void GameUI::drawLives(Arduboy2 &arduboy) {
-    // Draw the number of lives on the screen
-  Character *currentCharacter = gameModel.getSelectedCharacter();
-  char *name = currentCharacter->getName();
+  // Draw the number of lives on the screen
   int textWidthInPixels = strlen(name) * CHAR_WIDTH; 
   int startX = textWidthInPixels;
 
-  int totalLives = currentCharacter->getLives();
-  int currentLives = gameModel.getLives();
+  int totalLives = maxLives;
+  int currentLives = lives;
 
   int x = startX;
   for (int i = 0; i < totalLives; i++) {
