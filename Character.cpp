@@ -1,7 +1,7 @@
 #include "Character.h"
 
-const float gravity = 0.3;
-const float jumpPower = -5.0;
+float gravity = 0.3;
+float jumpPower = -5.0;
 
 Character::Character(int initialX, int initialY, CharacterType initialType) {
   x = initialX;
@@ -41,6 +41,8 @@ void Character::setType(CharacterType newType) {
   frameChangeInterval_Walking = 6;
   frameChangeInterval_Jump = 1;
   frameChangeInterval_Fall = 1;
+  gravity = 0.3;
+  jumpPower = -5.0;
 
   switch (type) {
     case CharacterType::JONAS:
@@ -50,6 +52,8 @@ void Character::setType(CharacterType newType) {
       walkSprite = character_jonas_run;
       jumpSprite = character_jonas_jump;
       fallSprite = character_jonas_fall;
+      jumpPower = -4.0;
+      gravity = 0.2;
     break;
     case CharacterType::HENRY:
       name = "HENRY";
@@ -58,6 +62,8 @@ void Character::setType(CharacterType newType) {
       walkSprite = character_skaterboy_run;
       jumpSprite = character_skaterboy_jump;
       fallSprite = character_skaterboy_fall;
+      jumpPower = -6.0;
+      gravity = 0.45;
     break;
     case CharacterType::JAXON:
       name = "JAXON";
@@ -67,6 +73,8 @@ void Character::setType(CharacterType newType) {
       walkSprite = character_caliban_run;
       jumpSprite = character_caliban_jump;
       fallSprite = character_caliban_fall;
+      jumpPower = -3.5;
+      gravity = 0.14;
     break;
     case CharacterType::MASON:
       name = "MASON";
@@ -74,6 +82,8 @@ void Character::setType(CharacterType newType) {
       walkSprite = character_calvin_run;
       jumpSprite = character_calvin_jump;
       fallSprite = character_calvin_fall;
+      jumpPower = -2.5;
+      gravity = 0.18;
     break;
     case CharacterType::RUHAAN:
       name = "RUHAAN";
@@ -82,6 +92,8 @@ void Character::setType(CharacterType newType) {
       jumpSprite = character_lyle_jump;
       fallSprite = character_lyle_fall;
       frameChangeInterval_Idle = 50;
+      jumpPower = -6.0;
+      gravity = 0.4;
     break;
     case CharacterType::NOLA:
       name = "NOLA";
