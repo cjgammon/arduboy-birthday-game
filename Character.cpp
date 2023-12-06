@@ -2,6 +2,7 @@
 
 float gravity = 0.3;
 float jumpPower = -5.0;
+float stopJumpDamping = 0.5;
 
 Character::Character(int initialX, int initialY, CharacterType initialType) {
   x = initialX;
@@ -43,6 +44,7 @@ void Character::setType(CharacterType newType) {
   frameChangeInterval_Fall = 1;
   gravity = 0.3;
   jumpPower = -5.0;
+  stopJumpDamping = 0.5;
 
   switch (type) {
     case CharacterType::JONAS:
@@ -54,6 +56,7 @@ void Character::setType(CharacterType newType) {
       fallSprite = character_jonas_fall;
       jumpPower = -4.0;
       gravity = 0.2;
+      stopJumpDamping = 0.3;
     break;
     case CharacterType::HENRY:
       name = "HENRY";
@@ -75,6 +78,7 @@ void Character::setType(CharacterType newType) {
       fallSprite = character_caliban_fall;
       jumpPower = -3.5;
       gravity = 0.14;
+      stopJumpDamping = 0.2;
     break;
     case CharacterType::MASON:
       name = "MASON";
@@ -94,6 +98,7 @@ void Character::setType(CharacterType newType) {
       frameChangeInterval_Idle = 50;
       jumpPower = -6.0;
       gravity = 0.4;
+      stopJumpDamping = 0.2;
     break;
     case CharacterType::NOLA:
       name = "NOLA";
@@ -161,6 +166,13 @@ void Character::startJump() {
   if (state != JUMP) {
     velocityY = jumpPower;  // Negative value for upward movement
     setState(JUMP);
+  }
+}
+
+void Character::stopJump() {
+  if (state == JUMP && velocityY < 0.0)
+  {
+    velocityY *= stopJumpDamping;
   }
 }
 

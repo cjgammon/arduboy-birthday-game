@@ -48,6 +48,7 @@ public:
     int getLives() const { return lives; }
 
     void startJump();
+    void stopJump();
 
 protected:
 

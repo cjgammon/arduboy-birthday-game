@@ -45,6 +45,10 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       playerCharacter->startJump();
     }
 
+    if (arduboy.justReleased(A_BUTTON)) {
+      playerCharacter->stopJump();
+    }
+
     scrollX = -speed;
     entityManager.update(arduboy, scrollX);
     playerCharacter->update(arduboy);
