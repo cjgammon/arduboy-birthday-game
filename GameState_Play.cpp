@@ -12,7 +12,7 @@ void GameState_Play::init() {
     speed = 2;
 
     CharacterType playerType = gameModel.getSelectedCharacter();
-    playerCharacter = new Character(0, 30, playerType);
+    playerCharacter = new Character(0, 28, playerType);
 
     char* name = playerCharacter->getName();
     int maxLives = playerCharacter->getLives();
@@ -109,9 +109,9 @@ void GameState_Play::createGroundEntities() {
 }
 
 void GameState_Play::draw(Arduboy2 &arduboy) {
+    gameUI.draw(arduboy);
     entityManager.draw(arduboy);
     playerCharacter->draw(arduboy);
-    gameUI.draw(arduboy);
 }
 
 void GameState_Play::cleanup() {
