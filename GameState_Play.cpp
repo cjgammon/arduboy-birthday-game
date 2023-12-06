@@ -47,8 +47,8 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 
     //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT setX
     if (playerCharacter->getY() == groundLevel && !entityManager.isGroundAt(playerCharacter->getX())) {
-      playerCharacter->setState(Character::FALL);
-      speed = 0;
+      //playerCharacter->setState(Character::FALL);
+      //speed = 0;
     }
 }
 

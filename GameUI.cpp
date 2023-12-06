@@ -1,6 +1,7 @@
 #include "GameUI.h"
 #include "GameModel.h"
 #include "sprites.h"
+#include "globals.h"
 
 GameUI::GameUI() {
 
@@ -20,7 +21,8 @@ void GameUI::draw(Arduboy2 &arduboy) {
 
 void GameUI::drawName(Arduboy2 &arduboy) {
   Character *currentCharacter = gameModel.getSelectedCharacter();
-  arduboy.print(currentCharacter->getName());
+  //arduboy.print(currentCharacter->getName());
+  arduboy.print(globalVariable);
 }
 
 void GameUI::drawScore(Arduboy2 &arduboy) {

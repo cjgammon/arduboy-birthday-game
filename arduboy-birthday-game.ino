@@ -5,6 +5,10 @@
 #include "GameState_CharacterSelection.h"
 #include "GameState_Play.h"
 
+#include "globals.h"
+
+int globalVariable = 13;
+
 Arduboy2 arduboy;
 ArduboyTones sound(arduboy.audio.enabled);
 
@@ -22,6 +26,8 @@ GameState* gameStates[] = {
 };
 
 const int numGameStates = sizeof(gameStates) / sizeof(gameStates[0]);
+
+
 
 void setup() {
   Serial.begin(9600);
