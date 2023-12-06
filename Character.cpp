@@ -45,6 +45,7 @@ void Character::setType(CharacterType newType) {
   switch (type) {
     case CharacterType::JONAS:
       name = "JONAS";
+      frameCount_Walking = 10;
       idleSprite = character_jonas_idle;
       walkSprite = character_jonas_run;
       jumpSprite = character_jonas_jump;
@@ -52,10 +53,11 @@ void Character::setType(CharacterType newType) {
     break;
     case CharacterType::HENRY:
       name = "HENRY";
-      idleSprite = character_henry_idle;
-      walkSprite = character_henry_run;
-      jumpSprite = character_henry_jump;
-      fallSprite = character_henry_fall;
+      frameCount_Walking = 6;
+      idleSprite = character_skaterboy_idle;
+      walkSprite = character_skaterboy_run;
+      jumpSprite = character_skaterboy_jump;
+      fallSprite = character_skaterboy_fall;
     break;
     case CharacterType::JAXON:
       name = "JAXON";
