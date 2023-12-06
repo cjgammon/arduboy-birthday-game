@@ -95,7 +95,7 @@ void Character::setType(CharacterType newType) {
       jumpSprite = character_skaterboy_jump;
       fallSprite = character_skaterboy_fall;
       jumpPower = -6.0;
-      gravity = 0.45;
+      gravity = 0.35;
     break;
     case CharacterType::JAXON:
       name = "JAXON";
@@ -105,9 +105,9 @@ void Character::setType(CharacterType newType) {
       walkSprite = character_caliban_run;
       jumpSprite = character_caliban_jump;
       fallSprite = character_caliban_fall;
-      jumpPower = -3.5;
-      gravity = 0.14;
-      stopJumpDamping = 0.2;
+      jumpPower = -4.9;
+      gravity = 0.22;
+      stopJumpDamping = 0.1;
     break;
     case CharacterType::MASON:
       name = "MASON";
@@ -125,8 +125,8 @@ void Character::setType(CharacterType newType) {
       jumpSprite = character_lyle_jump;
       fallSprite = character_lyle_fall;
       frameChangeInterval_Idle = 50;
-      jumpPower = -6.0;
-      gravity = 0.4;
+      jumpPower = -4.0;
+      gravity = 0.25;
       stopJumpDamping = 0.2;
     break;
     case CharacterType::NOLA:
