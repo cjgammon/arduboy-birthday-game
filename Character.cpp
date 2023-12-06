@@ -93,7 +93,7 @@ void Character::startJump() {
 
 void Character::draw(Arduboy2 &arduboy) {
     const uint8_t* currentSprite = nullptr;
-
+    
     switch (state) {
         case IDLE:
             currentSprite = idleSprite;
