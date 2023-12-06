@@ -1,10 +1,7 @@
 // GameState_CharacterSelection.cpp
-#include "sprites.h"
 #include "GameState_CharacterSelection.h"
-#include "Character.h"
-#include "GameModel.h"
 
-int numCharacters = 5;
+int numCharacters = 7;
 Character* playerCharacter;
 
 

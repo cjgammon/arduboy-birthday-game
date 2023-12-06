@@ -2,8 +2,11 @@
 #ifndef CHARACTERSELECTIONSTATE_H
 #define CHARACTERSELECTIONSTATE_H
 
+#include "sprites.h"
 #include "Vars.h"
 #include "GameState.h"
+#include "Character.h"
+#include "GameModel.h"
 
 class GameState_CharacterSelection : public GameState {
 public:
