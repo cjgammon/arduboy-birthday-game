@@ -2,8 +2,10 @@
 
 float gravity = 0.3;
 float jumpPower = -5.0;
+// jump damping - this controls how much your jump speed is reduced when you release the jump button.
 float stopJumpDamping = 0.5;
-// jump buffer
+// jump buffer - this provides a little bit of a window before we hit the ground for a second jump to register.
+// this is a lot more user friendly because people always mis-time when your character is actually 'on the ground'
 int jumpBufferLengthInFrames = 30;
 int jumpBufferCount = 0;
 
