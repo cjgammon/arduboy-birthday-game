@@ -9,7 +9,12 @@ enum CharacterType {
   HENRY,
   MASON,
   RUHAAN,
-  JAXON
+  JAXON,
+  NOLA,
+  LYLE,
+  ROBOT_STEVE,
+  PINEAPPLE_MURPHY,
+  VAL,
 };
 
 class Character {
@@ -47,13 +52,17 @@ public:
 
 protected:
 
+    const uint8_t* currentSprite;
     const uint8_t* idleSprite;
     const uint8_t* walkSprite;
+    const uint8_t* jumpSprite;
+    const uint8_t* fallSprite;
 
     int frameCount;
     int frameCount_Idle;
     int frameCount_Walking;
     int frameCount_Jump;
+    int frameCount_Fall;
 
     int groundLevel;
     float velocityY = 0;
@@ -64,13 +73,16 @@ protected:
     int frameChangeInterval_Idle;
     int frameChangeInterval_Walking;
     int frameChangeInterval_Jump;
+    int frameChangeInterval_Fall;
 
     CharacterType type;
     CharacterState state;
     int x; // X coordinate
     int y; // Y coordinate
-    const char* name; // Character's name
+    
     int lives;
+public:
+    const char* name; // Character's name
 };
 
 #endif // CHARACTER_H

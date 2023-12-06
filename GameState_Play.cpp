@@ -109,9 +109,9 @@ void GameState_Play::createGroundEntities() {
 }
 
 void GameState_Play::draw(Arduboy2 &arduboy) {
+    gameUI.draw(arduboy);
     entityManager.draw(arduboy);
     playerCharacter->draw(arduboy);
-    gameUI.draw(arduboy);
 }
 
 void GameState_Play::cleanup() {

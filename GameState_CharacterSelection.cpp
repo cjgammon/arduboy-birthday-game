@@ -41,6 +41,7 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
       }
       changeCharacter();
     }
+    arduboy.println(currentCharacter);
 
     playerCharacter->update(arduboy);
 }
