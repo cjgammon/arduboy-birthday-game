@@ -6,7 +6,7 @@ Character* playerCharacter;
 
 
 void GameState_CharacterSelection::init() {
-    int x = (SCREEN_WIDTH / 2) - 16;
+    int x = (SCREEN_WIDTH / 2) - (16 / 2);
     int y = 28;
     currentCharacter = 0;
     playerCharacter = new Character(x, y, currentCharacter);
@@ -38,7 +38,6 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
       }
       changeCharacter();
     }
-    arduboy.println(currentCharacter);
 
     playerCharacter->update(arduboy);
 }
