@@ -5,10 +5,10 @@
 Character_Mason::Character_Mason(int initialX, int initialY) : Character(initialX, initialY) {
   this->name = "MASON";
 
-  this->idleSprite = character_mason_idle;
-  this->walkSprite = character_mason_run;
-  this->jumpSprite = character_mason_jump;
-  this->fallSprite = character_mason_fall;
+  this->idleSprite = character_calvin_idle;
+  this->walkSprite = character_calvin_run;
+  this->jumpSprite = character_calvin_jump;
+  this->fallSprite = character_calvin_fall;
 
   this->frameCount_Idle = 2;
   this->frameCount_Walking = 9;
