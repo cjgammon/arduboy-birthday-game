@@ -61,8 +61,10 @@ protected:
     CharacterState state;
     int x; // X coordinate
     int y; // Y coordinate
-    const char* name; // Character's name
+    
     int lives;
+public:
+    const char* name; // Character's name
 };
 
 #endif // CHARACTER_H
