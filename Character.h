@@ -47,9 +47,6 @@ public:
     const char* getName() const { return name; } // Getter for the character's name
     int getLives() const { return lives; }
 
-    void startJump();
-    void stopJump();
-
 protected:
 
     const uint8_t* currentSprite;

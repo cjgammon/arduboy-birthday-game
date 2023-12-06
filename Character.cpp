@@ -3,6 +3,9 @@
 float gravity = 0.3;
 float jumpPower = -5.0;
 float stopJumpDamping = 0.5;
+// jump buffer
+int jumpBufferLengthInFrames = 30;
+int jumpBufferCount = 0;
 
 Character::Character(int initialX, int initialY, CharacterType initialType) {
   x = initialX;
@@ -21,6 +24,30 @@ Character::Character(int initialX, int initialY, CharacterType initialType) {
 Character::~Character() {}
 
 void Character::update(Arduboy2 &arduboy) {
+
+  // manage jump buffer
+  if (arduboy.justPressed(A_BUTTON)) {
+    jumpBufferCount = jumpBufferLengthInFrames;
+  }
+  else if (arduboy.justReleased(A_BUTTON))
+  {
+    jumpBufferCount = 0;
+  }
+  else
+  {
+    jumpBufferCount--;
+  }
+
+  if (jumpBufferCount > 0 && state != JUMP) {
+    jumpBufferCount = 0;
+    velocityY = jumpPower;  // Negative value for upward movement
+    setState(JUMP);
+  }
+
+  if (state == JUMP && velocityY < 0.0 && arduboy.justReleased(A_BUTTON)) {
+    velocityY *= stopJumpDamping;
+  }
+
   frameCounter++;
   if (frameCounter >= frameChangeInterval) {
     currentFrame++;
@@ -159,20 +186,6 @@ void Character::setState(CharacterState newState) {
       frameCount = frameCount_Fall;
       frameChangeInterval = frameChangeInterval_Fall;
       break;
-  }
-}
-
-void Character::startJump() {
-  if (state != JUMP) {
-    velocityY = jumpPower;  // Negative value for upward movement
-    setState(JUMP);
-  }
-}
-
-void Character::stopJump() {
-  if (state == JUMP && velocityY < 0.0)
-  {
-    velocityY *= stopJumpDamping;
   }
 }
 
