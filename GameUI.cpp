@@ -19,7 +19,7 @@ void GameUI::draw(Arduboy2 &arduboy) {
 
 void GameUI::drawName(Arduboy2 &arduboy) {
   byte textWidthInPixels = strlen(name) * CHAR_WIDTH;
-  arduboy.setCursor(128 - textWidthInPixels, 0);
+  arduboy.setCursor(SCREEN_WIDTH - textWidthInPixels, 0);
   arduboy.print(name);
 }
 
