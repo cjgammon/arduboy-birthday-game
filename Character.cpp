@@ -3,7 +3,7 @@
 const float gravity = 0.3;
 const float jumpPower = -5.0;
 
-Character::Character(int initialX, int initialY) {
+Character::Character(int initialX, int initialY, CharacterType initialType) {
   x = initialX;
   y = initialY;
 
@@ -12,6 +12,9 @@ Character::Character(int initialX, int initialY) {
   velocityY = 0;
   currentFrame = 0;
   lives = 3;
+  state = CharacterState::IDLE;
+
+  setType(initialType);
 }
 
 Character::~Character() {}
@@ -24,6 +27,35 @@ void Character::update(Arduboy2 &arduboy) {
       currentFrame = 0;
     }
     frameCounter = 0;
+  }
+}
+
+void Character::setType(CharacterType newType) {
+  type = newType;
+
+  switch (type) {
+    case CharacterType::JONAS:
+      name = "JONAS";
+      idleSprite = character0idle;
+      walkSprite = character0walk;
+      frameCount_Idle = 2;
+      frameCount_Walking = 9;
+      frameCount_Jump = 1;
+      frameChangeInterval_Idle = 10;
+      frameChangeInterval_Walking = 6;
+      frameChangeInterval_Jump = 1;
+    break;
+    case CharacterType::HENRY:
+      name = "HENRY";
+      idleSprite = character1idle;
+      walkSprite = character1walk;
+      frameCount_Idle = 2;
+      frameCount_Walking = 9;
+      frameCount_Jump = 1;
+      frameChangeInterval_Idle = 10;
+      frameChangeInterval_Walking = 6;
+      frameChangeInterval_Jump = 1;
+    break;
   }
 }
 

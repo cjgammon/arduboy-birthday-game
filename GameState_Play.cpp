@@ -1,7 +1,5 @@
 // GameState_Play.cpp
 #include "GameState_Play.h"
-#include "Character0.h"
-#include "Character1.h"
 #include "GameModel.h"
 
 int offset = 0; // Offset for scrolling
@@ -14,14 +12,34 @@ void GameState_Play::init() {
     speed = 2;
 
     //playerCharacter = new Character0(0, 30);
-    playerCharacter = gameModel.getSelectedCharacter();
+    //playerCharacter = gameModel.getSelectedCharacter();
+    /*
+    switch (gameModel.getSelectedCharacter()) {
+      case CharacterType::HENRY:
+        playerCharacter = new Character0(0, 30, CharacterType::JONAS);
+        break;
+      case CharacterType::CHARACTER1:
+        playerCharacter = new Character1(0, 30);
+        break;
+      default:
+        playerCharacter = new Character0(0, 30);
+        break;
+    }
+    */
+    CharacterType playerType = gameModel.getSelectedCharacter();
+    Character* playerCharacter = new Character(0, 30, playerType);
+
+    char* name = playerCharacter->getName();
+    int maxLives = playerCharacter->getLives();
+
     playerCharacter->setX(0);
     playerCharacter->setY(groundLevel);
     playerCharacter->setGround(groundLevel);
     playerCharacter->setState(Character::WALK);
-    gameModel.setLives(playerCharacter->getLives());
+    gameModel.setLives(maxLives);
 
-    gameUI.init();
+    
+    gameUI.init(name, maxLives, maxLives);
 
     entityManager.init();
 
