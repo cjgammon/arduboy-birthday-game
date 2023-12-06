@@ -2,6 +2,8 @@
 #ifndef GAMEPLAYSTATE_H
 #define GAMEPLAYSTATE_H
 
+#include <avr/pgmspace.h>
+#include "Vars.h"
 #include "GameState.h"
 #include "GameUI.h"
 #include "Character.h"
@@ -19,6 +21,8 @@ private:
     GameUI gameUI; // Create an instance of the GameUI class 
     Character* playerCharacter;
     EntityManager entityManager;
+
+    void createGroundEntities();
 };
 
 
