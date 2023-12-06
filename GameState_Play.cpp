@@ -41,13 +41,11 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
-    if (arduboy.justPressed(A_BUTTON)) {
-      playerCharacter->startJump();
-    }
+    playerCharacter->update(arduboy);
 
     scrollX = -speed;
     entityManager.update(arduboy, scrollX);
-    playerCharacter->update(arduboy);
+
 
     
     //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT setX
