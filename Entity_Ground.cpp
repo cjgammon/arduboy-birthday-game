@@ -11,38 +11,49 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
     // Constructor code, initialize variables
     type = EntityType::GROUND;
     for (int i = 0; i < GROUND_DEFINITION_SIZE; ++i) {
-        groundArray[i] = groundDefinitions[arrayIndex][i];
-        //groundArray[i] = pgm_read_byte(&(groundDefinitions[arrayIndex][i]));
+        //groundArray[i] = groundDefinitions[arrayIndex][i];
+        groundArray[i] = pgm_read_byte(&(groundDefinitions[arrayIndex][i]));
     }
 }
 
-/*
-Entity_Ground::Entity_Ground(int initialX, int initialY, const int inputArray[GROUND_DEFINITION_SIZE])
-    : Entity(initialX, initialY, GROUND_DEFINITION_SIZE * GROUND_SIZE, 1), groundArray() {
-    // Constructor implementation
-    type = EntityType::GROUND;
-    for (int i = 0; i < GROUND_DEFINITION_SIZE; ++i) {
-        groundArray[i] = inputArray[i];
+bool Entity_Ground::isGroundAt(int posX) {
+    // Calculate the relative x position
+    int relativeX = posX - x;
+
+    // Convert to index in the ground array
+    int index = relativeX / GROUND_SIZE;
+
+    // Check if the index is within the bounds of the array
+    if (index < 0 || index >= GROUND_DEFINITION_SIZE) {
+        return false; // posX is outside of this ground entity
     }
+
+    // Return true if there's ground at the index, false otherwise
+    return groundArray[index] == 1;
 }
-*/
+
 void Entity_Ground::update() {
     // Update the position of the ground based on speed
 }
 
 void Entity_Ground::draw(Arduboy2 &arduboy) {
     // Draw the ground segment
-    int max = floor(width / 6);
-    for (int i = 0; i < width; i += 6) {
-      if (i == 0) {
-        Sprites::drawOverwrite(x + i, y, environmentgroundstart, 0);
-      } else if (i == max * 6) {
-        Sprites::drawOverwrite(x + i, y, environmentgroundend, 0);
-      } else {
-        Sprites::drawOverwrite(x + i, y, environmentgroundmiddle, 0);
+    for (int i = 0; i < GROUND_DEFINITION_SIZE; i ++) {
+      int newX = x + (i * GROUND_SIZE);
+
+      if (i == 0 || i == GROUND_DEFINITION_SIZE - 1) {
+        Sprites::drawOverwrite(newX, y, environmentgroundmiddle, 0);
+      }
+
+      if (groundArray[i] == 1) {
+        if (i > 0 && groundArray[i - 1] == 0) {
+          Sprites::drawOverwrite(newX, y, environmentgroundstart, 0);
+        } else if (i < GROUND_DEFINITION_SIZE - 1 && groundArray[i + 1] == 0) {
+          Sprites::drawOverwrite(newX, y, environmentgroundend, 0);
+        } else {
+          Sprites::drawOverwrite(newX, y, environmentgroundmiddle, 0);
+        }
       }
     }
-    
-   // arduboy.drawRect(x, y, width, 64, WHITE); // Adjust color and size as needed
-
+    //arduboy.drawRect(x, y, width, 64, WHITE); // Adjust color and size as needed
 }
