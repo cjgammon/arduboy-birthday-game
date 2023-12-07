@@ -135,6 +135,10 @@ void Character::setType(CharacterType newType) {
       walkSprite = character_nola_run;
       jumpSprite = character_nola_jump;
       fallSprite = character_nola_fall;
+      frameCount_Walking = 8;
+      jumpPower = -4.5;
+      gravity = 0.18;
+      stopJumpDamping = 0.5;
     break;
     case CharacterType::PINEAPPLE_MURPHY:
       name = "PINEAPPLE MURPHY";
