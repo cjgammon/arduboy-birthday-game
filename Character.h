@@ -43,8 +43,9 @@ public:
     void setY(int newY) { y = newY; }
 
     void setGround(int newGround) {groundLevel = newGround;}
-    
+
     const char* getName() const { return name; } // Getter for the character's name
+    const char* getDescription() const { return description; }
     int getLives() const { return lives; }
 
 protected:
@@ -80,6 +81,7 @@ protected:
     int lives;
 public:
     const char* name; // Character's name
+    const char* description;
 };
 
 #endif // CHARACTER_H

@@ -57,6 +57,13 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     arduboy.setCursor(textX, textY);
     arduboy.print(playerCharacter->getName());
 
+    name = playerCharacter->getDescription();
+    textWidthInPixels = strlen(name) * CHAR_WIDTH;
+    textX = (SCREEN_WIDTH / 2) - (textWidthInPixels / 2);
+    textY = 11;
+    arduboy.setCursor(textX, textY);
+    arduboy.print(playerCharacter->getDescription());
+
     playerCharacter->draw(arduboy);
 
     //draw ground

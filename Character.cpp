@@ -112,6 +112,7 @@ void Character::setType(CharacterType newType) {
   switch (type) {
     case CharacterType::JONAS:
       name = "JONAS";
+      description = "ABILITY: Hover";
       frameCount_Walking = 10;
       idleSprite = character_jonas_idle;
       walkSprite = character_jonas_run;
@@ -127,6 +128,7 @@ void Character::setType(CharacterType newType) {
     break;
     case CharacterType::HENRY:
       name = "HENRY";
+      description = "ABILITY: Double Ollie";
       frameCount_Walking = 6;
       idleSprite = character_skaterboy_idle;
       walkSprite = character_skaterboy_run;
@@ -141,6 +143,7 @@ void Character::setType(CharacterType newType) {
     break;
     case CharacterType::JAXON:
       name = "JAXON";
+      description = "ABILITY: Butt Stomp";
       frameCount_Idle = 4;
       frameChangeInterval_Idle = 16;
       idleSprite = character_caliban_idle;
@@ -151,12 +154,13 @@ void Character::setType(CharacterType newType) {
       gravity = 0.22;
       jumpCount = 2;
       jumpsRemaining = 2;
-      extraJumpPower = 13;// positive on purpose!
+      extraJumpPower = 9;// positive on purpose!
       stopJumpDamping = 0.1;
       // notes: big floaty jump, pressing the button again sends you downward quickly, like a butt stomp/ground pound.
     break;
     case CharacterType::MASON:
       name = "MASON";
+      description = "ABILITY: Double Jump";
       idleSprite = character_calvin_idle;
       walkSprite = character_calvin_run;
       jumpSprite = character_calvin_jump;
@@ -170,6 +174,7 @@ void Character::setType(CharacterType newType) {
     break;
     case CharacterType::RUHAAN:
       name = "RUHAAN";
+      description = "ABILITY: Dragon Punch";
       idleSprite = character_lyle_idle;
       walkSprite = character_lyle_run;
       jumpSprite = character_lyle_jump;
@@ -182,6 +187,7 @@ void Character::setType(CharacterType newType) {
     break;
     case CharacterType::NOLA:
       name = "NOLA";
+      description = "ABILITY: Triple Jump";
       idleSprite = character_nola_idle;
       walkSprite = character_nola_run;
       jumpSprite = character_nola_jump;
@@ -197,6 +203,7 @@ void Character::setType(CharacterType newType) {
     break;
     case CharacterType::PINEAPPLE_MURPHY:
       name = "PINEAPPLE MURPHY";
+      description = "ABILITY: ???";
       idleSprite = character_pineappleMurphy_idle;
       walkSprite = character_pineappleMurphy_run;
       jumpSprite = character_pineappleMurphy_jump;
