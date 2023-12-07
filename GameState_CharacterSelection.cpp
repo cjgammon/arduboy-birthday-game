@@ -8,13 +8,13 @@ Character* playerCharacter;
 void GameState_CharacterSelection::init() {
     int x = (SCREEN_WIDTH / 2) - (16 / 2);
     int y = 28;
-    currentCharacter = 0;
+    //currentCharacter = 0;
     playerCharacter = new Character(x, y, currentCharacter);
 }
 
 void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     // Update logic
-    if (arduboy.justPressed(A_BUTTON)) {
+    if (arduboy.justReleased(A_BUTTON)) {
       if (stateChangeCallback != nullptr) {
           gameModel.setSelectedCharacter(currentCharacter);
           stateChangeCallback(STATE_GAME_PLAY);
@@ -39,7 +39,8 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
       changeCharacter();
     }
 
-    playerCharacter->update(arduboy);
+    // don't update the character here unless you want them to handle input and process physics.
+    //playerCharacter->update(arduboy);
 }
 
 void GameState_CharacterSelection::changeCharacter() {
@@ -69,4 +70,5 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
 void GameState_CharacterSelection::cleanup() {
     // Drawing code
     delete playerCharacter; // Delete the array of character pointers
+    playerCharacter = nullptr; // Set to nullptr to avoid dangling pointer
 }

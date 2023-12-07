@@ -13,9 +13,7 @@ void GameState_Titlescreen::init() {
 
 void GameState_Titlescreen::update(Arduboy2 &arduboy) {
     // Update logic
-    if (arduboy.justPressed(A_BUTTON)) {
-        Serial.println("A Button Pressed");
-
+    if (arduboy.justReleased(A_BUTTON)) {
         if (stateChangeCallback != nullptr) {
             stateChangeCallback(STATE_CHARACTER_SELECTION);
         }
