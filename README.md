@@ -11,3 +11,5 @@ runs on arduboy like hardware ex) Arduino Leonardo
 [tile sheet converter](http://www.bloggingadeadhorse.com/TeamARGTileSheetConverter/)
 
 [image converter](http://www.bloggingadeadhorse.com/TeamARGImgConverter/)
+
+[midi2tones](https://github.com/MLXXXp/midi2tones)

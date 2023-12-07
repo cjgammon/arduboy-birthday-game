@@ -14,8 +14,6 @@ private:
 public:
     Entity_Ground();
     Entity_Ground(int initialX, int initialY, int arrayIndex);
-    //Entity_Ground(int initialX, int initialY, const int inputArray[GROUND_DEFINITION_SIZE]);
-    //Entity_Ground(int initialX, int initialY, int (&array)[groundDefinitionSize]);
 
     void update() override;
     void draw(Arduboy2 &arduboy) override;
