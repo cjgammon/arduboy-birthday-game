@@ -68,5 +68,8 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
 
 void GameState_CharacterSelection::cleanup() {
     // Drawing code
-    delete playerCharacter; // Delete the array of character pointers
+     if (playerCharacter != nullptr) {
+        delete playerCharacter;
+        playerCharacter = nullptr; // Set to nullptr to avoid dangling pointer
+    }
 }
