@@ -17,6 +17,7 @@ public:
 
     void update() override;
     void draw(Arduboy2 &arduboy) override;
+    bool isGroundAt(int posX);
 };
 
 #endif // ENTITY_GROUND_H

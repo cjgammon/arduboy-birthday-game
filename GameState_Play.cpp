@@ -43,17 +43,15 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 
     playerCharacter->update(arduboy);
 
-    //scrollX = -speed;
+    scrollX = -speed;
     entityManager.update(arduboy, scrollX);
 
     //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT setX
-    /*
+    
     if (playerCharacter->getY() == groundLevel && !entityManager.isGroundAt(playerCharacter->getX())) {
       playerCharacter->setState(Character::FALL);
       speed = 0;
-    }
-    */
-    
+    }    
 }
 
 void GameState_Play::createGroundEntities() {

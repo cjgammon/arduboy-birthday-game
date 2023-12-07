@@ -5,6 +5,7 @@
 #include "Vars.h"
 #include <Arduboy2.h>
 #include "Entity.h"
+#include "Entity_Ground.h"
 
 class EntityManager {
 public:

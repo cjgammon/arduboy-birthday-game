@@ -47,9 +47,16 @@ bool EntityManager::isGroundAt(int x) {
         if (entities[i] != nullptr) {
             if (entities[i] -> getType() == EntityType::GROUND) {
                 //check if x position is within the ground x and width
+                /*
                 if (x >= entities[i]->getX() && x <= entities[i]->getX() + entities[i]->getWidth()) {
                   return true;
                 }
+                */
+              Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[i]);
+
+              if (groundEntity -> isGroundAt(x)) {
+                return true;
+              }
             }
         }
     }

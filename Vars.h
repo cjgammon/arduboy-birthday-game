@@ -11,12 +11,12 @@
 #define GROUND_SIZE 6 
 
 #define GROUND_DEFINITION_COUNT 3
-#define GROUND_DEFINITION_SIZE 4
+#define GROUND_DEFINITION_SIZE 24
 
 const int groundDefinitions[GROUND_DEFINITION_COUNT][GROUND_DEFINITION_SIZE] PROGMEM = {
-    {1, 1, 1, 1},
-    {1, 0, 0, 1},
-    {1, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 };
 
 #endif // VARS_H
