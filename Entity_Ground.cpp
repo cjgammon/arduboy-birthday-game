@@ -51,26 +51,19 @@ void Entity_Ground::draw(Arduboy2 &arduboy) {
         } else if (i < GROUND_DEFINITION_SIZE - 1 && groundArray[i + 1] == 0) {
           Sprites::drawOverwrite(newX, y, environmentgroundend, 0);
         } else {
-       
-          //randomly choose between 5 sprites favoring the default
-
-          int random = random(0, 100);
-
-          if (random < 5) {
-            Sprites::drawOverwrite(newX, y, environmentgroundmiddle, 0);
-          } else if (random < 25) {
-            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt1, 0);
-          } else if (random < 45) {
-            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt2, 0);
-          } else if (random < 65) {
-            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt3, 0);
-          } else if (random < 85) {
+          if (i % 23 == 0) {
             Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt4, 0);
-          } else {
+          } else if (i % 17 == 0) {
             Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt5, 0);
+          } else if (i % 12 == 0) {
+            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt3, 0);
+          } else if (i % 8 == 0) {
+            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt2, 0);
+          } else if (i % 7 == 0) {
+            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt1, 0);
+          } else {
+            Sprites::drawOverwrite(newX, y, environmentgroundmiddle, 0);
           }
-
-          //Sprites::drawOverwrite(newX, y, environmentgroundmiddle, 0);
         }
       }
     }
