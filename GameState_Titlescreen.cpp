@@ -30,7 +30,7 @@ void GameState_Titlescreen::draw(Arduboy2 &arduboy) {
   int height = 12;
 
   int textX = (SCREEN_WIDTH / 2) - (textWidthInPixels / 2);
-  int textY = SCREEN_HEIGHT - height + 1;
+  int textY = SCREEN_HEIGHT - height + 3;
 
   unsigned long currentTime = millis();
   if (currentTime - lastBlinkTime >= 500) { // Adjust the blinking speed as needed

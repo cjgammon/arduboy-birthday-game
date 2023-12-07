@@ -16,7 +16,6 @@ public:
     void cleanup() override;
 
 private:
-    int currentCharacter;
     void changeCharacter();
 };
 

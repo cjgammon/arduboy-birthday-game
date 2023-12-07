@@ -51,7 +51,19 @@ void Entity_Ground::draw(Arduboy2 &arduboy) {
         } else if (i < GROUND_DEFINITION_SIZE - 1 && groundArray[i + 1] == 0) {
           Sprites::drawOverwrite(newX, y, environmentgroundend, 0);
         } else {
-          Sprites::drawOverwrite(newX, y, environmentgroundmiddle, 0);
+          if (i % 23 == 0) {
+            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt4, 0);
+          } else if (i % 17 == 0) {
+            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt5, 0);
+          } else if (i % 12 == 0) {
+            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt3, 0);
+          } else if (i % 8 == 0) {
+            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt2, 0);
+          } else if (i % 7 == 0) {
+            Sprites::drawOverwrite(newX, y, environmentgroundmiddle_alt1, 0);
+          } else {
+            Sprites::drawOverwrite(newX, y, environmentgroundmiddle, 0);
+          }
         }
       }
     }
