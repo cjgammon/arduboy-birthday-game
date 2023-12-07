@@ -4,11 +4,11 @@
 int numCharacters = 6;
 Character* playerCharacter;
 
+int currentCharacter = 0;
 
 void GameState_CharacterSelection::init() {
     int x = (SCREEN_WIDTH / 2) - (16 / 2);
     int y = 28;
-    currentCharacter = 0;
     playerCharacter = new Character(x, y, currentCharacter);
 }
 
