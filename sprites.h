@@ -36,6 +36,36 @@ const uint8_t PROGMEM environmentgroundmiddle[] = {
 #endif
 };
 
+const uint8_t PROGMEM environmentgroundmiddle_alt1[] = {
+6, 6,
+0x06, 0x09, 0x09, 0x09, 0x09, 0x09, 
+};
+
+const uint8_t PROGMEM environmentgroundmiddle_alt2[] = {
+6, 6,
+0x06, 0x03, 0x03, 0x0f, 0x07, 0x03, 
+};
+
+const uint8_t PROGMEM environmentgroundmiddle_alt3[] = {
+6, 6,
+0x06, 0x07, 0x0f, 0x01, 0x01, 0x03, 
+};
+
+const uint8_t PROGMEM environmentgroundmiddle_alt4[] = {
+6, 6,
+0x06, 0x03, 0x01, 0x1d, 0x0f, 0x07, 
+};
+
+const uint8_t PROGMEM environmentgroundmiddle_alt5[] = {
+6, 6,
+0x06, 0x07, 0x0f, 0x1f, 0x0f, 0x07, 
+};
+
+const uint8_t PROGMEM environmentgroundmiddle_alt6[] = {
+6, 6,
+0x06, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 
+};
+
 const uint8_t PROGMEM environmentgroundend[] = {
 #ifdef USE_ASSETS
 6, 6,
@@ -1285,11 +1315,5 @@ const unsigned char PROGMEM character_val_run[] =
 #endif
 };
  
- 
- 
-
-
-
-
 
 #endif // SPRITES_H
