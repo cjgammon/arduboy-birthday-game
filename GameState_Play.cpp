@@ -73,6 +73,10 @@ void GameState_Play::draw(Arduboy2 &arduboy) {
 }
 
 void GameState_Play::cleanup() {
+     if (playerCharacter != nullptr) {
+        delete playerCharacter;
+        playerCharacter = nullptr; // Set to nullptr to avoid dangling pointer
+    }
     // Drawing code
     entityManager.cleanup();
 }
