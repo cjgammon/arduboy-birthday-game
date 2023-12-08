@@ -12,7 +12,7 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
     type = EntityType::GROUND;
     for (int i = 0; i < GROUND_DEFINITION_SIZE; ++i) {
         //groundArray[i] = groundDefinitions[arrayIndex][i];
-        groundArray[i] = pgm_read_byte(&(groundDefinitions[arrayIndex][i]));
+        groundArray[i] = pgm_read_byte(&(groundDefinitions[arrayIndex].groundArray[i]));
     }
 }
 
