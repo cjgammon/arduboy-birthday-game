@@ -41,17 +41,23 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
-    playerCharacter->update(arduboy);
+
 
     scrollX = -speed;
     entityManager.update(arduboy, scrollX);
 
     //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT setX
-    
-    if (playerCharacter->getY() == groundLevel && !entityManager.isGroundAt(playerCharacter->getX())) {
-      playerCharacter->setState(Character::FALL);
-      speed = 0;
-    }    
+    if (playerCharacter->getY() == groundLevel) {
+      int characterPos = playerCharacter->getX();
+      // todo :: account for different character width?
+      if (!entityManager.isGroundAt(characterPos - 3) && ! entityManager.isGroundAt(characterPos + 3))
+      {
+        playerCharacter->setState(Character::FALL);
+        speed = 0;
+      }
+    }
+
+    playerCharacter->update(arduboy);
 }
 
 void GameState_Play::createGroundEntities() {
