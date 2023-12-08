@@ -52,39 +52,44 @@ void Character::update(Arduboy2 &arduboy) {
   {
     if (
         // if not jumping, and the player is trying to jump, jump!
-        ((state != JUMP && state != FALL) && jumpBufferCount > 0)
+        ((!isJumping() && state != CharacterState::FALL) && jumpBufferCount > 0)
         // if jumping, and we still have jumps remaining, and the player is trying to jump, and the player is still kinda jumping upward, jump!
-        || (state == JUMP && jumpJustPressed)
+        || (isJumping() && jumpJustPressed)
         )
     {
       jumpBufferCount = 0;
       velocityY = (jumpsRemaining == jumpCount) ? jumpPower : extraJumpPower;
       jumpsRemaining--;
-      setState(JUMP);
+      setState(CharacterState::JUMP);
     }
   }
 
   // releasing the jump button should dampen your jump.
-  if (state == JUMP && velocityY < 0.0 && jumpJustReleased) {
+  if (isJumping() && velocityY < 0.0 && jumpJustReleased) {
     velocityY *= stopJumpDamping;
   }
 
   // update physics
   switch (state)
   {
-    case IDLE:
+    case CharacterState::IDLE:
       break;
-    case WALK:
+    case CharacterState::WALK:
       break;
-    case JUMP:
+    case CharacterState::JUMP:
+    case CharacterState::DESCEND:
       y += velocityY;          // Move the character up or down
       velocityY += gravity;    // Apply gravity
       if (y >= groundLevel) {  // Check if character lands
         y = groundLevel;       // Reset position to ground
-        setState(WALK);
+        setState(CharacterState::WALK);
+      }
+      else if (velocityY > 0 && state != CharacterState::DESCEND)
+      {
+        setState(CharacterState::DESCEND);
       }
       break;
-    case FALL:
+    case CharacterState::FALL:
       y += velocityY;
       velocityY += gravity;
       break;
@@ -93,14 +98,16 @@ void Character::update(Arduboy2 &arduboy) {
 
 void Character::setType(CharacterType newType) {
   type = newType;
-  
+
   frameCount_Idle = 2;
   frameCount_Walking = 9;
   frameCount_Jump = 1;
+  frameCount_Descend = 1;
   frameCount_Fall = 1;
   frameChangeInterval_Idle = 10;
   frameChangeInterval_Walking = 6;
   frameChangeInterval_Jump = 1;
+  frameChangeInterval_Descend = 1;
   frameChangeInterval_Fall = 1;
   gravity = 0.3;
   jumpPower = -5.0;
@@ -117,6 +124,7 @@ void Character::setType(CharacterType newType) {
       idleSprite = character_jonas_idle;
       walkSprite = character_jonas_run;
       jumpSprite = character_jonas_jump;
+      descendSprite = character_jonas_jump;
       fallSprite = character_jonas_fall;
       jumpPower = -4.0;
       gravity = 0.2;
@@ -133,6 +141,7 @@ void Character::setType(CharacterType newType) {
       idleSprite = character_skaterboy_idle;
       walkSprite = character_skaterboy_run;
       jumpSprite = character_skaterboy_jump;
+      descendSprite = character_skaterboy_jump;
       fallSprite = character_skaterboy_fall;
       jumpPower = -4.0;
       gravity = 0.35;
@@ -149,6 +158,7 @@ void Character::setType(CharacterType newType) {
       idleSprite = character_caliban_idle;
       walkSprite = character_caliban_run;
       jumpSprite = character_caliban_jump;
+      descendSprite = character_caliban_jump;
       fallSprite = character_caliban_fall;
       jumpPower = -4.9;
       gravity = 0.22;
@@ -164,6 +174,7 @@ void Character::setType(CharacterType newType) {
       idleSprite = character_calvin_idle;
       walkSprite = character_calvin_run;
       jumpSprite = character_calvin_jump;
+      descendSprite = character_calvin_jump;
       fallSprite = character_calvin_fall;
       jumpPower = -1.7;
       extraJumpPower = -3.2;
@@ -178,6 +189,7 @@ void Character::setType(CharacterType newType) {
       idleSprite = character_lyle_idle;
       walkSprite = character_lyle_run;
       jumpSprite = character_lyle_jump;
+      descendSprite = character_lyle_jump;
       fallSprite = character_lyle_fall;
       frameChangeInterval_Idle = 50;
       jumpPower = -4.0;
@@ -191,9 +203,12 @@ void Character::setType(CharacterType newType) {
       idleSprite = character_nola_idle;
       walkSprite = character_nola_run;
       jumpSprite = character_nola_jump;
+      descendSprite = character_nola_descend;
       fallSprite = character_nola_fall;
       frameCount_Walking = 8;
       frameCount_Idle = 3;
+      frameCount_Descend = 2;
+      frameChangeInterval_Descend = 5;
       jumpPower = -3.5;
       gravity = 0.18;
       stopJumpDamping = 0.5;
@@ -202,29 +217,6 @@ void Character::setType(CharacterType newType) {
       extraJumpPower = -2.5;
       // notes: floaty jump, with a couple additional flutters
     break;
-    case CharacterType::PINEAPPLE_MURPHY:
-      name = "PINEAPPLE MURPHY";
-      description = "ABILITY: ???";
-      idleSprite = character_pineappleMurphy_idle;
-      walkSprite = character_pineappleMurphy_run;
-      jumpSprite = character_pineappleMurphy_jump;
-      fallSprite = character_pineappleMurphy_fall;
-    break;
-    case CharacterType::VAL:
-      name = "VAL";
-      idleSprite = character_val_idle;
-      walkSprite = character_val_run;
-      jumpSprite = character_val_jump;
-      fallSprite = character_val_fall;
-    break;
-    case CharacterType::ROBOT_STEVE:
-      name = "ROBOT STEVE";
-      idleSprite = character_robotsteve_idle;
-      walkSprite = character_robotsteve_run;
-      jumpSprite = character_robotsteve_jump;
-      fallSprite = character_robotsteve_fall;
-    break;
-
   }
 
   setState(state);
@@ -235,24 +227,29 @@ void Character::setState(CharacterState newState) {
   frameCounter = 0;
   state = newState;
   switch (state) {
-    case IDLE:
+    case CharacterState::IDLE:
       currentSprite = idleSprite;
       frameCount = frameCount_Idle;
       frameChangeInterval = frameChangeInterval_Idle;
       jumpsRemaining = jumpCount;
       break;
-    case WALK:
+    case CharacterState::WALK:
       currentSprite = walkSprite;
       frameCount = frameCount_Walking;
       frameChangeInterval = frameChangeInterval_Walking;
       jumpsRemaining = jumpCount;
       break;
-    case JUMP:
+    case CharacterState::JUMP:
       currentSprite = jumpSprite;
       frameCount = frameCount_Jump;
       frameChangeInterval = frameChangeInterval_Jump;
       break;
-    case FALL:
+    case CharacterState::DESCEND:
+      currentSprite = descendSprite;
+      frameCount = frameCount_Descend;
+      frameChangeInterval = frameChangeInterval_Descend;
+      break;
+    case CharacterState::FALL:
       currentSprite = fallSprite;
       frameCount = frameCount_Fall;
       frameChangeInterval = frameChangeInterval_Fall;
@@ -262,7 +259,7 @@ void Character::setState(CharacterState newState) {
 
 void Character::draw(Arduboy2 &arduboy)
 {
-  // update animation frame.
+  // calculate new animation frame.
   frameCounter++;
   if (frameCounter >= frameChangeInterval) {
     currentFrame++;

@@ -20,7 +20,7 @@ void GameState_Play::init() {
     playerCharacter->setX(0);
     playerCharacter->setY(groundLevel);
     playerCharacter->setGround(groundLevel);
-    playerCharacter->setState(Character::WALK);
+    playerCharacter->setState(CharacterState::WALK);
     gameModel.setLives(maxLives);
 
     
@@ -50,7 +50,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       // todo :: account for different character width?
       if (!entityManager.isGroundAt(characterCenterPos - 3) && ! entityManager.isGroundAt(characterCenterPos + 3))
       {
-        playerCharacter->setState(Character::FALL);
+        playerCharacter->setState(CharacterState::FALL);
         speed = 0;
       }
     }
