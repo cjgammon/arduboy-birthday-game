@@ -12,6 +12,8 @@
 
 #define GROUND_DEFINITION_COUNT 8
 #define GROUND_DEFINITION_SIZE 24
+#define MAX_ENEMIES_PER_SEGMENT 5  // Adjust as needed
+#define MAX_COINS_PER_SEGMENT 10   // Adjust as needed
 
 const uint8_t groundDefinitions[GROUND_DEFINITION_COUNT][GROUND_DEFINITION_SIZE] PROGMEM = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1},
