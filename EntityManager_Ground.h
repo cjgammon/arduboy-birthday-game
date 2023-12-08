@@ -12,6 +12,7 @@ public:
 
 private:
     void recycleGroundEntity(int index);
+    int findMaxRightX();
 };
 
 #endif // ENTITYMANAGER_GROUND_H

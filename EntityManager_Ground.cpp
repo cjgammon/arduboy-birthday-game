@@ -9,19 +9,37 @@ void EntityManager_Ground::update(Arduboy2 &arduboy, int xDelta) {
     for (int i = 0; i < numEntities; i++) {
         if (entities[i] != nullptr && entities[i]->getType() == EntityType::GROUND) {
             entities[i]->move(xDelta, 0);
-
             if (entities[i]->getX() + entities[i]->getWidth() < 0) {
                 recycleGroundEntity(i);
             }
-
             entities[i]->update();
         }
     }
 }
 
 void EntityManager_Ground::recycleGroundEntity(int index) {
-    // Specific logic to recycle ground entities
-    // This can include repositioning the entity and rearranging it in the array
+    // Find the rightmost position of the current ground segments
+    int maxRightX = findMaxRightX();
+
+    // Move the recycled entity to the right of the rightmost ground entity
+    if (entities[index] != nullptr && entities[index]->getType() == EntityType::GROUND) {
+        Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[index]);
+        groundEntity->setX(maxRightX);
+    }
+}
+
+int EntityManager_Ground::findMaxRightX() {
+    int maxRightX = 0;
+    for (int i = 0; i < numEntities; i++) {
+        if (entities[i] != nullptr && entities[i]->getType() == EntityType::GROUND) {
+            Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[i]);
+            int rightEdgeX = groundEntity->getX() + GROUND_DEFINITION_SIZE * GROUND_SIZE;
+            if (rightEdgeX > maxRightX) {
+                maxRightX = rightEdgeX;
+            }
+        }
+    }
+    return maxRightX;
 }
 
 bool EntityManager_Ground::isGroundAt(int x) {
