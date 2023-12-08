@@ -193,6 +193,7 @@ void Character::setType(CharacterType newType) {
       jumpSprite = character_nola_jump;
       fallSprite = character_nola_fall;
       frameCount_Walking = 8;
+      frameCount_Idle = 3;
       jumpPower = -3.5;
       gravity = 0.18;
       stopJumpDamping = 0.5;
