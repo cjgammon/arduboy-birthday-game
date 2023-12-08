@@ -14,7 +14,7 @@ void GameState_CharacterSelection::init() {
 
 void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     // Update logic
-    if (arduboy.justPressed(A_BUTTON)) {
+    if (arduboy.justReleased(A_BUTTON)) {
       if (stateChangeCallback != nullptr) {
           gameModel.setSelectedCharacter(currentCharacter);
           stateChangeCallback(STATE_GAME_PLAY);
@@ -39,7 +39,8 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
       changeCharacter();
     }
 
-    playerCharacter->update(arduboy);
+    // don't update the character here unless you want them to handle input and process physics.
+    //playerCharacter->update(arduboy);
 }
 
 void GameState_CharacterSelection::changeCharacter() {
@@ -55,6 +56,13 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     int textY = 0;
     arduboy.setCursor(textX, textY);
     arduboy.print(playerCharacter->getName());
+
+    name = playerCharacter->getDescription();
+    textWidthInPixels = strlen(name) * CHAR_WIDTH;
+    textX = (SCREEN_WIDTH / 2) - (textWidthInPixels / 2);
+    textY = 11;
+    arduboy.setCursor(textX, textY);
+    arduboy.print(playerCharacter->getDescription());
 
     playerCharacter->draw(arduboy);
 
