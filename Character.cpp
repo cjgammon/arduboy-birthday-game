@@ -179,7 +179,7 @@ void Character::setType(CharacterType newType) {
       walkSprite = character_lyle_run;
       jumpSprite = character_lyle_jump;
       fallSprite = character_lyle_fall;
-      frameChangeInterval_Idle = 50;
+      frameChangeInterval_Idle = 20;
       jumpPower = -4.0;
       gravity = 0.25;
       stopJumpDamping = 0.2;
