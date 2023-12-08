@@ -8,7 +8,7 @@
 #include "GameUI.h"
 #include "Character.h"
 #include "Entity_Ground.h"
-#include "EntityManager.h"
+#include "EntityManager_Ground.h"
 
 
 class GameState_Play : public GameState {
@@ -20,7 +20,7 @@ public:
 private:
     GameUI gameUI; // Create an instance of the GameUI class 
     Character* playerCharacter;
-    EntityManager entityManager;
+    EntityManager_Ground groundManager;
 
     void createGroundEntities();
 };

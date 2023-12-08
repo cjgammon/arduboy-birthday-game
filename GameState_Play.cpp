@@ -26,11 +26,9 @@ void GameState_Play::init() {
     
     gameUI.init(name, maxLives, maxLives);
 
-    entityManager.init();
+    groundManager.init();
 
     GameState_Play::createGroundEntities();
-
-    //entityManager.addEntity(playerCharacter);
 }
 
 void GameState_Play::update(Arduboy2 &arduboy) {
@@ -42,13 +40,13 @@ void GameState_Play::update(Arduboy2 &arduboy) {
     }
 
     scrollX = -speed;
-    entityManager.update(arduboy, scrollX);
+    groundManager.update(arduboy, scrollX);
 
     //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT setX
     if (playerCharacter->getY() == groundLevel) {
       int characterCenterPos = playerCharacter->getCenterX();
       // todo :: account for different character width?
-      if (!entityManager.isGroundAt(characterCenterPos - 3) && ! entityManager.isGroundAt(characterCenterPos + 3))
+      if (!groundManager.isGroundAt(characterCenterPos - 3) && ! groundManager.isGroundAt(characterCenterPos + 3))
       {
         playerCharacter->setState(Character::FALL);
         speed = 0;
@@ -64,7 +62,7 @@ void GameState_Play::createGroundEntities() {
   for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
     //int groundDef = pgm_read_byte(&(groundDefinitions[i]));
     Entity_Ground* newGround = new Entity_Ground(lastX, 60, i);
-    entityManager.addEntity(newGround);
+    groundManager.addEntity(newGround);
     lastX += GROUND_DEFINITION_SIZE * GROUND_SIZE;
   }
   
@@ -72,7 +70,7 @@ void GameState_Play::createGroundEntities() {
 
 void GameState_Play::draw(Arduboy2 &arduboy) {
     gameUI.draw(arduboy);
-    entityManager.draw(arduboy);
+    groundManager.draw(arduboy);
     playerCharacter->draw(arduboy);
 }
 
@@ -82,5 +80,5 @@ void GameState_Play::cleanup() {
         playerCharacter = nullptr; // Set to nullptr to avoid dangling pointer
     }
     // Drawing code
-    entityManager.cleanup();
+    groundManager.cleanup();
 }

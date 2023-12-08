@@ -9,7 +9,7 @@
 
 class Entity_Ground : public Entity {
 private:
-    int groundArray[GROUND_DEFINITION_SIZE]; // Member array
+    uint8_t groundArray[GROUND_DEFINITION_SIZE]; // Member array
 
 public:
     Entity_Ground();
