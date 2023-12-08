@@ -52,7 +52,7 @@ void Character::update(Arduboy2 &arduboy) {
   {
     if (
         // if not jumping, and the player is trying to jump, jump!
-        (state != JUMP && jumpBufferCount > 0)
+        ((state != JUMP && state != FALL) && jumpBufferCount > 0)
         // if jumping, and we still have jumps remaining, and the player is trying to jump, and the player is still kinda jumping upward, jump!
         || (state == JUMP && jumpJustPressed)
         )
