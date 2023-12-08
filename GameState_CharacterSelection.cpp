@@ -69,7 +69,23 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     //draw ground
     int x = 0;
     for (int i = 0; i < 21; i++) {
-      Sprites::drawOverwrite(x, 60, environmentgroundmiddle, 0);
+      const uint8_t* sprite;
+
+      if (i % 23 == 0) {
+        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt4, 0);
+      } else if (i % 17 == 0) {
+        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt5, 0);
+      } else if (i % 12 == 0) {
+        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt3, 0);
+      } else if (i % 8 == 0) {
+        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt2, 0);
+      } else if (i % 7 == 0) {
+        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt1, 0);
+      } else {
+        Sprites::drawOverwrite(x, 60, environmentgroundmiddle, 0);
+      }
+
+      //Sprites::drawOverwrite(x, 60, environmentgroundmiddle, 0);
       x += 6;
     }
 }
