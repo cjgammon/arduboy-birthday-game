@@ -1,5 +1,7 @@
 #include "Character.h"
+#include "Vars.h"
 
+// todo :: all this stuff should be properties on the character probably.  but adding it here is a little easier rn
 float gravity = 0.3;
 float jumpPower = -5.0;
 float extraJumpPower = -5.0;
@@ -78,8 +80,8 @@ void Character::update(Arduboy2 &arduboy) {
       break;
     case CharacterState::JUMP:
     case CharacterState::DESCEND:
-      y += velocityY;          // Move the character up or down
-      velocityY += gravity;    // Apply gravity
+      y += velocityY * globalSpeedMultiplier;          // Move the character up or down
+      velocityY += gravity * globalSpeedMultiplier;    // Apply gravity
       if (y >= groundLevel) {  // Check if character lands
         y = groundLevel;       // Reset position to ground
         setState(CharacterState::WALK);
@@ -90,8 +92,8 @@ void Character::update(Arduboy2 &arduboy) {
       }
       break;
     case CharacterState::FALL:
-      y += velocityY;
-      velocityY += gravity;
+      y += velocityY * globalSpeedMultiplier;
+      velocityY += gravity * globalSpeedMultiplier;
       break;
   }
 }
@@ -260,7 +262,7 @@ void Character::setState(CharacterState newState) {
 void Character::draw(Arduboy2 &arduboy)
 {
   // calculate new animation frame.
-  frameCounter++;
+  frameCounter += 1 * globalSpeedMultiplier;
   if (frameCounter >= frameChangeInterval) {
     currentFrame++;
     if (currentFrame >= frameCount) {

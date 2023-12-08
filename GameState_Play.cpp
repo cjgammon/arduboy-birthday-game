@@ -1,13 +1,20 @@
 // GameState_Play.cpp
 #include "GameState_Play.h"
 #include "GameModel.h"
+#include "Vars.h"
 
 float scrollX = 0; // Offset for scrolling
 float speed = 2;
 int groundLevel = 28;
 
+float globalSpeedMultiplier = 1.0;
+float maxSpeed = 1.5;
+float timeToReachMaxSpeedInSeconds = 60.0;
+float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (timeToReachMaxSpeedInSeconds * 60.0);
+
 void GameState_Play::init() {
     // Initialization code
+    globalSpeedMultiplier = 1.0;
     scrollX = 0;
     speed = 2;
 
@@ -32,6 +39,21 @@ void GameState_Play::init() {
 }
 
 void GameState_Play::update(Arduboy2 &arduboy) {
+    if (arduboy.justPressed(UP_BUTTON))
+    {
+      globalSpeedMultiplier += 0.1;
+    }
+    if (arduboy.justPressed(DOWN_BUTTON))
+    {
+      globalSpeedMultiplier -= 0.1;
+    }
+
+    globalSpeedMultiplier += speedMultiplierIncreasePerFrame;
+    if (globalSpeedMultiplier > maxSpeed)
+    {
+      globalSpeedMultiplier = maxSpeed;
+    }
+
     // Update logic
     if (arduboy.justPressed(B_BUTTON)) {
       if (stateChangeCallback != nullptr) {
@@ -39,7 +61,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
-    scrollX = -speed;
+    scrollX = -speed * globalSpeedMultiplier;
     groundManager.update(arduboy, scrollX);
 
     //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT setX

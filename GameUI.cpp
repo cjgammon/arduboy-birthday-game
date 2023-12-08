@@ -1,4 +1,5 @@
 #include "GameUI.h"
+#include "Vars.h"
 
 GameUI::GameUI() {
 
@@ -15,6 +16,7 @@ void GameUI::draw(Arduboy2 &arduboy) {
     //drawLives(arduboy);
     //drawScore(arduboy);
     // ...
+    drawSpeed(arduboy);
 }
 
 void GameUI::drawName(Arduboy2 &arduboy) {
@@ -46,4 +48,9 @@ void GameUI::drawLives(Arduboy2 &arduboy) {
     }
     x += 6;
   }
+}
+
+void GameUI::drawSpeed(Arduboy2 &arduboy) {
+  arduboy.setCursor(0, 0);
+  arduboy.print(globalSpeedMultiplier);
 }

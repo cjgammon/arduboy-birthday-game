@@ -24,5 +24,7 @@ const uint8_t groundDefinitions[GROUND_DEFINITION_COUNT][GROUND_DEFINITION_SIZE]
     {1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1}, 
 };
 
+extern float globalSpeedMultiplier;
+
 #endif // VARS_H
 
