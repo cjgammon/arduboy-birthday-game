@@ -11,22 +11,20 @@ enum CharacterType {
   RUHAAN,
   JAXON,
   NOLA,
-  ROBOT_STEVE,
-  PINEAPPLE_MURPHY,
-  VAL,
+};
+
+enum CharacterState {
+    IDLE,
+    WALK,
+    JUMP,
+    DESCEND,
+    FALL,
 };
 
 class Character {
 public:
     Character(int initialX, int initialY, CharacterType initialType);
     virtual ~Character();
-
-    enum CharacterState {
-        IDLE,
-        WALK,
-        JUMP,
-        FALL,
-    };
 
     void setState(CharacterState newState);
 
@@ -51,6 +49,8 @@ public:
     const char* getDescription() const { return description; }
     int getLives() const { return lives; }
 
+    bool isJumping() { return state == CharacterState::JUMP || state == CharacterState::DESCEND; }
+
 protected:
 
     const uint8_t* currentSprite;
@@ -58,11 +58,13 @@ protected:
     const uint8_t* walkSprite;
     const uint8_t* jumpSprite;
     const uint8_t* fallSprite;
+    const uint8_t* descendSprite;
 
     int frameCount;
     int frameCount_Idle;
     int frameCount_Walking;
     int frameCount_Jump;
+    int frameCount_Descend;
     int frameCount_Fall;
 
     int groundLevel;
@@ -74,6 +76,7 @@ protected:
     int frameChangeInterval_Idle;
     int frameChangeInterval_Walking;
     int frameChangeInterval_Jump;
+    int frameChangeInterval_Descend;
     int frameChangeInterval_Fall;
 
     CharacterType type;
