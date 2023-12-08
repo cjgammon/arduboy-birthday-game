@@ -38,6 +38,9 @@ public:
 
     int getX() const { return x; }
     int getY() const { return y; }
+    int getCenterX() { return x + getHalfSpriteWidth(); }
+    int getSpriteWidth() { return 16; }// todo :: make variable?
+    int getHalfSpriteWidth() { return 8; }// todo :: make variable/cache?
 
     void setX(int newX) { x = newX; }
     void setY(int newY) { y = newY; }
