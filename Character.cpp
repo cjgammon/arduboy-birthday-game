@@ -9,8 +9,8 @@ float extraJumpPower = -5.0;
 float stopJumpDamping = 0.5;
 // jump buffer - this provides a little bit of a window before we hit the ground for a second jump to register.
 // this is a lot more user friendly because people always mis-time when your character is actually 'on the ground'
-int jumpBufferLengthInFrames = 30;
-int jumpBufferCount = 0;
+float jumpBufferLengthInFrames = 30.0;
+float jumpBufferCountRaw = 0.0;
 // how many jumps do they have
 // this is like double jumps in awesomenauts (i.e. lonestar) - the ability to jump again while in mid air.
 int jumpCount = 1;
@@ -39,27 +39,27 @@ void Character::update(Arduboy2 &arduboy) {
   // manage jump buffer
   if (jumpJustPressed)
   {
-    jumpBufferCount = jumpBufferLengthInFrames;
+    jumpBufferCountRaw = jumpBufferLengthInFrames;
   }
   else if (jumpJustReleased)
   {
-    jumpBufferCount = 0;
+    jumpBufferCountRaw = 0.0;
   }
   else
   {
-    jumpBufferCount--;
+    jumpBufferCountRaw -= 1 * globalSpeedMultiplier;
   }
 
   if (jumpsRemaining > 0)
   {
     if (
         // if not jumping, and the player is trying to jump, jump!
-        ((!isJumping() && state != CharacterState::FALL) && jumpBufferCount > 0)
+        ((!isJumping() && state != CharacterState::FALL) && jumpBufferCountRaw > 0)
         // if jumping, and we still have jumps remaining, and the player is trying to jump, and the player is still kinda jumping upward, jump!
         || (isJumping() && jumpJustPressed)
         )
     {
-      jumpBufferCount = 0;
+      jumpBufferCountRaw = 0;
       velocityY = (jumpsRemaining == jumpCount) ? jumpPower : extraJumpPower;
       jumpsRemaining--;
       setState(CharacterState::JUMP);
@@ -80,10 +80,11 @@ void Character::update(Arduboy2 &arduboy) {
       break;
     case CharacterState::JUMP:
     case CharacterState::DESCEND:
-      y += velocityY * globalSpeedMultiplier;          // Move the character up or down
-      velocityY += gravity * globalSpeedMultiplier;    // Apply gravity
-      if (y >= groundLevel) {  // Check if character lands
-        y = groundLevel;       // Reset position to ground
+      y += velocityY * globalSpeedMultiplier;
+      velocityY += gravity * globalSpeedMultiplier;
+      if (y >= groundLevel)
+      {
+        y = groundLevel;
         setState(CharacterState::WALK);
       }
       else if (velocityY > 0 && state != CharacterState::DESCEND)
@@ -128,12 +129,12 @@ void Character::setType(CharacterType newType) {
       jumpSprite = character_jonas_jump;
       descendSprite = character_jonas_jump;
       fallSprite = character_jonas_fall;
-      jumpPower = -4.0;
+      jumpPower = -3.3;
       gravity = 0.2;
       stopJumpDamping = 0.3;
       jumpCount = 8;
       jumpsRemaining = 8;
-      extraJumpPower = -0.5;
+      extraJumpPower = -0.8;
       // notes: kinda normal single jump, then you can press the butotn a bunch to sorta hover.
     break;
     case CharacterType::HENRY:
@@ -149,7 +150,7 @@ void Character::setType(CharacterType newType) {
       gravity = 0.35;
       jumpCount = 2;
       jumpsRemaining = 2;
-      extraJumpPower = -5.0;
+      extraJumpPower = -4.0;
       // notes: pretty basic double jump
     break;
     case CharacterType::JAXON:
@@ -162,7 +163,7 @@ void Character::setType(CharacterType newType) {
       jumpSprite = character_caliban_jump;
       descendSprite = character_caliban_jump;
       fallSprite = character_caliban_fall;
-      jumpPower = -4.9;
+      jumpPower = -4.6;
       gravity = 0.22;
       jumpCount = 2;
       jumpsRemaining = 2;
@@ -178,8 +179,8 @@ void Character::setType(CharacterType newType) {
       jumpSprite = character_calvin_jump;
       descendSprite = character_calvin_jump;
       fallSprite = character_calvin_fall;
-      jumpPower = -1.7;
-      extraJumpPower = -3.2;
+      jumpPower = -2.1;
+      extraJumpPower = -3.1;
       gravity = 0.18;
       jumpCount = 2;
       jumpsRemaining = 2;
@@ -211,12 +212,12 @@ void Character::setType(CharacterType newType) {
       frameCount_Idle = 3;
       frameCount_Descend = 2;
       frameChangeInterval_Descend = 5;
-      jumpPower = -3.5;
+      jumpPower = -3.0;
       gravity = 0.18;
       stopJumpDamping = 0.5;
       jumpCount = 3;
       jumpsRemaining = 3;
-      extraJumpPower = -2.5;
+      extraJumpPower = -2.25;
       // notes: floaty jump, with a couple additional flutters
     break;
   }

@@ -7,14 +7,15 @@ float scrollX = 0; // Offset for scrolling
 float speed = 2;
 int groundLevel = 28;
 
-float globalSpeedMultiplier = 1.0;
-float maxSpeed = 1.5;
+float globalSpeedMultiplier = 0.85;
+float maxSpeed = 1.6;
 float timeToReachMaxSpeedInSeconds = 60.0;
 float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (timeToReachMaxSpeedInSeconds * 60.0);
+bool autoSpeedupEnabled = true;
 
 void GameState_Play::init() {
     // Initialization code
-    globalSpeedMultiplier = 1.0;
+    globalSpeedMultiplier = 0.85;
     scrollX = 0;
     speed = 2;
 
@@ -39,20 +40,31 @@ void GameState_Play::init() {
 }
 
 void GameState_Play::update(Arduboy2 &arduboy) {
-    if (arduboy.justPressed(UP_BUTTON))
+    // manage speed up
+    if (arduboy.justPressed(RIGHT_BUTTON))
     {
-      globalSpeedMultiplier += 0.1;
-    }
-    if (arduboy.justPressed(DOWN_BUTTON))
-    {
-      globalSpeedMultiplier -= 0.1;
+      globalSpeedMultiplier += 0.25;
     }
 
-    globalSpeedMultiplier += speedMultiplierIncreasePerFrame;
-    if (globalSpeedMultiplier > maxSpeed)
+    if (arduboy.justPressed(LEFT_BUTTON))
     {
-      globalSpeedMultiplier = maxSpeed;
+      globalSpeedMultiplier -= 0.25;
     }
+
+    if (arduboy.justPressed(UP_BUTTON))
+    {
+      autoSpeedupEnabled = !autoSpeedupEnabled;
+    }
+
+    if (autoSpeedupEnabled)
+    {
+      globalSpeedMultiplier += speedMultiplierIncreasePerFrame;
+      if (globalSpeedMultiplier > maxSpeed)
+      {
+        globalSpeedMultiplier = maxSpeed;
+      }
+    }
+
 
     // Update logic
     if (arduboy.justPressed(B_BUTTON)) {
