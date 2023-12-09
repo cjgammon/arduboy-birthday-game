@@ -46,22 +46,18 @@ void GameState_CharacterSelection::changeCharacter() {
   playerCharacter->setType(currentCharacter); 
 }
 
+void drawCenteredText(Arduboy2 &arduboy, char* text, uint8_t y)
+{
+  int textWidthInPixels = strlen(text) * CHAR_WIDTH;
+  int textX = HALF_SCREEN_WIDTH - (textWidthInPixels / 2);
+  arduboy.setCursor(textX, y);
+  arduboy.print(text);
+}
+
 void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     // Drawing code
-
-    size_t name = playerCharacter->getName();
-    int textWidthInPixels = strlen(name) * CHAR_WIDTH; 
-    int textX = (SCREEN_WIDTH / 2) - (textWidthInPixels / 2);
-    int textY = 0;
-    arduboy.setCursor(textX, textY);
-    arduboy.print(playerCharacter->getName());
-
-    name = playerCharacter->getDescription();
-    textWidthInPixels = strlen(name) * CHAR_WIDTH;
-    textX = (SCREEN_WIDTH / 2) - (textWidthInPixels / 2);
-    textY = 11;
-    arduboy.setCursor(textX, textY);
-    arduboy.print(playerCharacter->getDescription());
+    drawCenteredText(arduboy, playerCharacter->getName(), 0);
+    drawCenteredText(arduboy, playerCharacter->getDescription(), 11);
 
     playerCharacter->draw(arduboy);
 
