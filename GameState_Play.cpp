@@ -97,7 +97,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
-    if (!godModeEnabled && groundManager.enemyCollision(playerCharacter->getX(), playerCharacter->getY()))
+    if (!godModeEnabled && groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY()))
     {
       //explosion???
       speed = 0;
@@ -121,20 +121,6 @@ void GameState_Play::draw(Arduboy2 &arduboy) {
     gameUI.draw(arduboy);
     groundManager.draw(arduboy);
     playerCharacter->draw(arduboy);
-
-        //CHECK COLLISION WITH ENEMIES
-    arduboy.setCursor(0, 0);
-    if (groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY())) {
-      arduboy.print("true");
-    } else {
-      arduboy.print("false");
-    }
-    
-    arduboy.setCursor(0, 22);
-    arduboy.print("p:");
-    arduboy.print(playerCharacter->getX());
-    arduboy.print(",");
-    arduboy.print(playerCharacter->getY());
 }
 
 void GameState_Play::cleanup() {
