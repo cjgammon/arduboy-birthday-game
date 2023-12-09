@@ -15,7 +15,7 @@ public:
     Entity(int initialX, int initialY, int initialWidth, int initialHeight);
     virtual ~Entity();
 
-    void move(int dx, int dy);
+    void move(float dx, float dy);
     virtual void update();
     virtual void draw(Arduboy2 &arduboy);
 
@@ -25,10 +25,20 @@ public:
     int getHeight() const { return height; }
     EntityType getType() const { return type; }
 
-    void setX(int newX) { x = newX; }
-    void setY(int newY) { y = newY; }
+    void setX(int newX)
+    {
+      x = newX;
+      xRaw = newX;
+    }
+    void setY(int newY)
+    {
+      y = newY;
+      yRaw = newY;
+    }
 
 protected:
+    float xRaw;
+    float yRaw;
     int x;
     int y;
     int width;
@@ -38,11 +48,16 @@ protected:
 };
 
 inline Entity::Entity() {};
-inline Entity::Entity(int initialX, int initialY, int initialWidth, int initialHeight) : x(initialX), y(initialY), width(initialWidth), height(initialHeight) {}
+inline Entity::Entity(int initialX, int initialY, int initialWidth, int initialHeight) : x(initialX), y(initialY), width(initialWidth), height(initialHeight) {
+  xRaw = x;
+  yRaw = y;
+}
 inline Entity::~Entity() {}
-inline void Entity::move(int dx, int dy) {
-  x += dx;
-  y += dy;
+inline void Entity::move(float dx, float dy) {
+  xRaw += dx;
+  yRaw += dy;
+  x = xRaw;
+  y = yRaw;
 }
 inline void Entity::update() {}
 inline void Entity::draw(Arduboy2 &arduboy) {}
