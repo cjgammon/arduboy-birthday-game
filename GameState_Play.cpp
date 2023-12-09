@@ -95,6 +95,8 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
+    //CHECK COLLISION WITH ENEMIES
+
     playerCharacter->update(arduboy);
 }
 
