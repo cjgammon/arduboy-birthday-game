@@ -13,7 +13,11 @@ float timeToReachMaxSpeedInSeconds = 60.0;
 float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (timeToReachMaxSpeedInSeconds * 60.0);
 bool autoSpeedupEnabled = true;
 
+bool godModeEnabled = false;
+
 void GameState_Play::init() {
+    godModeEnabled = false;
+
     // Initialization code
     globalSpeedMultiplier = 0.85;
     scrollX = 0;
@@ -56,6 +60,11 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       autoSpeedupEnabled = !autoSpeedupEnabled;
     }
 
+    if (arduboy.justPressed(DOWN_BUTTON))
+    {
+      godModeEnabled = !godModeEnabled;
+    }
+
     if (autoSpeedupEnabled)
     {
       globalSpeedMultiplier += speedMultiplierIncreasePerFrame;
@@ -80,7 +89,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
     if (playerCharacter->getY() == groundLevel) {
       int characterCenterPos = playerCharacter->getCenterX();
       // todo :: account for different character width?
-      if (!groundManager.isGroundAt(characterCenterPos - 3) && ! groundManager.isGroundAt(characterCenterPos + 3))
+      if (!godModeEnabled && !groundManager.isGroundAt(characterCenterPos - 3) && ! groundManager.isGroundAt(characterCenterPos + 3))
       {
         playerCharacter->setState(CharacterState::FALL);
         speed = 0;

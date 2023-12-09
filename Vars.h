@@ -25,6 +25,7 @@ const uint8_t groundDefinitions[GROUND_DEFINITION_COUNT][GROUND_DEFINITION_SIZE]
 };
 
 extern float globalSpeedMultiplier;
+extern bool godModeEnabled;
 
 #endif // VARS_H
 

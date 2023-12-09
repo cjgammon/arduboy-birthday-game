@@ -17,6 +17,7 @@ void GameUI::draw(Arduboy2 &arduboy) {
     //drawScore(arduboy);
     // ...
     drawSpeed(arduboy);
+    drawGodMode(arduboy);
 }
 
 void GameUI::drawName(Arduboy2 &arduboy) {
@@ -53,4 +54,12 @@ void GameUI::drawLives(Arduboy2 &arduboy) {
 void GameUI::drawSpeed(Arduboy2 &arduboy) {
   arduboy.setCursor(0, 0);
   arduboy.print(globalSpeedMultiplier);
+}
+
+void GameUI::drawGodMode(Arduboy2 &arduboy) {
+  if (godModeEnabled)
+  {
+    arduboy.setCursor(30, 0);
+    arduboy.print("G");
+  }
 }
