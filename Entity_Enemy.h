@@ -18,10 +18,14 @@ class Entity_Enemy : public Entity {
 public:
     Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, uint8_t initialWidth, uint8_t initialHeight);
 
-    void update() override;
-    void draw(Arduboy2 &arduboy, int offsetX);
+    void update(int newOffsetX);
+    void draw(Arduboy2 &arduboy) override;
+    int getAbsoluteX();
 
     EnemyType enemyType;
+
+private:
+    int offsetX;
 };
 
 #endif // ENTITY_ENEMY_H

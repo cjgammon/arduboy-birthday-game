@@ -4,6 +4,12 @@
 
 #include <avr/pgmspace.h>
 
+#define PLAYER_W 16
+#define PLAYER_HALF_W 8
+#define PLAYER_H 32
+#define PLAYER_HALF_H 16
+
+
 #define SCREEN_WIDTH 128 // character width in pixels including inter-character spacing
 #define SCREEN_HEIGHT 64
 #define CHAR_WIDTH 6 // character width in pixels including inter-character spacing

@@ -20,6 +20,7 @@ public:
     void drawEnemies(Arduboy2 &arduboy);
     bool isGroundAt(int posX);
     void addEnemy(const Enemy& enemyData);
+    bool enemyCollision(int playerX, int playerY);
 
 private:
     uint8_t groundArray[GROUND_DEFINITION_SIZE];
