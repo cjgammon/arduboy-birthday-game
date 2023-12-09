@@ -9,7 +9,7 @@
 
 void drawRandomGround(int i, uint8_t x, uint8_t y);
 
-inline void drawRandomGround(int i, uint8_t x, uint8_t y)
+inline void drawRandomGround(int i, int x, int y)
 {
   if (i % 23 == 0) {
     Sprites::drawOverwrite(x, y, environmentgroundmiddle_alt4, 0);
