@@ -30,10 +30,6 @@ private:
 
     Coin coinArray[MAX_COINS_PER_SEGMENT];
     int numCoins;
-
-    int _playerX;
-    int _playerY;
-
 };
 
 #endif // ENTITY_GROUND_H

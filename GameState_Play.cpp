@@ -3,7 +3,7 @@
 #include "GameModel.h"
 #include "Vars.h"
 
-float scrollX = 0; // Offset for scrolling
+float scrollX = 1; // Offset for scrolling
 float speed = 2;
 int groundLevel = 28;
 

@@ -23,12 +23,4 @@ void Entity_Enemy::draw(Arduboy2 &arduboy) {
   } else if (enemyType == EnemyType::SPIDER) {
     Sprites::drawSelfMasked(offsetX + x, y, enemy_spider, 0);
   }
-
-/*
-    arduboy.setCursor(offsetX + x, 12);
-    arduboy.print("e:");
-    arduboy.print(getAbsoluteX());
-    arduboy.print(",");
-    arduboy.print(getY());
-  */
 }

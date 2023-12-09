@@ -51,9 +51,6 @@ bool Entity_Ground::isGroundAt(int posX) {
 }
 
 bool Entity_Ground::enemyCollision(int playerX, int playerY) {
-    _playerX = playerX;
-    _playerY = playerY;
-
     for (int i = 0; i < numEnemies; ++i) {
       Entity_Enemy* enemy = enemyArray[i];
       int enemyX = enemy->getAbsoluteX() + enemy->getWidth() / 2;
