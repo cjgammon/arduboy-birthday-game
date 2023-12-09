@@ -6,18 +6,30 @@
 #include "Entity.h"
 #include <Arduboy2.h>
 #include "sprites.h"
+#include "Entity_Enemy.h"
 
 class Entity_Ground : public Entity {
-private:
-    uint8_t groundArray[GROUND_DEFINITION_SIZE]; // Member array
-
 public:
     Entity_Ground();
     Entity_Ground(int initialX, int initialY, int arrayIndex);
+    ~Entity_Ground();
 
     void update() override;
     void draw(Arduboy2 &arduboy) override;
+
+    void drawEnemies(Arduboy2 &arduboy);
     bool isGroundAt(int posX);
+    void addEnemy(const Enemy& enemyData);
+
+private:
+    uint8_t groundArray[GROUND_DEFINITION_SIZE];
+
+    Entity_Enemy* enemyArray[MAX_ENEMIES_PER_SEGMENT]; // Array of pointers to Entity_Enemy
+    int numEnemies;
+
+    Coin coinArray[MAX_COINS_PER_SEGMENT];
+    int numCoins;
+
 };
 
 #endif // ENTITY_GROUND_H

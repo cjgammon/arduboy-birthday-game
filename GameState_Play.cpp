@@ -35,7 +35,6 @@ void GameState_Play::init() {
     playerCharacter->setState(CharacterState::WALK);
     gameModel.setLives(maxLives);
 
-    
     gameUI.init(name, maxLives, maxLives);
 
     groundManager.init();
@@ -96,6 +95,8 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
+    //CHECK COLLISION WITH ENEMIES
+
     playerCharacter->update(arduboy);
 }
 
@@ -103,7 +104,6 @@ void GameState_Play::createGroundEntities() {
   
   int lastX = 0;
   for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
-    //int groundDef = pgm_read_byte(&(groundDefinitions[i]));
     Entity_Ground* newGround = new Entity_Ground(lastX, 60, i);
     groundManager.addEntity(newGround);
     lastX += GROUND_DEFINITION_SIZE * GROUND_SIZE;
