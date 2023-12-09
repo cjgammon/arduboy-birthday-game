@@ -20,6 +20,7 @@ public:
     void drawEnemies(Arduboy2 &arduboy);
     bool isGroundAt(int posX);
     void addEnemy(const Enemy& enemyData);
+    bool enemyCollision(int playerX, int playerY);
 
 private:
     uint8_t groundArray[GROUND_DEFINITION_SIZE];
@@ -29,7 +30,6 @@ private:
 
     Coin coinArray[MAX_COINS_PER_SEGMENT];
     int numCoins;
-
 };
 
 #endif // ENTITY_GROUND_H

@@ -5,13 +5,18 @@ Entity_Enemy::Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t i
     // Constructor code, initialize variables
     enemyType = initialEnemyType;
     type = EntityType::ENEMY;
+    offsetX = 0;
 }
 
-void Entity_Enemy::update() {
-    // Update the position of the ground based on speed
+int Entity_Enemy::getAbsoluteX() {
+  return offsetX + x;
 }
 
-void Entity_Enemy::draw(Arduboy2 &arduboy, int offsetX) {
+void Entity_Enemy::update(int newOffsetX) {
+  offsetX = newOffsetX;
+}
+
+void Entity_Enemy::draw(Arduboy2 &arduboy) {
 
   if (enemyType == EnemyType::TROLL) {
     Sprites::drawSelfMasked(offsetX + x, y, enemy_troll, 0);

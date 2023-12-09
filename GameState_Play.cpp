@@ -3,7 +3,7 @@
 #include "GameModel.h"
 #include "Vars.h"
 
-float scrollX = 0; // Offset for scrolling
+float scrollX = 1; // Offset for scrolling
 float speed = 2;
 int groundLevel = 28;
 
@@ -84,18 +84,24 @@ void GameState_Play::update(Arduboy2 &arduboy) {
     scrollX = -speed * globalSpeedMultiplier;
     groundManager.update(arduboy, scrollX);
 
+    int characterCenterPosY = playerCharacter->getCenterY();
+    int characterCenterPosX = playerCharacter->getCenterX();
+
     //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT setX
     if (playerCharacter->getY() == groundLevel) {
-      int characterCenterPos = playerCharacter->getCenterX();
       // todo :: account for different character width?
-      if (!godModeEnabled && !groundManager.isGroundAt(characterCenterPos - 3) && ! groundManager.isGroundAt(characterCenterPos + 3))
+      if (!godModeEnabled && !groundManager.isGroundAt(characterCenterPosX - 3) && ! groundManager.isGroundAt(characterCenterPosX + 3))
       {
         playerCharacter->setState(CharacterState::FALL);
         speed = 0;
       }
     }
 
-    //CHECK COLLISION WITH ENEMIES
+    if (!godModeEnabled && groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY()))
+    {
+      //explosion???
+      speed = 0;
+    }
 
     playerCharacter->update(arduboy);
 }
