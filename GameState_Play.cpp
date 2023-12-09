@@ -14,6 +14,7 @@ float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (ti
 bool autoSpeedupEnabled = true;
 
 bool godModeEnabled = false;
+bool debugDraw  = true;
 
 void GameState_Play::init() {
     godModeEnabled = false;

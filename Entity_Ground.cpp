@@ -29,7 +29,7 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
 
 void Entity_Ground::addEnemy(const Enemy& enemyData) {
     if (numEnemies < MAX_ENEMIES_PER_SEGMENT) {
-        enemyArray[numEnemies] = new Entity_Enemy(enemyData.type, enemyData.x, enemyData.y, enemyData.width, enemyData.height);
+        enemyArray[numEnemies] = new Entity_Enemy(enemyData.type, enemyData.x, enemyData.y, enemyData.width, enemyData.height, enemyData.cx, enemyData.cy, enemyData.cr);
         numEnemies++;
     }
 }
