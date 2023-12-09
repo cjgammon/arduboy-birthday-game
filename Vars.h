@@ -9,9 +9,7 @@
 #define CHAR_WIDTH 6 // character width in pixels including inter-character spacing
 #define GROUND_SIZE 6 
 
-<<<<<<< HEAD
-
-#define GROUND_DEFINITION_COUNT 4
+#define GROUND_DEFINITION_COUNT 6
 #define GROUND_DEFINITION_SIZE 24
 #define MAX_ENEMIES_PER_SEGMENT 3  // Adjust as needed
 #define MAX_COINS_PER_SEGMENT 5   // Adjust as needed
@@ -53,7 +51,6 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1},
       // Enemies for segment 0
       {
-        {1, 0, 28, 32, 32}, // Enemy 1
       },
       {
 
@@ -61,20 +58,42 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     },
     {
       // Ground array for segment 0
-      {1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1},
       // Enemies for segment 0
       {
+        {1, 20, 28, 32, 32}, // Enemy 1
       },
       {
 
       }
     },
-        {
+    {
       // Ground array for segment 0
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1},
       // Enemies for segment 0
       {
          {2, 20, 0, 32, 32}, // Enemy 1
+      },
+      {
+
+      }
+    },
+    {
+      // Ground array for segment 0
+      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+      // Enemies for segment 0
+      {
+        {1, 50, 28, 32, 32}, // Enemy 1
+      },
+      {
+
+      }
+    },
+    {
+      // Ground array for segment 0
+      {1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1},
+      // Enemies for segment 0
+      {
       },
       {
 

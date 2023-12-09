@@ -14,8 +14,8 @@ void Entity_Enemy::update() {
 void Entity_Enemy::draw(Arduboy2 &arduboy, int offsetX) {
 
   if (enemyType == EnemyType::TROLL) {
-    Sprites::drawOverwrite(offsetX + x, y, enemy_troll, 0);
+    Sprites::drawSelfMasked(offsetX + x, y, enemy_troll, 0);
   } else if (enemyType == EnemyType::SPIDER) {
-    Sprites::drawOverwrite(offsetX + x, y, enemy_spider, 0);
+    Sprites::drawSelfMasked(offsetX + x, y, enemy_spider, 0);
   }
 }
