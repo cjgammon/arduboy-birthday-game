@@ -240,6 +240,8 @@ void Character::setState(CharacterState newState) {
       jumpsRemaining = jumpCount;
       break;
     case CharacterState::WALK:
+      frameCounterRaw = 2.0;// jonas looks better here than starting at 0 when landing from a jump. could re-order his animation?
+      currentFrame = 2;
       currentSprite = walkSprite;
       frameCount = frameCount_Walking;
       frameChangeInterval = frameChangeInterval_Walking;
