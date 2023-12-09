@@ -16,10 +16,8 @@ void GameState_CharacterSelection::init() {
 void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justReleased(A_BUTTON)) {
-      if (stateChangeCallback != nullptr) {
-          gameModel.setSelectedCharacter(currentCharacter);
-          stateChangeCallback(STATE_GAME_PLAY);
-      }
+      gameModel.setSelectedCharacter(currentCharacter);
+      stateChangeCallback(STATE_GAME_PLAY);
     }
 
     if (arduboy.justPressed(RIGHT_BUTTON)) {
