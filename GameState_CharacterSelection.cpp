@@ -1,5 +1,6 @@
 // GameState_CharacterSelection.cpp
 #include "GameState_CharacterSelection.h"
+#include "GlobalMethods.h"
 
 int numCharacters = 6;
 Character* playerCharacter;
@@ -71,19 +72,7 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     for (int i = 0; i < 21; i++) {
       const uint8_t* sprite;
 
-      if (i % 23 == 0) {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt4, 0);
-      } else if (i % 17 == 0) {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt5, 0);
-      } else if (i % 12 == 0) {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt3, 0);
-      } else if (i % 8 == 0) {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt2, 0);
-      } else if (i % 7 == 0) {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt1, 0);
-      } else {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle, 0);
-      }
+      drawRandomGround(i, x, 60);
 
       //Sprites::drawOverwrite(x, 60, environmentgroundmiddle, 0);
       x += 6;
