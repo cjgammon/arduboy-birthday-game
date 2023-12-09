@@ -53,9 +53,12 @@ bool Entity_Ground::isGroundAt(int posX) {
 bool Entity_Ground::enemyCollision(int playerX, int playerY) {
     for (int i = 0; i < numEnemies; ++i) {
       Entity_Enemy* enemy = enemyArray[i];
-      int enemyX = enemy->getAbsoluteX() + enemy->getWidth() / 2;
-      int enemyY = enemy->getY() + enemy->getHeight() / 2;
-      int enemyRadius = enemy->getWidth() / 2;
+      //int enemyX = enemy->getAbsoluteX() + enemy->getWidth() / 2;
+      //int enemyY = enemy->getY() + enemy->getHeight() / 2;
+      //int enemyRadius = enemy->getWidth() / 2;
+      int enemyX = enemy->getCollisionX();
+      int enemyY = enemy->getCollisionY();
+      int enemyRadius = enemy->getCollisionR();
 
       int px = playerX - x;
       int py = playerY;

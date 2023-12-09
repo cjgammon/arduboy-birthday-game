@@ -81,7 +81,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1},
       // Enemies for segment 0
       {
-         {2, 20, 0, 32, 32, 20, 28, 5}, // Enemy 1
+         {2, 20, 0, 32, 32, 12, 20, 10}, // Enemy 1
       },
       {
 
@@ -92,7 +92,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
       // Enemies for segment 0
       {
-        {1, 50, 28, 32, 32, 20, 28, 10}, // Enemy 1
+        {1, 50, 28, 32, 32, 14, 20, 10}, // Enemy 1
       },
       {
 
