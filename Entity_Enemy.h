@@ -8,6 +8,7 @@
 #include "sprites.h"
 
 enum EnemyType {
+    NONE,
     TROLL,
     SPIDER,
 };
@@ -15,10 +16,12 @@ enum EnemyType {
 class Entity_Enemy : public Entity {
 
 public:
-    Entity_Enemy();
+    Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, uint8_t initialWidth, uint8_t initialHeight);
 
     void update() override;
-    void draw(Arduboy2 &arduboy) override;
+    void draw(Arduboy2 &arduboy, int offsetX);
+
+    EnemyType enemyType;
 };
 
 #endif // ENTITY_ENEMY_H

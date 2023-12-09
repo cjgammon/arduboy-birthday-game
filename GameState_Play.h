@@ -21,8 +21,10 @@ private:
     GameUI gameUI; // Create an instance of the GameUI class 
     Character* playerCharacter;
     EntityManager_Ground groundManager;
+    //EntityManager_Enemy enemyManager;
 
     void createGroundEntities();
+    //void createEnemyEntities();
 };
 
 

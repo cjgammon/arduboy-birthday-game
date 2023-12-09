@@ -8,11 +8,29 @@ Entity_Ground::Entity_Ground(): Entity() {
 
 Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
     : Entity(initialX, initialY, GROUND_DEFINITION_SIZE * GROUND_SIZE, 1) {
+
     // Constructor code, initialize variables
     type = EntityType::GROUND;
     for (int i = 0; i < GROUND_DEFINITION_SIZE; ++i) {
         //groundArray[i] = groundDefinitions[arrayIndex][i];
         groundArray[i] = pgm_read_byte(&(groundDefinitions[arrayIndex].groundArray[i]));
+    }
+
+    numEnemies = 0;
+    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
+        Enemy enemyData;
+        
+        memcpy_P(&enemyData, &groundDefinitions[arrayIndex].enemies[i], sizeof(Enemy));
+        if (enemyData.type != 0) { // Assuming type 0 means no enemy
+            addEnemy(enemyData);
+        }
+    }
+}
+
+void Entity_Ground::addEnemy(const Enemy& enemyData) {
+    if (numEnemies < MAX_ENEMIES_PER_SEGMENT) {
+        enemyArray[numEnemies] = new Entity_Enemy(enemyData.type, enemyData.x, enemyData.y, enemyData.width, enemyData.height);
+        numEnemies++;
     }
 }
 
@@ -33,7 +51,7 @@ bool Entity_Ground::isGroundAt(int posX) {
 }
 
 void Entity_Ground::update() {
-    // Update the position of the ground based on speed
+
 }
 
 void Entity_Ground::draw(Arduboy2 &arduboy) {
@@ -68,4 +86,19 @@ void Entity_Ground::draw(Arduboy2 &arduboy) {
       }
     }
     //arduboy.drawRect(x, y, width, 64, WHITE); // Adjust color and size as needed
+    drawEnemies(arduboy);
+}
+
+void Entity_Ground::drawEnemies(Arduboy2 &arduboy) {
+
+    for (int i = 0; i < numEnemies; ++i) {
+      Entity_Enemy* enemy = enemyArray[i];
+      enemy->draw(arduboy, x);
+    }
+}
+
+Entity_Ground::~Entity_Ground() {
+    for (int i = 0; i < numEnemies; ++i) {
+        delete enemyArray[i];
+    }
 }
