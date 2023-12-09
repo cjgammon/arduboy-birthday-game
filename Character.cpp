@@ -134,7 +134,7 @@ void Character::setType(CharacterType newType) {
       stopJumpDamping = 0.3;
       jumpCount = 8;
       jumpsRemaining = 8;
-      extraJumpPower = -0.8;
+      extraJumpPower = -1.0;
       // notes: kinda normal single jump, then you can press the butotn a bunch to sorta hover.
     break;
     case CharacterType::HENRY:
@@ -196,8 +196,11 @@ void Character::setType(CharacterType newType) {
       fallSprite = character_lyle_fall;
       frameChangeInterval_Idle = 20;
       jumpPower = -4.0;
+      extraJumpPower = -2.3;
       gravity = 0.25;
       stopJumpDamping = 0.2;
+      jumpCount = 2;
+      jumpsRemaining = 2;
       // notes: very basic single jump.  perhaps he can punch through enemies while he's jumping??
     break;
     case CharacterType::NOLA:
