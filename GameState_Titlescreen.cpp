@@ -22,7 +22,16 @@ void GameState_Titlescreen::update(Arduboy2 &arduboy) {
 
 void GameState_Titlescreen::draw(Arduboy2 &arduboy) {
     // Drawing code
-  Sprites::drawOverwrite (0, 0, titlescreensuper, 0);
+  //Sprites::drawOverwrite (0, 0, titlescreensuper, 0);
+  Sprites::drawOverwrite(5, 0, ui_logo_jonas, 0);
+  Sprites::drawOverwrite(5, 7, ui_logo_super_birthday, 0);
+  Sprites::drawOverwrite(92, 22, ui_logo_rush, 0);
+
+  Sprites::drawOverwrite(15,  27, character_skaterboy_jump, 0);
+  Sprites::drawOverwrite(35,  23, character_caliban_jump, 0);
+  Sprites::drawOverwrite(55,  20, character_jonas_jump, 0);
+  Sprites::drawOverwrite(75,  23, character_lyle_jump, 0);
+  Sprites::drawOverwrite(95,  27, character_nola_run, 2);
 
   const char* startText = "PRESS A TO START"; // Change type to const char*
   int textWidthInPixels = strlen(startText) * CHAR_WIDTH; 
