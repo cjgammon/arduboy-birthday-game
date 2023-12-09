@@ -28,7 +28,7 @@ void GameState_Titlescreen::draw(Arduboy2 &arduboy) {
   Sprites::drawOverwrite(92, 22, ui_logo_rush, 0);
 
   const char* startText = "PRESS A TO START"; // Change type to const char*
-  int textWidthInPixels = strlen(startText) * CHAR_WIDTH; 
+  int textWidthInPixels = strlen(startText) * CHAR_WIDTH;
 
   int height = 12;
 
@@ -41,7 +41,7 @@ void GameState_Titlescreen::draw(Arduboy2 &arduboy) {
     lastBlinkTime = currentTime; // Update the last blink time
   }
 
-  arduboy.fillRoundRect(textX - 2, textY, textWidthInPixels + 4, 12, 2, BLACK);
+  //arduboy.fillRoundRect(textX - 2, textY, textWidthInPixels + 4, 12, 2, BLACK);
   arduboy.drawRoundRect(textX - 2, textY, textWidthInPixels + 4, 12, 2, WHITE);
 
   if (showText) {
