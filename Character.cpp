@@ -226,7 +226,7 @@ void Character::setType(CharacterType newType) {
 
 void Character::setState(CharacterState newState) {
   currentFrame = 0;
-  frameCounter = 0;
+  frameCounterRaw = 0.0;
   state = newState;
   switch (state) {
     case CharacterState::IDLE:
@@ -262,13 +262,13 @@ void Character::setState(CharacterState newState) {
 void Character::draw(Arduboy2 &arduboy)
 {
   // calculate new animation frame.
-  frameCounter += 1 * globalSpeedMultiplier;
-  if (frameCounter >= frameChangeInterval) {
+  frameCounterRaw += 1 * globalSpeedMultiplier;
+  if (frameCounterRaw >= frameChangeInterval) {
     currentFrame++;
     if (currentFrame >= frameCount) {
       currentFrame = 0;
     }
-    frameCounter = 0;
+    frameCounterRaw -= frameChangeInterval;
   }
 
   if (currentSprite != nullptr) {

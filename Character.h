@@ -70,7 +70,7 @@ protected:
     int groundLevel;
     float velocityY = 0;
 
-    int frameCounter;
+    float frameCounterRaw;
     int currentFrame;
     int frameChangeInterval;
     int frameChangeInterval_Idle;
