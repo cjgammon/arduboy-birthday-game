@@ -4,11 +4,11 @@ EntityManager_Ground::EntityManager_Ground() : EntityManager() {
     // Additional initialization for ground entities, if needed
 }
 
-void EntityManager_Ground::update(Arduboy2 &arduboy, int xDelta) {
+void EntityManager_Ground::update(Arduboy2 &arduboy, float xDelta) {
     // Override update method to specifically handle ground entities
     for (int i = 0; i < numEntities; i++) {
         if (entities[i] != nullptr && entities[i]->getType() == EntityType::GROUND) {
-            entities[i]->move(xDelta, 0);
+            entities[i]->move(xDelta, 0.0);
             if (entities[i]->getX() + entities[i]->getWidth() < 0) {
                 recycleGroundEntity(i);
             }

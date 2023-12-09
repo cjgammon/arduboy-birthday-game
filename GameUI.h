@@ -25,6 +25,8 @@ private:
     void drawName(Arduboy2 &arduboy);
     void drawScore(Arduboy2 &arduboy);
     void drawLives(Arduboy2 &arduboy);
+    void drawSpeed(Arduboy2 &arduboy);
+    void drawGodMode(Arduboy2 &arduboy);
 };
 
 #endif // GAME_UI_H

@@ -1,13 +1,25 @@
 // GameState_Play.cpp
 #include "GameState_Play.h"
 #include "GameModel.h"
+#include "Vars.h"
 
 float scrollX = 0; // Offset for scrolling
 float speed = 2;
 int groundLevel = 28;
 
+float globalSpeedMultiplier = 0.85;
+float maxSpeed = 1.6;
+float timeToReachMaxSpeedInSeconds = 60.0;
+float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (timeToReachMaxSpeedInSeconds * 60.0);
+bool autoSpeedupEnabled = true;
+
+bool godModeEnabled = false;
+
 void GameState_Play::init() {
+    godModeEnabled = false;
+
     // Initialization code
+    globalSpeedMultiplier = 0.85;
     scrollX = 0;
     speed = 2;
 
@@ -20,7 +32,7 @@ void GameState_Play::init() {
     playerCharacter->setX(0);
     playerCharacter->setY(groundLevel);
     playerCharacter->setGround(groundLevel);
-    playerCharacter->setState(Character::WALK);
+    playerCharacter->setState(CharacterState::WALK);
     gameModel.setLives(maxLives);
 
     gameUI.init(name, maxLives, maxLives);
@@ -31,6 +43,37 @@ void GameState_Play::init() {
 }
 
 void GameState_Play::update(Arduboy2 &arduboy) {
+    // manage speed up
+    if (arduboy.justPressed(RIGHT_BUTTON))
+    {
+      globalSpeedMultiplier += 0.25;
+    }
+
+    if (arduboy.justPressed(LEFT_BUTTON))
+    {
+      globalSpeedMultiplier -= 0.25;
+    }
+
+    if (arduboy.justPressed(UP_BUTTON))
+    {
+      autoSpeedupEnabled = !autoSpeedupEnabled;
+    }
+
+    if (arduboy.justPressed(DOWN_BUTTON))
+    {
+      godModeEnabled = !godModeEnabled;
+    }
+
+    if (autoSpeedupEnabled)
+    {
+      globalSpeedMultiplier += speedMultiplierIncreasePerFrame;
+      if (globalSpeedMultiplier > maxSpeed)
+      {
+        globalSpeedMultiplier = maxSpeed;
+      }
+    }
+
+
     // Update logic
     if (arduboy.justPressed(B_BUTTON)) {
       if (stateChangeCallback != nullptr) {
@@ -38,16 +81,16 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
-    scrollX = -speed;
+    scrollX = -speed * globalSpeedMultiplier;
     groundManager.update(arduboy, scrollX);
 
     //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT setX
     if (playerCharacter->getY() == groundLevel) {
       int characterCenterPos = playerCharacter->getCenterX();
       // todo :: account for different character width?
-      if (!groundManager.isGroundAt(characterCenterPos - 3) && ! groundManager.isGroundAt(characterCenterPos + 3))
+      if (!godModeEnabled && !groundManager.isGroundAt(characterCenterPos - 3) && ! groundManager.isGroundAt(characterCenterPos + 3))
       {
-        playerCharacter->setState(Character::FALL);
+        playerCharacter->setState(CharacterState::FALL);
         speed = 0;
       }
     }

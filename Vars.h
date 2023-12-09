@@ -9,6 +9,7 @@
 #define CHAR_WIDTH 6 // character width in pixels including inter-character spacing
 #define GROUND_SIZE 6 
 
+<<<<<<< HEAD
 
 #define GROUND_DEFINITION_COUNT 4
 #define GROUND_DEFINITION_SIZE 24
@@ -81,6 +82,8 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     },
 };
 
+extern float globalSpeedMultiplier;
+extern bool godModeEnabled;
 
 #endif // VARS_H
 
