@@ -123,7 +123,6 @@ void Character::setType(CharacterType newType) {
     case CharacterType::JONAS:
       name = "JONAS";
       description = "ABILITY: Hover";
-      frameCount_Walking = 10;
       idleSprite = character_jonas_idle;
       walkSprite = character_jonas_run;
       jumpSprite = character_jonas_jump;
