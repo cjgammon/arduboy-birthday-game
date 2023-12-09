@@ -12,10 +12,10 @@ void EntityManager::init() {
     numEntities = 0;
 }
 
-void EntityManager::update(Arduboy2 &arduboy, int xDelta) {
+void EntityManager::update(Arduboy2 &arduboy, float xDelta) {
     for (int i = 0; i < numEntities; i++) {
         if (entities[i] != nullptr) {
-          entities[i]->move(xDelta, 0);
+          entities[i]->move(xDelta, 0.0);
           entities[i]->update();
         }
     }

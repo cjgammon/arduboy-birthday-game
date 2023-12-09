@@ -70,7 +70,7 @@ protected:
     int groundLevel;
     float velocityY = 0;
 
-    int frameCounter;
+    float frameCounterRaw;
     int currentFrame;
     int frameChangeInterval;
     int frameChangeInterval_Idle;
@@ -81,8 +81,8 @@ protected:
 
     CharacterType type;
     CharacterState state;
-    int x; // X coordinate
-    int y; // Y coordinate
+    float x; // X coordinate
+    float y; // Y coordinate
     
     int lives;
 public:

@@ -7,7 +7,7 @@
 class EntityManager_Ground : public EntityManager {
 public:
     EntityManager_Ground();
-    void update(Arduboy2 &arduboy, int xDelta) override;
+    void update(Arduboy2 &arduboy, float xDelta) override;
     bool isGroundAt(int x); // Check if there is ground at the given coordinates
 
 private:
