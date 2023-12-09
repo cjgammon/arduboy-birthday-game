@@ -280,4 +280,8 @@ void Character::draw(Arduboy2 &arduboy)
   if (currentSprite != nullptr) {
     Sprites::drawSelfMasked(x, y, currentSprite, currentFrame);
   }
+
+  if (debugDraw) {
+    arduboy.drawCircle(x + PLAYER_HALF_W, y + PLAYER_HALF_H, PLAYER_HALF_W);
+  }
 }
