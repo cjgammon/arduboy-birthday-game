@@ -103,7 +103,7 @@ void Character::setType(CharacterType newType) {
   type = newType;
 
   frameCount_Idle = 2;
-  frameCount_Walking = 9;
+  frameCount_Walking = 8;
   frameCount_Jump = 1;
   frameCount_Descend = 1;
   frameCount_Fall = 1;
@@ -123,7 +123,6 @@ void Character::setType(CharacterType newType) {
     case CharacterType::JONAS:
       name = "JONAS";
       description = "ABILITY: Hover";
-      frameCount_Walking = 10;
       idleSprite = character_jonas_idle;
       walkSprite = character_jonas_run;
       jumpSprite = character_jonas_jump;
@@ -211,7 +210,6 @@ void Character::setType(CharacterType newType) {
       jumpSprite = character_nola_jump;
       descendSprite = character_nola_descend;
       fallSprite = character_nola_fall;
-      frameCount_Walking = 8;
       frameCount_Idle = 3;
       frameCount_Descend = 2;
       frameChangeInterval_Descend = 5;
