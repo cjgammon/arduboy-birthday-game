@@ -279,7 +279,7 @@ void Character::draw(Arduboy2 &arduboy)
     Sprites::drawSelfMasked(x, y, currentSprite, currentFrame);
   }
 
-  if (debugDraw) {
-    arduboy.drawCircle(x + PLAYER_HALF_W, y + PLAYER_HALF_H, PLAYER_HALF_W);
-  }
+#ifdef DEBUG_DRAW_HITBOXES
+    arduboy.drawCircle(getCenterX(), getCenterY(), radius);
+#endif
 }
