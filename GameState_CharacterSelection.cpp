@@ -5,6 +5,7 @@
 int numCharacters = 6;
 Character* playerCharacter;
 
+int selectedCharacter = 0;
 int currentCharacter = 0;
 
 void GameState_CharacterSelection::init() {
@@ -16,7 +17,7 @@ void GameState_CharacterSelection::init() {
 void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justReleased(A_BUTTON)) {
-      gameModel.setSelectedCharacter(currentCharacter);
+      selectedCharacter = currentCharacter;
       stateChangeCallback(STATE_GAME_PLAY);
     }
 
