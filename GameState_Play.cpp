@@ -1,8 +1,8 @@
 // GameState_Play.cpp
 #include "GameState_Play.h"
-#include "GameModel.h"
 #include "Vars.h"
 
+int lives = 3;
 float scrollX = 1; // Offset for scrolling
 float speed = 2;
 int groundLevel = 28;
@@ -24,7 +24,7 @@ void GameState_Play::init() {
     scrollX = 0;
     speed = 2;
 
-    CharacterType playerType = gameModel.getSelectedCharacter();
+    int playerType = selectedCharacter;
     playerCharacter = new Character(0, 28, playerType);
 
     char* name = playerCharacter->getName();
@@ -34,7 +34,7 @@ void GameState_Play::init() {
     playerCharacter->setY(groundLevel);
     playerCharacter->setGround(groundLevel);
     playerCharacter->setState(CharacterState::WALK);
-    gameModel.setLives(maxLives);
+    lives = maxLives;
 
     gameUI.init(name, maxLives, maxLives);
 

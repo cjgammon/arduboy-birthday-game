@@ -111,6 +111,9 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     },
 };
 
+extern int selectedCharacter;
+extern int lives;
+extern int score;
 extern float globalSpeedMultiplier;
 extern bool godModeEnabled;
 extern bool debugDraw;
