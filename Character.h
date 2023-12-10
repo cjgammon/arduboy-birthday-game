@@ -1,6 +1,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+#include "Vars.h"
 #include "sprites.h"
 #include <Arduboy2.h>
 
@@ -37,8 +38,11 @@ public:
     int getX() const { return x; }
     int getY() const { return y; }
     int getCenterX() { return x + getHalfSpriteWidth(); }
-    int getSpriteWidth() { return 16; }// todo :: make variable?
-    int getHalfSpriteWidth() { return 8; }// todo :: make variable/cache?
+    int getCenterY() { return y + getHalfSpriteHeight(); }
+
+    int getSpriteWidth() { return PLAYER_W; }// todo :: make variable?
+    int getHalfSpriteWidth() { return PLAYER_HALF_W; }// todo :: make variable/cache?
+    int getHalfSpriteHeight() { return PLAYER_HALF_H; }// todo :: make variable/cache?
 
     void setX(int newX) { x = newX; }
     void setY(int newY) { y = newY; }
