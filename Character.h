@@ -39,6 +39,7 @@ public:
     int getY() const { return y; }
     int getCenterX() { return x + getHalfSpriteWidth(); }
     int getCenterY() { return y + getHalfSpriteHeight(); }
+    int getRadius() { return radius; }
 
     int getSpriteWidth() { return PLAYER_W; }// todo :: make variable?
     int getHalfSpriteWidth() { return PLAYER_HALF_W; }// todo :: make variable/cache?
@@ -87,6 +88,7 @@ protected:
     CharacterState state;
     float x; // X coordinate
     float y; // Y coordinate
+    float radius;
     
     int lives;
 public:
