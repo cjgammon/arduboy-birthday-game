@@ -118,6 +118,7 @@ void Character::setType(CharacterType newType) {
   stopJumpDamping = 0.5;
   jumpCount = 1;
   jumpsRemaining = 1;
+  radius = 8;
 
   switch (type) {
     case CharacterType::JONAS:
@@ -183,6 +184,7 @@ void Character::setType(CharacterType newType) {
       gravity = 0.18;
       jumpCount = 2;
       jumpsRemaining = 2;
+      radius = 5;
       // notes: weak single jump, nice double jump
     break;
     case CharacterType::RUHAAN:

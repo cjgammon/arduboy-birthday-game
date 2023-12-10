@@ -4,11 +4,11 @@
 
 #include <avr/pgmspace.h>
 
-//#define DEBUG_DRAW_HITBOXES
+#define DEBUG_DRAW_HITBOXES
 
 #define PLAYER_W 16
-#define PLAYER_HALF_W 8
 #define PLAYER_H 32
+#define PLAYER_HALF_W 8
 #define PLAYER_HALF_H 16
 
 
