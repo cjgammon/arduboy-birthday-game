@@ -27,7 +27,7 @@ void setup() {
   
   Serial.begin(9600);
 
-  arduboy.begin();
+  arduboy.boot();
   arduboy.setFrameRate(60);
 
   for (int i = 0; i < numGameStates; i++) {
