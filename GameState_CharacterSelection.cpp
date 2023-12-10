@@ -1,5 +1,6 @@
 // GameState_CharacterSelection.cpp
 #include "GameState_CharacterSelection.h"
+#include "GlobalMethods.h"
 
 int numCharacters = 6;
 Character* playerCharacter;
@@ -15,10 +16,8 @@ void GameState_CharacterSelection::init() {
 void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justReleased(A_BUTTON)) {
-      if (stateChangeCallback != nullptr) {
-          gameModel.setSelectedCharacter(currentCharacter);
-          stateChangeCallback(STATE_GAME_PLAY);
-      }
+      gameModel.setSelectedCharacter(currentCharacter);
+      stateChangeCallback(STATE_GAME_PLAY);
     }
 
     if (arduboy.justPressed(RIGHT_BUTTON)) {
@@ -47,22 +46,18 @@ void GameState_CharacterSelection::changeCharacter() {
   playerCharacter->setType(currentCharacter); 
 }
 
+void drawCenteredText(Arduboy2 &arduboy, char* text, uint8_t y)
+{
+  int textWidthInPixels = strlen(text) * CHAR_WIDTH;
+  int textX = HALF_SCREEN_WIDTH - (textWidthInPixels / 2);
+  arduboy.setCursor(textX, y);
+  arduboy.print(text);
+}
+
 void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     // Drawing code
-
-    size_t name = playerCharacter->getName();
-    int textWidthInPixels = strlen(name) * CHAR_WIDTH; 
-    int textX = (SCREEN_WIDTH / 2) - (textWidthInPixels / 2);
-    int textY = 0;
-    arduboy.setCursor(textX, textY);
-    arduboy.print(playerCharacter->getName());
-
-    name = playerCharacter->getDescription();
-    textWidthInPixels = strlen(name) * CHAR_WIDTH;
-    textX = (SCREEN_WIDTH / 2) - (textWidthInPixels / 2);
-    textY = 11;
-    arduboy.setCursor(textX, textY);
-    arduboy.print(playerCharacter->getDescription());
+    drawCenteredText(arduboy, playerCharacter->getName(), 0);
+    drawCenteredText(arduboy, playerCharacter->getDescription(), 11);
 
     playerCharacter->draw(arduboy);
 
@@ -71,19 +66,7 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     for (int i = 0; i < 21; i++) {
       const uint8_t* sprite;
 
-      if (i % 23 == 0) {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt4, 0);
-      } else if (i % 17 == 0) {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt5, 0);
-      } else if (i % 12 == 0) {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt3, 0);
-      } else if (i % 8 == 0) {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt2, 0);
-      } else if (i % 7 == 0) {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle_alt1, 0);
-      } else {
-        Sprites::drawOverwrite(x, 60, environmentgroundmiddle, 0);
-      }
+      drawRandomGround(i, x, 60);
 
       //Sprites::drawOverwrite(x, 60, environmentgroundmiddle, 0);
       x += 6;
