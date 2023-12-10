@@ -5,7 +5,7 @@ Entity_Enemy::Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t i
     // Constructor code, initialize variables
     enemyType = initialEnemyType;
     type = EntityType::ENEMY;
-    offsetX = 0;
+    offsetX = 1000;  //prevents from flashing on screen
     collisionX = cx;
     collisionY = cy;
     collisionR = cr;
@@ -34,9 +34,9 @@ void Entity_Enemy::update(int newOffsetX) {
 void Entity_Enemy::draw(Arduboy2 &arduboy) {
 
   if (enemyType == EnemyType::TROLL) {
-    Sprites::drawSelfMasked(offsetX + x, y, enemy_troll, 0);
+    Sprites::drawSelfMasked(getAbsoluteX(), y, enemy_troll, 0);
   } else if (enemyType == EnemyType::SPIDER) {
-    Sprites::drawSelfMasked(offsetX + x, y, enemy_spider, 0);
+    Sprites::drawSelfMasked(getAbsoluteX(), y, enemy_spider, 0);
   }
 
   if (debugDraw) {
