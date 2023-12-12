@@ -10,7 +10,7 @@
 class Entity_Enemy : public Entity {
 
 public:
-    Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, float groundX);
+    Entity_Enemy(const EnemyDefinition& enemyDefinition, float groundX);
 
     void update(float newX);
     void draw(Arduboy2 &arduboy) override;

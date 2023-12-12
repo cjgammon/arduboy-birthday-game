@@ -1,13 +1,20 @@
 // Entity_Ground.cpp
 #include "Entity_Enemy.h"
 
-Entity_Enemy::Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, float groundX): Entity(initialX, initialY) {
-    // Constructor code, initialize variables
-    enemyType = initialEnemyType;
+Entity_Enemy::Entity_Enemy(const EnemyDefinition& enemyDefinition, float groundX): Entity()
+{
+    EnemyTypeDefinition enemyTypeDefinition = getEnemyTypeDefinition();
+
+    x = enemyDefinition.x;
+    xRaw = x;
+    y = enemyTypeDefinition.y;
+    yRaw = y;
+
+    enemyType = enemyDefinition.enemyType;
     entityType = EntityType::ENEMY;
     offsetX = groundX;
-    width = getEnemyTypeDefinition().spriteWidth;
-    height = getEnemyTypeDefinition().spriteHeight;
+    width = enemyTypeDefinition.spriteWidth;
+    height = enemyTypeDefinition.spriteHeight;
 }
 
 int Entity_Enemy::getAbsoluteX() {
