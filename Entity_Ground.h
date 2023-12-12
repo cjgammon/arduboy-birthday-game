@@ -21,9 +21,11 @@ public:
     bool isGroundAt(int posX);
     void addEnemy(const EnemyDefinition& enemyDefinition);
     bool enemyCollision(int playerX, int playerY, int playerRadius);
-
 private:
-    uint8_t groundTiles[GROUND_DEFINITION_SIZE];
+    int groundDefinitionIndex;
+
+    //uint8_t groundTiles[GROUND_DEFINITION_SIZE];
+    bool hasTileAt(int tilePos);
 
     Entity_Enemy* enemyArray[MAX_ENEMIES_PER_SEGMENT]; // Array of pointers to Entity_Enemy
     int numEnemies;

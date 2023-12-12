@@ -64,25 +64,103 @@ struct SegmentDefinition {
 };
 
 // change this if you add/remove groundDefinitions.
-#define GROUND_DEFINITION_COUNT 2
+#define GROUND_DEFINITION_COUNT 11
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         // segment 0
         {
-                {255, 255, 195},
+                {255, 255, 255},
                 {
 
                 },
                 {
                 }
         },
-        // segment 1
         {
-                {127, 248, 176},
+                {255, 255, 255},
                 {
+
                 },
                 {
                 }
         },
+        {
+                {255, 255, 255},
+                {
+
+                },
+                {
+                }
+        },
+        {
+                {255, 255, 255},
+                {
+
+                },
+                {
+                }
+        },
+        {
+                {255, 255, 255},
+                {
+
+                },
+                {
+                }
+        },
+        {
+                {255, 255, 255},
+                {
+
+                },
+                {
+                }
+        },
+        {
+                {255, 255, 255},
+                {
+
+                },
+                {
+                }
+        },
+        {
+                {255, 255, 255},
+                {
+
+                },
+                {
+                }
+        },
+        {
+                {255, 255, 255},
+                {
+
+                },
+                {
+                }
+        },
+        {
+                {255, 255, 255},
+                {
+
+                },
+                {
+                }
+        },
+        {
+                {255, 255, 255},
+                {
+
+                },
+                {
+                }
+        },
+
+
+
+
+
+
 };
 
 #endif // SEGMENTDEFINITION_H

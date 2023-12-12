@@ -10,25 +10,28 @@ Entity_Ground::Entity_Ground(): Entity() {
 Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
     : Entity(initialX, initialY) {
 
+    groundDefinitionIndex = arrayIndex;
     width = GROUND_DEFINITION_SIZE * GROUND_SIZE;
     height = 1;
 
     entityType = EntityType::GROUND;
 
+    /*
     for (int byteIndex = 0; byteIndex < GROUND_DEFINITION_SIZE / 8; byteIndex++)
     {
-        uint8_t tileByte = pgm_read_byte(&(groundDefinitions[arrayIndex].groundArray[byteIndex]));
+        uint8_t tileByte = pgm_read_byte(&(groundDefinitions[groundDefinitionIndex].groundArray[byteIndex]));
         for (int bitIndex = 0; bitIndex < 8; bitIndex++)
         {
           groundTiles[byteIndex * 8 + bitIndex] = (tileByte >> bitIndex) & 1;
         }
     }
+    */
 
     numEnemies = 0;
     for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
         EnemyDefinition enemyDefinition;
         
-        memcpy_P(&enemyDefinition, &groundDefinitions[arrayIndex].enemies[i], sizeof(EnemyDefinition));
+        memcpy_P(&enemyDefinition, &groundDefinitions[groundDefinitionIndex].enemies[i], sizeof(EnemyDefinition));
         if (enemyDefinition.enemyType != 0) { // Assuming type 0 means no enemy
             addEnemy(enemyDefinition);
         }
@@ -55,7 +58,20 @@ bool Entity_Ground::isGroundAt(int posX) {
     }
 
     // Return true if there's ground at the index, false otherwise
-    return groundTiles[index] == 1;
+    //return groundTiles[index] == 1;
+    return hasTileAt(index);
+}
+
+bool Entity_Ground::hasTileAt(int tilePos)
+{
+  // which byte do we need?
+  int byteIndex = tilePos / 8;
+
+  // which bit are we looking for?
+  int bitIndex = tilePos - byteIndex * 8;
+
+  uint8_t tileByte = pgm_read_byte(&(groundDefinitions[groundDefinitionIndex].groundArray[byteIndex]));
+  return (tileByte & (1 << bitIndex)) != 0;
 }
 
 bool Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius) {
@@ -99,10 +115,10 @@ void Entity_Ground::draw(Arduboy2 &arduboy) {
         Sprites::drawOverwrite(newX, y, environmentgroundmiddle, 0);
       }
 
-      if (groundTiles[i] == 1) {
-        if (i > 0 && groundTiles[i - 1] == 0) {
+      if (hasTileAt(i)) {
+        if (i > 0 && !hasTileAt(i - 1)) {
           Sprites::drawOverwrite(newX, y, environmentgroundstart, 0);
-        } else if (i < GROUND_DEFINITION_SIZE - 1 && groundTiles[i + 1] == 0) {
+        } else if (i < GROUND_DEFINITION_SIZE - 1 && !hasTileAt(i + 1)) {
           Sprites::drawOverwrite(newX, y, environmentgroundend, 0);
         } else {
           drawRandomGround(i, newX, y);
