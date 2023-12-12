@@ -20,7 +20,7 @@ struct EnemyTypeDefinition {
 };
 
 // !!! the EnemyType enum and the enemyDefinitions must be in the same order!
-enum EnemyType {
+enum EnemyType : uint8_t {
     NONE,
     TROLL,
     SPIDER,
@@ -68,16 +68,17 @@ struct SegmentDefinition {
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         // segment 0
         {
-                {255, 255, 195},
+                {255, 255, 255},
                 {
-
+                        {2, 48}, // Enemy
+                        {1, 113}, // Enemy
                 },
                 {
                 }
         },
         // segment 1
         {
-                {127, 248, 176},
+                {255, 7, 224},
                 {
                 },
                 {

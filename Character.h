@@ -5,7 +5,7 @@
 #include "sprites.h"
 #include <Arduboy2.h>
 
-enum CharacterType {
+enum CharacterType : uint8_t {
   JONAS,
   HENRY,
   MASON,
@@ -14,7 +14,7 @@ enum CharacterType {
   NOLA,
 };
 
-enum CharacterState {
+enum CharacterState : uint8_t {
     IDLE,
     WALK,
     JUMP,

@@ -1,4 +1,4 @@
-enum GameStateID {
+enum GameStateID : uint8_t {
     STATE_START_MENU,
     STATE_CHARACTER_SELECTION,
     STATE_GAME_PLAY,
