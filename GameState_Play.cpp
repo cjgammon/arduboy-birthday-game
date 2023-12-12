@@ -120,7 +120,11 @@ void GameState_Play::createGroundEntities()
     groundEntity->init(lastX, 60);
     groundManager.addEntity(groundEntity);
     lastX += GROUND_DEFINITION_SIZE * GROUND_SIZE;
-    groundEntity->setData(&groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]);
+    groundEntity->setData(
+            i == 0
+            ? &flatGround
+            : &groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]
+      );
   }
   
 }
