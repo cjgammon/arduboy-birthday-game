@@ -30,7 +30,7 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
 
 void Entity_Ground::addEnemy(const Enemy& enemyData) {
     if (numEnemies < MAX_ENEMIES_PER_SEGMENT) {
-        enemyArray[numEnemies] = new Entity_Enemy(enemyData.type, enemyData.x, enemyData.y, enemyData.width, enemyData.height, enemyData.cx, enemyData.cy, enemyData.cr);
+        enemyArray[numEnemies] = new Entity_Enemy(enemyData.type, enemyData.x, enemyData.y, enemyData.width, enemyData.height, enemyData.cx, enemyData.cy, enemyData.cr, x);
         numEnemies++;
     }
 }
@@ -80,7 +80,7 @@ bool Entity_Ground::enemyCollision(int playerX, int playerY) {
 void Entity_Ground::update() {
     for (int i = 0; i < numEnemies; ++i) {
       Entity_Enemy* enemy = enemyArray[i];
-      enemy->update();
+      enemy->update(x);
     }
 }
 

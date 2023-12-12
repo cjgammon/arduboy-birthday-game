@@ -16,9 +16,9 @@ enum EnemyType {
 class Entity_Enemy : public Entity {
 
 public:
-    Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, uint8_t initialWidth, uint8_t initialHeight, uint8_t cx, uint8_t cy, uint8_t cr);
+    Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, uint8_t initialWidth, uint8_t initialHeight, uint8_t cx, uint8_t cy, uint8_t cr, float groundX);
 
-    void update();
+    void update(float newX);
     void draw(Arduboy2 &arduboy) override;
     int getAbsoluteX();
 
