@@ -1,11 +1,11 @@
 // Entity_Ground.cpp
 #include "Entity_Enemy.h"
 
-Entity_Enemy::Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY): Entity(initialX, initialY) {
+Entity_Enemy::Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, float groundX): Entity(initialX, initialY) {
     // Constructor code, initialize variables
     enemyType = initialEnemyType;
     entityType = EntityType::ENEMY;
-    offsetX = 1000;  //prevents from flashing on screen
+    offsetX = groundX;
     width = getEnemyTypeDefinition().spriteWidth;
     height = getEnemyTypeDefinition().spriteHeight;
 }
@@ -22,8 +22,8 @@ int Entity_Enemy::getCollisionY() {
   return y + getColliderY();
 }
 
-void Entity_Enemy::update(int newOffsetX) {
-  offsetX = newOffsetX;
+void Entity_Enemy::update(float newX) {
+  offsetX = newX;
 }
 
 void Entity_Enemy::draw(Arduboy2 &arduboy) {

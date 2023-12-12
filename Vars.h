@@ -4,6 +4,8 @@
 
 #include <avr/pgmspace.h>
 
+//#include "SegmentDefinition.h"
+
 //#define DEBUG_DRAW_HITBOXES
 
 #define PLAYER_W 16
@@ -94,16 +96,6 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     },
     {
       // Ground array for segment 0
-      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1},
-      // Enemies for segment 0
-      {
-      },
-      {
-
-      }
-    },
-    {
-      // Ground array for segment 0
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1},
       // Enemies for segment 0
       {
@@ -147,11 +139,15 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     },
 };
 
+
 extern int selectedCharacter;
 extern int lives;
 extern int score;
 extern float globalSpeedMultiplier;
 extern bool godModeEnabled;
+
+extern float cameraX;
+extern float cameraY;
 
 #endif // VARS_H
 
