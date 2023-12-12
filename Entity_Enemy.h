@@ -18,7 +18,7 @@ class Entity_Enemy : public Entity {
 public:
     Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, uint8_t initialWidth, uint8_t initialHeight, uint8_t cx, uint8_t cy, uint8_t cr);
 
-    void update(int newOffsetX);
+    void update();
     void draw(Arduboy2 &arduboy) override;
     int getAbsoluteX();
 
