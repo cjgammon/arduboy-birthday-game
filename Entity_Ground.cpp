@@ -20,7 +20,6 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
         uint8_t tileByte = pgm_read_byte(&(groundDefinitions[arrayIndex].groundArray[byteIndex]));
         for (int bitIndex = 0; bitIndex < 8; bitIndex++)
         {
-          //groundTiles[byteIndex * 8 + bitIndex] = tileByte & (1 << bitIndex) != 0 ? 1 : 0;
           groundTiles[byteIndex * 8 + bitIndex] = (tileByte >> bitIndex) & 1;
         }
     }
