@@ -28,7 +28,7 @@ struct Enemy {
     uint8_t y;
 };
 
-struct EnemyDefinition {
+struct EnemyTypeDefinition {
     uint8_t id;
     uint8_t spriteWidth;
     uint8_t spriteHeight;
@@ -46,7 +46,7 @@ enum EnemyType {
     TOTAL
 };
 
-const EnemyDefinition enemyDefinitions[EnemyType::TOTAL] PROGMEM = {
+const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] PROGMEM = {
         {69},// first one is NONE, intentionally left empty.
         {
                 123,// 0 - troll

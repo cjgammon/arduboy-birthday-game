@@ -6,8 +6,8 @@ Entity_Enemy::Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t i
     enemyType = initialEnemyType;
     entityType = EntityType::ENEMY;
     offsetX = 1000;  //prevents from flashing on screen
-    width = getEnemyDefinition().spriteWidth;
-    height = getEnemyDefinition().spriteHeight;
+    width = getEnemyTypeDefinition().spriteWidth;
+    height = getEnemyTypeDefinition().spriteHeight;
 }
 
 int Entity_Enemy::getAbsoluteX() {
@@ -37,6 +37,6 @@ void Entity_Enemy::draw(Arduboy2 &arduboy) {
 #ifdef DEBUG_DRAW_HITBOXES
   arduboy.drawCircle(getCollisionX(), getCollisionY(), getColliderRadius());
   arduboy.setCursor(0, 10);
-  arduboy.print(getEnemyDefinition().id);
+  arduboy.print(getEnemyTypeDefinition().id);
 #endif
 }

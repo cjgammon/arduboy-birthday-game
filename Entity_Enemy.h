@@ -19,10 +19,10 @@ public:
     int getCollisionX();
     int getCollisionY();
 
-    EnemyDefinition getEnemyDefinition() { return enemyDefinitions[enemyType]; }
-    int getColliderX() { return getEnemyDefinition().colliderX; }
-    int getColliderY() { return getEnemyDefinition().colliderY; }
-    int getColliderRadius() { return getEnemyDefinition().colliderRadius; }
+    EnemyTypeDefinition getEnemyTypeDefinition() { return enemyTypeDefinitions[enemyType]; }
+    int getColliderX() { return getEnemyTypeDefinition().colliderX; }
+    int getColliderY() { return getEnemyTypeDefinition().colliderY; }
+    int getColliderRadius() { return getEnemyTypeDefinition().colliderRadius; }
 
     EnemyType enemyType;
 
