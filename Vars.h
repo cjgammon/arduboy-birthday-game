@@ -6,7 +6,7 @@
 
 #include "SegmentDefinition.h"
 
-//#define DEBUG_DRAW_HITBOXES
+#define DEBUG_DRAW_HITBOXES
 
 #define PLAYER_W 16
 #define PLAYER_H 32

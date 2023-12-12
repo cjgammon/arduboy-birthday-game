@@ -25,6 +25,9 @@ void EntityManager_Ground::recycleGroundEntity(int index) {
     if (entities[index] != nullptr && entities[index]->getEntityType() == EntityType::GROUND) {
         Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[index]);
         groundEntity->setX(maxRightX);
+
+        // pick a new random section
+        groundEntity->setData(&groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]);
     }
 }
 

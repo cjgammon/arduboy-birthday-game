@@ -10,7 +10,8 @@
 class Entity_Enemy : public Entity {
 
 public:
-    Entity_Enemy(const EnemyDefinition& enemyDefinition, float groundX);
+    Entity_Enemy();
+    void setData(const EnemyDefinition& enemyDefinition, float groundX);
 
     void update(float newX);
     void draw(Arduboy2 &arduboy) override;
@@ -19,12 +20,14 @@ public:
     int getCollisionX();
     int getCollisionY();
 
-    EnemyTypeDefinition getEnemyTypeDefinition() { return enemyTypeDefinitions[enemyType]; }
+    const EnemyTypeDefinition& getEnemyTypeDefinition() { return enemyTypeDefinitions[enemyType]; }
     int getColliderX() { return getEnemyTypeDefinition().colliderX; }
     int getColliderY() { return getEnemyTypeDefinition().colliderY; }
     int getColliderRadius() { return getEnemyTypeDefinition().colliderRadius; }
 
     EnemyType enemyType;
+
+    bool enabled;
 
 private:
     int offsetX;

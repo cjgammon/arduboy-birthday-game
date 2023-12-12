@@ -1,9 +1,14 @@
 // Entity_Ground.cpp
 #include "Entity_Enemy.h"
 
-Entity_Enemy::Entity_Enemy(const EnemyDefinition& enemyDefinition, float groundX): Entity()
+Entity_Enemy::Entity_Enemy() : Entity()
 {
-    EnemyTypeDefinition enemyTypeDefinition = getEnemyTypeDefinition();
+
+}
+
+void Entity_Enemy::setData(const EnemyDefinition& enemyDefinition, float groundX)
+{
+    const EnemyTypeDefinition& enemyTypeDefinition = getEnemyTypeDefinition();
 
     x = enemyDefinition.x;
     xRaw = x;
@@ -30,10 +35,19 @@ int Entity_Enemy::getCollisionY() {
 }
 
 void Entity_Enemy::update(float newX) {
+  if (!enabled)
+  {
+    return;
+  }
+
   offsetX = newX;
 }
 
 void Entity_Enemy::draw(Arduboy2 &arduboy) {
+  if (!enabled)
+  {
+    return;
+  }
 
   if (enemyType == EnemyType::TROLL) {
     Sprites::drawSelfMasked(getAbsoluteX(), 28, enemy_troll, 0);

@@ -64,7 +64,7 @@ struct SegmentDefinition {
 };
 
 // change this if you add/remove groundDefinitions.
-#define GROUND_DEFINITION_COUNT 2
+#define GROUND_DEFINITION_COUNT 4
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         // segment 0
         {
@@ -79,6 +79,24 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         // segment 1
         {
                 {255, 7, 224},
+                {
+                },
+                {
+                }
+        },
+        // segment 2
+        {
+                {255, 255, 255},
+                {
+                        {2, 12}, // Enemy
+                        {2, 36}, // Enemy
+                },
+                {
+                }
+        },
+        // segment 3
+        {
+                {255, 255, 255},
                 {
                 },
                 {

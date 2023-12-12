@@ -3,43 +3,49 @@
 #include "GlobalMethods.h"
 
 Entity_Ground::Entity_Ground(): Entity() {
-    // Constructor code, initialize variables
     entityType = EntityType::GROUND;
-}
-
-Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
-    : Entity(initialX, initialY) {
-
-    width = GROUND_DEFINITION_SIZE * GROUND_SIZE;
-    height = 1;
-
-    entityType = EntityType::GROUND;
-
-    for (int byteIndex = 0; byteIndex < GROUND_DEFINITION_SIZE / 8; byteIndex++)
+    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i)
     {
-        uint8_t tileByte = pgm_read_byte(&(groundDefinitions[arrayIndex].groundArray[byteIndex]));
-        for (int bitIndex = 0; bitIndex < 8; bitIndex++)
-        {
-          groundTiles[byteIndex * 8 + bitIndex] = (tileByte >> bitIndex) & 1;
-        }
-    }
-
-    numEnemies = 0;
-    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
-        EnemyDefinition enemyDefinition;
-        
-        memcpy_P(&enemyDefinition, &groundDefinitions[arrayIndex].enemies[i], sizeof(EnemyDefinition));
-        if (enemyDefinition.enemyType != 0) { // Assuming type 0 means no enemy
-            addEnemy(enemyDefinition);
-        }
+      enemies[i] = new Entity_Enemy();
     }
 }
 
-void Entity_Ground::addEnemy(const EnemyDefinition& enemyDefinition) {
-    if (numEnemies < MAX_ENEMIES_PER_SEGMENT) {
-        enemyArray[numEnemies] = new Entity_Enemy(enemyDefinition, x);
-        numEnemies++;
+void Entity_Ground::init(int initialX, int initialY)
+{
+  x = initialX;
+  xRaw = x;
+  y = initialY;
+  yRaw = y;
+  width = GROUND_DEFINITION_SIZE * GROUND_SIZE;
+  height = 1;
+}
+
+void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
+{
+  for (int byteIndex = 0; byteIndex < GROUND_DEFINITION_SIZE / 8; byteIndex++)
+  {
+    uint8_t tileByte = pgm_read_byte(&(segmentDefinition->groundArray[byteIndex]));
+    for (int bitIndex = 0; bitIndex < 8; bitIndex++)
+    {
+      groundTiles[byteIndex * 8 + bitIndex] = (tileByte >> bitIndex) & 1;
     }
+  }
+
+  for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i)
+  {
+    EnemyDefinition enemyDefinition;
+
+    memcpy_P(&enemyDefinition, &segmentDefinition->enemies[i], sizeof(EnemyDefinition));
+    if (enemyDefinition.enemyType != 0)// Assuming type 0 means no enemy
+    {
+      enemies[i]->setData(enemyDefinition, x);
+      enemies[i]->enabled = true;
+    }
+    else
+    {
+      enemies[i]->enabled = false;
+    }
+  }
 }
 
 bool Entity_Ground::isGroundAt(int posX) {
@@ -58,9 +64,16 @@ bool Entity_Ground::isGroundAt(int posX) {
     return groundTiles[index] == 1;
 }
 
-bool Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius) {
-    for (int i = 0; i < numEnemies; ++i) {
-      Entity_Enemy* enemy = enemyArray[i];
+bool Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius)
+{
+    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
+      Entity_Enemy* enemy = enemies[i];
+
+      if (!enemy->enabled)
+      {
+        continue;
+      }
+
       //int enemyX = enemy->getAbsoluteX() + enemy->getWidth() / 2;
       //int enemyY = enemy->getY() + enemy->getHeight() / 2;
       //int enemyRadius = enemy->getWidth() / 2;
@@ -84,8 +97,8 @@ bool Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius) {
 }
 
 void Entity_Ground::update() {
-    for (int i = 0; i < numEnemies; ++i) {
-      Entity_Enemy* enemy = enemyArray[i];
+    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
+      Entity_Enemy* enemy = enemies[i];
       enemy->update(x);
     }
 }
@@ -114,8 +127,8 @@ void Entity_Ground::draw(Arduboy2 &arduboy) {
 }
 
 void Entity_Ground::drawEnemies(Arduboy2 &arduboy) {
-    for (int i = 0; i < numEnemies; ++i) {
-      Entity_Enemy* enemy = enemyArray[i];
+    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
+      Entity_Enemy* enemy = enemies[i];
       /*
 
       int enemyX = enemy->getAbsoluteX() + enemy->getWidth() / 2;
@@ -144,7 +157,7 @@ void Entity_Ground::drawEnemies(Arduboy2 &arduboy) {
 }
 
 Entity_Ground::~Entity_Ground() {
-    for (int i = 0; i < numEnemies; ++i) {
-        delete enemyArray[i];
+    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
+        delete enemies[i];
     }
 }

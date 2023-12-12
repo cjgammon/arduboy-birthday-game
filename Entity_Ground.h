@@ -11,22 +11,22 @@
 class Entity_Ground : public Entity {
 public:
     Entity_Ground();
-    Entity_Ground(int initialX, int initialY, int arrayIndex);
+    void init(int initialX, int initialY);
     ~Entity_Ground();
+
+    void setData(SegmentDefinition * segmentDefinition);
 
     void update() override;
     void draw(Arduboy2 &arduboy) override;
 
     void drawEnemies(Arduboy2 &arduboy);
     bool isGroundAt(int posX);
-    void addEnemy(const EnemyDefinition& enemyDefinition);
     bool enemyCollision(int playerX, int playerY, int playerRadius);
 
 private:
     uint8_t groundTiles[GROUND_DEFINITION_SIZE];
 
-    Entity_Enemy* enemyArray[MAX_ENEMIES_PER_SEGMENT]; // Array of pointers to Entity_Enemy
-    int numEnemies;
+    Entity_Enemy* enemies[MAX_ENEMIES_PER_SEGMENT]; // Array of pointers to Entity_Enemy
 
     CoinDefinition coinArray[MAX_COINS_PER_SEGMENT];
     int numCoins;
