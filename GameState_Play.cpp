@@ -100,7 +100,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
-    if (!godModeEnabled && groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY()))
+    if (!godModeEnabled && groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius()))
     {
       //explosion???
       speed = 0;

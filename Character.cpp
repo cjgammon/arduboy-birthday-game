@@ -100,7 +100,7 @@ void Character::update(Arduboy2 &arduboy) {
 }
 
 void Character::setType(CharacterType newType) {
-  type = newType;
+  characterType = newType;
 
   frameCount_Idle = 2;
   frameCount_Walking = 8;
@@ -118,8 +118,9 @@ void Character::setType(CharacterType newType) {
   stopJumpDamping = 0.5;
   jumpCount = 1;
   jumpsRemaining = 1;
+  radius = 8;
 
-  switch (type) {
+  switch (characterType) {
     case CharacterType::JONAS:
       name = "JONAS";
       description = "ABILITY: Hover";
@@ -183,6 +184,7 @@ void Character::setType(CharacterType newType) {
       gravity = 0.18;
       jumpCount = 2;
       jumpsRemaining = 2;
+      radius = 5;
       // notes: weak single jump, nice double jump
     break;
     case CharacterType::RUHAAN:

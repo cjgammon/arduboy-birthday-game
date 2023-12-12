@@ -4,14 +4,17 @@
 
 Entity_Ground::Entity_Ground(): Entity() {
     // Constructor code, initialize variables
-    type = EntityType::GROUND;
+    entityType = EntityType::GROUND;
 }
 
 Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
-    : Entity(initialX, initialY, GROUND_DEFINITION_SIZE * GROUND_SIZE, 1) {
+    : Entity(initialX, initialY) {
+
+    width = GROUND_DEFINITION_SIZE * GROUND_SIZE;
+    height = 1;
 
     // Constructor code, initialize variables
-    type = EntityType::GROUND;
+    entityType = EntityType::GROUND;
     for (int i = 0; i < GROUND_DEFINITION_SIZE; ++i) {
         //groundArray[i] = groundDefinitions[arrayIndex][i];
         groundArray[i] = pgm_read_byte(&(groundDefinitions[arrayIndex].groundArray[i]));
@@ -19,18 +22,18 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
 
     numEnemies = 0;
     for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
-        Enemy enemyData;
+        EnemyDefinition enemyDefinition;
         
-        memcpy_P(&enemyData, &groundDefinitions[arrayIndex].enemies[i], sizeof(Enemy));
-        if (enemyData.type != 0) { // Assuming type 0 means no enemy
-            addEnemy(enemyData);
+        memcpy_P(&enemyDefinition, &groundDefinitions[arrayIndex].enemies[i], sizeof(EnemyDefinition));
+        if (enemyDefinition.enemyType != 0) { // Assuming type 0 means no enemy
+            addEnemy(enemyDefinition);
         }
     }
 }
 
-void Entity_Ground::addEnemy(const Enemy& enemyData) {
+void Entity_Ground::addEnemy(const EnemyDefinition& enemyDefinition) {
     if (numEnemies < MAX_ENEMIES_PER_SEGMENT) {
-        enemyArray[numEnemies] = new Entity_Enemy(enemyData.type, enemyData.x, enemyData.y, enemyData.width, enemyData.height, enemyData.cx, enemyData.cy, enemyData.cr, x);
+        enemyArray[numEnemies] = new Entity_Enemy(enemyDefinition.enemyType, enemyDefinition.x, enemyDefinition.y, x);
         numEnemies++;
     }
 }
@@ -51,7 +54,7 @@ bool Entity_Ground::isGroundAt(int posX) {
     return groundArray[index] == 1;
 }
 
-bool Entity_Ground::enemyCollision(int playerX, int playerY) {
+bool Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius) {
     for (int i = 0; i < numEnemies; ++i) {
       Entity_Enemy* enemy = enemyArray[i];
       //int enemyX = enemy->getAbsoluteX() + enemy->getWidth() / 2;
@@ -59,11 +62,10 @@ bool Entity_Ground::enemyCollision(int playerX, int playerY) {
       //int enemyRadius = enemy->getWidth() / 2;
       int enemyX = enemy->getCollisionX();
       int enemyY = enemy->getCollisionY();
-      int enemyRadius = enemy->getCollisionR();
+      int enemyRadius = enemy->getColliderRadius();
 
       int px = playerX - x;
       int py = playerY;
-      int playerRadius = PLAYER_HALF_W; // Radius of player
 
       int dx = playerX - enemyX;
       int dy = playerY - enemyY;

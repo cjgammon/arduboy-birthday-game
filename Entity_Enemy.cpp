@@ -1,14 +1,13 @@
 // Entity_Ground.cpp
 #include "Entity_Enemy.h"
 
-Entity_Enemy::Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, uint8_t initialWidth, uint8_t initialHeight, uint8_t cx, uint8_t cy, uint8_t cr, float groundX): Entity(initialX, initialY, initialWidth, initialHeight) {
+Entity_Enemy::Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, float groundX): Entity(initialX, initialY) {
     // Constructor code, initialize variables
     enemyType = initialEnemyType;
-    type = EntityType::ENEMY;
+    entityType = EntityType::ENEMY;
     offsetX = groundX;
-    collisionX = cx;
-    collisionY = cy;
-    collisionR = cr;
+    width = getEnemyTypeDefinition().spriteWidth;
+    height = getEnemyTypeDefinition().spriteHeight;
 }
 
 int Entity_Enemy::getAbsoluteX() {
@@ -16,15 +15,11 @@ int Entity_Enemy::getAbsoluteX() {
 }
 
 int Entity_Enemy::getCollisionX() {
-  return offsetX + x + collisionX;
+  return offsetX + x + getColliderX();
 }
 
 int Entity_Enemy::getCollisionY() {
-  return y + collisionY;
-}
-
-int Entity_Enemy::getCollisionR() {
-  return collisionR;
+  return y + getColliderY();
 }
 
 void Entity_Enemy::update(float newX) {
@@ -40,6 +35,6 @@ void Entity_Enemy::draw(Arduboy2 &arduboy) {
   }
 
 #ifdef DEBUG_DRAW_HITBOXES
-    arduboy.drawCircle(getCollisionX(), getCollisionY(), getCollisionR());
+  arduboy.drawCircle(getCollisionX(), getCollisionY(), getColliderRadius());
 #endif
 }

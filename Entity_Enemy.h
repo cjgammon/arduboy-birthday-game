@@ -7,16 +7,10 @@
 #include <Arduboy2.h>
 #include "sprites.h"
 
-enum EnemyType {
-    NONE,
-    TROLL,
-    SPIDER,
-};
-
 class Entity_Enemy : public Entity {
 
 public:
-    Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, uint8_t initialWidth, uint8_t initialHeight, uint8_t cx, uint8_t cy, uint8_t cr, float groundX);
+    Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY, float groundX);
 
     void update(float newX);
     void draw(Arduboy2 &arduboy) override;
@@ -24,15 +18,16 @@ public:
 
     int getCollisionX();
     int getCollisionY();
-    int getCollisionR();
+
+    EnemyTypeDefinition getEnemyTypeDefinition() { return enemyTypeDefinitions[enemyType]; }
+    int getColliderX() { return getEnemyTypeDefinition().colliderX; }
+    int getColliderY() { return getEnemyTypeDefinition().colliderY; }
+    int getColliderRadius() { return getEnemyTypeDefinition().colliderRadius; }
 
     EnemyType enemyType;
 
 private:
     int offsetX;
-    int collisionX;
-    int collisionY;
-    int collisionR;
 };
 
 #endif // ENTITY_ENEMY_H

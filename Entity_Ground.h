@@ -19,8 +19,8 @@ public:
 
     void drawEnemies(Arduboy2 &arduboy);
     bool isGroundAt(int posX);
-    void addEnemy(const Enemy& enemyData);
-    bool enemyCollision(int playerX, int playerY);
+    void addEnemy(const EnemyDefinition& enemyDefinition);
+    bool enemyCollision(int playerX, int playerY, int playerRadius);
 
 private:
     uint8_t groundArray[GROUND_DEFINITION_SIZE];
@@ -28,7 +28,7 @@ private:
     Entity_Enemy* enemyArray[MAX_ENEMIES_PER_SEGMENT]; // Array of pointers to Entity_Enemy
     int numEnemies;
 
-    Coin coinArray[MAX_COINS_PER_SEGMENT];
+    CoinDefinition coinArray[MAX_COINS_PER_SEGMENT];
     int numCoins;
 };
 
