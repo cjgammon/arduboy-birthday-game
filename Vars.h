@@ -66,7 +66,7 @@ const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] PROGMEM = {
         },
 };
 
-struct Coin {
+struct CoinDefinition {
     uint8_t show;  
     uint8_t x;
     uint8_t y;
@@ -75,7 +75,7 @@ struct Coin {
 struct SegmentDefinition {
     uint8_t groundArray[GROUND_DEFINITION_SIZE];
     EnemyDefinition enemies[MAX_ENEMIES_PER_SEGMENT];  // Define MAX_ENEMIES_PER_SEGMENT as needed
-    Coin coins[MAX_COINS_PER_SEGMENT];       // Define MAX_COINS_PER_SEGMENT as needed
+    CoinDefinition coins[MAX_COINS_PER_SEGMENT];       // Define MAX_COINS_PER_SEGMENT as needed
 };
 
 // change this if you add/remove groundDefinitions.

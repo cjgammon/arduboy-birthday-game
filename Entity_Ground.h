@@ -28,7 +28,7 @@ private:
     Entity_Enemy* enemyArray[MAX_ENEMIES_PER_SEGMENT]; // Array of pointers to Entity_Enemy
     int numEnemies;
 
-    Coin coinArray[MAX_COINS_PER_SEGMENT];
+    CoinDefinition coinArray[MAX_COINS_PER_SEGMENT];
     int numCoins;
 };
 
