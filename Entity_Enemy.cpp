@@ -36,9 +36,9 @@ void Entity_Enemy::update(float newX) {
 void Entity_Enemy::draw(Arduboy2 &arduboy) {
 
   if (enemyType == EnemyType::TROLL) {
-    Sprites::drawSelfMasked(getAbsoluteX(), y, enemy_troll, 0);
+    Sprites::drawSelfMasked(getAbsoluteX(), 28, enemy_troll, 0);
   } else if (enemyType == EnemyType::SPIDER) {
-    Sprites::drawSelfMasked(getAbsoluteX(), y, enemy_spider, 0);
+    Sprites::drawSelfMasked(getAbsoluteX(), 0, enemy_spider, 0);
   }
 
 #ifdef DEBUG_DRAW_HITBOXES
