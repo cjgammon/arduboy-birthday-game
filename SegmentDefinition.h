@@ -63,6 +63,10 @@ struct SegmentDefinition {
     CoinDefinition coins[MAX_COINS_PER_SEGMENT];       // Define MAX_COINS_PER_SEGMENT as needed
 };
 
+const SegmentDefinition flatGround PROGMEM = {
+        {255, 255, 255}, {}, {}
+};
+
 // change this if you add/remove groundDefinitions.
 #define GROUND_DEFINITION_COUNT 40
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
