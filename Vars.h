@@ -4,6 +4,12 @@
 
 #include <avr/pgmspace.h>
 
+#include "LogUI.h"
+
+#ifdef LOG_UI_ENABLED
+extern LogUI* logger;
+#endif
+
 #define DEBUG_DRAW_HITBOXES
 
 #define PLAYER_W 16

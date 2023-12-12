@@ -1,5 +1,7 @@
 // Entity_Ground.cpp
 #include "Entity_Enemy.h"
+#include "LogUI.h"
+#include "Vars.h"
 
 Entity_Enemy::Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t initialY): Entity(initialX, initialY) {
     // Constructor code, initialize variables
@@ -8,6 +10,9 @@ Entity_Enemy::Entity_Enemy(uint8_t initialEnemyType, uint8_t initialX, uint8_t i
     offsetX = 1000;  //prevents from flashing on screen
     width = getEnemyTypeDefinition().spriteWidth;
     height = getEnemyTypeDefinition().spriteHeight;
+#ifdef LOG_UI_ENABLED
+    logger->log("making enemy");
+#endif
 }
 
 int Entity_Enemy::getAbsoluteX() {

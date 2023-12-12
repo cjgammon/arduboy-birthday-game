@@ -4,6 +4,7 @@
 #include "GameState_Titlescreen.h"
 #include "GameState_CharacterSelection.h"
 #include "GameState_Play.h"
+#include "Vars.h"
 
 Arduboy2 arduboy;
 ArduboyTones sound(arduboy.audio.enabled);
@@ -22,6 +23,10 @@ GameState* gameStates[] = {
 };
 
 const int numGameStates = sizeof(gameStates) / sizeof(gameStates[0]);
+
+#ifdef LOG_UI_ENABLED
+LogUI* logger = new LogUI();
+#endif
 
 void setup() {
   
