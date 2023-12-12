@@ -18,10 +18,7 @@
 #define CHAR_WIDTH 6 // character width in pixels including inter-character spacing
 #define GROUND_SIZE 6 
 
-#define GROUND_DEFINITION_COUNT 6
-#define GROUND_DEFINITION_SIZE 24
-#define MAX_ENEMIES_PER_SEGMENT 3  // Adjust as needed
-#define MAX_COINS_PER_SEGMENT 5   // Adjust as needed
+
 
 
 extern int selectedCharacter;
@@ -31,8 +28,8 @@ extern float globalSpeedMultiplier;
 extern bool godModeEnabled;
 extern bool debugDraw;
 
-extern int cameraX;
-extern int cameraY;
+extern float cameraX;
+extern float cameraY;
 
 #endif // VARS_H
 

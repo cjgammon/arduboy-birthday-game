@@ -2,8 +2,11 @@
 #include "GameState_Play.h"
 #include "Vars.h"
 
+
+float cameraX = 0;
+float cameraY = 0;
+
 int lives = 3;
-float scrollX = 1; // Offset for scrolling
 float speed = 2;
 int groundLevel = 28;
 
@@ -21,7 +24,7 @@ void GameState_Play::init() {
 
     // Initialization code
     globalSpeedMultiplier = 0.85;
-    scrollX = 0;
+    cameraX = 0;
     speed = 2;
 
     int playerType = selectedCharacter;
@@ -82,8 +85,8 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
-    scrollX = -speed * globalSpeedMultiplier;
-    groundManager.update(arduboy, scrollX);
+    cameraX = -speed * globalSpeedMultiplier;
+    groundManager.update(arduboy);
 
     int characterCenterPosY = playerCharacter->getCenterY();
     int characterCenterPosX = playerCharacter->getCenterX();

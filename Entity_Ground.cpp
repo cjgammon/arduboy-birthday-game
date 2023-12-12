@@ -80,7 +80,7 @@ bool Entity_Ground::enemyCollision(int playerX, int playerY) {
 void Entity_Ground::update() {
     for (int i = 0; i < numEnemies; ++i) {
       Entity_Enemy* enemy = enemyArray[i];
-      enemy->update(x);
+      enemy->update();
     }
 }
 

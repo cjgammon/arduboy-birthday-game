@@ -18,6 +18,11 @@ struct Coin {
     uint8_t y;
 };
 
+#define GROUND_DEFINITION_COUNT 6
+#define GROUND_DEFINITION_SIZE 24
+#define MAX_ENEMIES_PER_SEGMENT 3  // Adjust as needed
+#define MAX_COINS_PER_SEGMENT 5   // Adjust as needed
+
 struct SegmentDefinition {
     uint8_t groundArray[GROUND_DEFINITION_SIZE];
     Enemy enemies[MAX_ENEMIES_PER_SEGMENT];  // Define MAX_ENEMIES_PER_SEGMENT as needed

@@ -27,8 +27,8 @@ int Entity_Enemy::getCollisionR() {
   return collisionR;
 }
 
-void Entity_Enemy::update(int newOffsetX) {
-  offsetX = newOffsetX;
+void Entity_Enemy::update() {
+  offsetX = cameraX;
 }
 
 void Entity_Enemy::draw(Arduboy2 &arduboy) {
