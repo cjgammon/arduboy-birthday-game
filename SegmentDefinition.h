@@ -8,10 +8,10 @@
 struct EnemyDefinition {
     uint8_t enemyType;
     uint8_t x;
-    uint8_t y;
 };
 
 struct EnemyTypeDefinition {
+    uint8_t y;// all enemies of a specific type are at the same 'y' position in this game.  this is what this y refers to.
     uint8_t spriteWidth;
     uint8_t spriteHeight;
     uint8_t colliderX;
@@ -33,6 +33,7 @@ const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] = {
         },// first one is NONE, intentionally left empty.
         {
                 // 0 - troll
+                28, // y
                 32, // sprite width
                 32, // sprite height
                 14, // collider x
@@ -41,6 +42,7 @@ const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] = {
         },
         {
                 // 1 - spider
+                0,  // y
                 32, // sprite width
                 32, // sprite height
                 12, // collider x
@@ -62,7 +64,7 @@ struct SegmentDefinition {
 };
 
 // change this if you add/remove groundDefinitions.
-#define GROUND_DEFINITION_COUNT 6
+#define GROUND_DEFINITION_COUNT 5
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     {
       // Ground array for segment 0
@@ -80,7 +82,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1},
       // Enemies for segment 0
       {
-        {1, 20, 28}, // Enemy 1
+        {1, 20}, // Enemy 1
       },
       {
 
@@ -91,7 +93,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1},
       // Enemies for segment 0
       {
-         {2, 20, 0}, // Enemy 1
+         {2, 20}, // Enemy 1
       },
       {
 
