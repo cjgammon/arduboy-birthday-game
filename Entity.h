@@ -12,7 +12,7 @@ enum EntityType {
 class Entity {
 public:
     Entity();
-    Entity(int initialX, int initialY, int initialWidth, int initialHeight);
+    Entity(int initialX, int initialY);
     virtual ~Entity();
 
     void move(float dx, float dy);
@@ -23,7 +23,7 @@ public:
     int getY() const { return y; }
     int getWidth() const { return width; }
     int getHeight() const { return height; }
-    EntityType getType() const { return type; }
+    EntityType getEntityType() const { return entityType; }
 
     void setX(int newX)
     {
@@ -43,12 +43,12 @@ protected:
     int y;
     int width;
     int height;
-    EntityType type;
+    EntityType entityType;// todo :: rename to entityType
 
 };
 
 inline Entity::Entity() {};
-inline Entity::Entity(int initialX, int initialY, int initialWidth, int initialHeight) : x(initialX), y(initialY), width(initialWidth), height(initialHeight) {
+inline Entity::Entity(int initialX, int initialY) : x(initialX), y(initialY) {
   xRaw = x;
   yRaw = y;
 }

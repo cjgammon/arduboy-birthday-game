@@ -4,14 +4,17 @@
 
 Entity_Ground::Entity_Ground(): Entity() {
     // Constructor code, initialize variables
-    type = EntityType::GROUND;
+    entityType = EntityType::GROUND;
 }
 
 Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
-    : Entity(initialX, initialY, GROUND_DEFINITION_SIZE * GROUND_SIZE, 1) {
+    : Entity(initialX, initialY) {
+
+    width = GROUND_DEFINITION_SIZE * GROUND_SIZE;
+    height = 1;
 
     // Constructor code, initialize variables
-    type = EntityType::GROUND;
+    entityType = EntityType::GROUND;
     for (int i = 0; i < GROUND_DEFINITION_SIZE; ++i) {
         //groundArray[i] = groundDefinitions[arrayIndex][i];
         groundArray[i] = pgm_read_byte(&(groundDefinitions[arrayIndex].groundArray[i]));
@@ -30,7 +33,7 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
 
 void Entity_Ground::addEnemy(const Enemy& enemyData) {
     if (numEnemies < MAX_ENEMIES_PER_SEGMENT) {
-        enemyArray[numEnemies] = new Entity_Enemy(enemyData.type, enemyData.x, enemyData.y, enemyData.width, enemyData.height, enemyData.cx, enemyData.cy, enemyData.cr);
+        enemyArray[numEnemies] = new Entity_Enemy(enemyData.type, enemyData.x, enemyData.y);
         numEnemies++;
     }
 }
@@ -59,7 +62,7 @@ bool Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius) {
       //int enemyRadius = enemy->getWidth() / 2;
       int enemyX = enemy->getCollisionX();
       int enemyY = enemy->getCollisionY();
-      int enemyRadius = enemy->getCollisionR();
+      int enemyRadius = enemy->getColliderRadius();
 
       int px = playerX - x;
       int py = playerY;

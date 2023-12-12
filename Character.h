@@ -29,7 +29,7 @@ public:
 
     void setState(CharacterState newState);
 
-    CharacterType getType() const { return type; };
+    CharacterType getCharacterType() const { return characterType; };
     void setType(CharacterType newType);
 
     void update(Arduboy2 &arduboy);
@@ -84,7 +84,7 @@ protected:
     int frameChangeInterval_Descend;
     int frameChangeInterval_Fall;
 
-    CharacterType type;
+    CharacterType characterType;
     CharacterState state;
     float x; // X coordinate
     float y; // Y coordinate
