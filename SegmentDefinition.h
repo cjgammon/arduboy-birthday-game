@@ -62,7 +62,7 @@ struct SegmentDefinition {
 };
 
 // change this if you add/remove groundDefinitions.
-#define GROUND_DEFINITION_COUNT 6
+#define GROUND_DEFINITION_COUNT 5
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     {
       // Ground array for segment 0
