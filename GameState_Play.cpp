@@ -18,6 +18,9 @@ bool autoSpeedupEnabled = true;
 
 bool godModeEnabled = false;
 
+#define MAX_VISIBLE_GROUND_PIECES 3
+Entity_Ground groundPieces[MAX_VISIBLE_GROUND_PIECES];
+
 void GameState_Play::init() {
     godModeEnabled = false;
 
@@ -79,9 +82,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 
     // Update logic
     if (arduboy.justPressed(B_BUTTON)) {
-      if (stateChangeCallback != nullptr) {
-          stateChangeCallback(STATE_START_MENU);
-      }
+      stateChangeCallback(STATE_START_MENU);
     }
 
     cameraX = -speed * globalSpeedMultiplier;
@@ -109,13 +110,17 @@ void GameState_Play::update(Arduboy2 &arduboy) {
     playerCharacter->update(arduboy);
 }
 
-void GameState_Play::createGroundEntities() {
-  
+void GameState_Play::createGroundEntities()
+{
+  // create as many ground entities as can possibly be visible at once.
   int lastX = 0;
-  for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
-    Entity_Ground* newGround = new Entity_Ground(lastX, 60, i);
-    groundManager.addEntity(newGround);
+  for (int i = 0; i < MAX_VISIBLE_GROUND_PIECES; i++)
+  {
+    Entity_Ground* groundEntity = &groundPieces[i];
+    groundEntity->init(lastX, 60);
+    groundManager.addEntity(groundEntity);
     lastX += GROUND_DEFINITION_SIZE * GROUND_SIZE;
+    groundEntity->setData(&groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]);
   }
   
 }
@@ -126,11 +131,13 @@ void GameState_Play::draw(Arduboy2 &arduboy) {
     playerCharacter->draw(arduboy);
 }
 
-void GameState_Play::cleanup() {
-     if (playerCharacter != nullptr) {
-        delete playerCharacter;
-        playerCharacter = nullptr; // Set to nullptr to avoid dangling pointer
-    }
-    // Drawing code
-    groundManager.cleanup();
+void GameState_Play::cleanup()
+{
+  if (playerCharacter != nullptr)
+  {
+    delete playerCharacter;
+    playerCharacter = nullptr; // Set to nullptr to avoid dangling pointer
+  }
+
+  groundManager.cleanup();
 }

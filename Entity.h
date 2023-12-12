@@ -3,7 +3,7 @@
 
 #include <Arduboy2.h>
 
-enum EntityType {
+enum EntityType : uint8_t {
     GROUND,
     COIN,
     ENEMY,

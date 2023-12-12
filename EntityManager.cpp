@@ -42,7 +42,7 @@ void EntityManager::cleanup() {
         // Check if the pointer is not null
         if (entities[i] != nullptr) {
             // Delete the entity object
-            delete entities[i];
+            //delete entities[i];// don't delete, these are managed elsewhere!
 
             // Set the pointer to null to avoid dangling references
             entities[i] = nullptr;
