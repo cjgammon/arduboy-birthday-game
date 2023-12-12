@@ -25,7 +25,7 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
         EnemyDefinition enemyDefinition;
         
         memcpy_P(&enemyDefinition, &groundDefinitions[arrayIndex].enemies[i], sizeof(EnemyDefinition));
-        if (enemyDefinition.type != 0) { // Assuming type 0 means no enemy
+        if (enemyDefinition.enemyType != 0) { // Assuming type 0 means no enemy
             addEnemy(enemyDefinition);
         }
     }
@@ -33,7 +33,7 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
 
 void Entity_Ground::addEnemy(const EnemyDefinition& enemyDefinition) {
     if (numEnemies < MAX_ENEMIES_PER_SEGMENT) {
-        enemyArray[numEnemies] = new Entity_Enemy(enemyDefinition.type, enemyDefinition.x, enemyDefinition.y);
+        enemyArray[numEnemies] = new Entity_Enemy(enemyDefinition.enemyType, enemyDefinition.x, enemyDefinition.y);
         numEnemies++;
     }
 }

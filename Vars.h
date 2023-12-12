@@ -4,7 +4,7 @@
 
 #include <avr/pgmspace.h>
 
-#define DEBUG_DRAW_HITBOXES
+//#define DEBUG_DRAW_HITBOXES
 
 #define PLAYER_W 16
 #define PLAYER_H 32
@@ -23,13 +23,12 @@
 #define MAX_COINS_PER_SEGMENT 5   // Adjust as needed
 
 struct EnemyDefinition {
-    uint8_t type;
+    uint8_t enemyType;
     uint8_t x;
     uint8_t y;
 };
 
 struct EnemyTypeDefinition {
-    uint8_t id;
     uint8_t spriteWidth;
     uint8_t spriteHeight;
     uint8_t colliderX;
@@ -46,10 +45,11 @@ enum EnemyType {
     TOTAL
 };
 
-const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] PROGMEM = {
-        {69},// first one is NONE, intentionally left empty.
+const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] = {
         {
-                123,// 0 - troll
+        },// first one is NONE, intentionally left empty.
+        {
+                // 0 - troll
                 32, // sprite width
                 32, // sprite height
                 14, // collider x
@@ -57,7 +57,7 @@ const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] PROGMEM = {
                 10// collider radius
         },
         {
-                456,// 1 - spider
+                // 1 - spider
                 32, // sprite width
                 32, // sprite height
                 12, // collider x
@@ -118,7 +118,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1},
       // Enemies for segment 0
       {
-         //{2, 20, 0}, // Enemy 1
+         {2, 20, 0}, // Enemy 1
       },
       {
 

@@ -36,7 +36,5 @@ void Entity_Enemy::draw(Arduboy2 &arduboy) {
 
 #ifdef DEBUG_DRAW_HITBOXES
   arduboy.drawCircle(getCollisionX(), getCollisionY(), getColliderRadius());
-  arduboy.setCursor(0, 10);
-  arduboy.print(getEnemyTypeDefinition().id);
 #endif
 }
