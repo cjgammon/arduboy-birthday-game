@@ -13,11 +13,15 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
     width = GROUND_DEFINITION_SIZE * GROUND_SIZE;
     height = 1;
 
-    // Constructor code, initialize variables
     entityType = EntityType::GROUND;
-    for (int i = 0; i < GROUND_DEFINITION_SIZE; ++i) {
-        //groundArray[i] = groundDefinitions[arrayIndex][i];
-        groundArray[i] = pgm_read_byte(&(groundDefinitions[arrayIndex].groundArray[i]));
+
+    for (int byteIndex = 0; byteIndex < GROUND_DEFINITION_SIZE / 8; byteIndex++)
+    {
+        uint8_t tileByte = pgm_read_byte(&(groundDefinitions[arrayIndex].groundArray[byteIndex]));
+        for (int bitIndex = 0; bitIndex < 8; bitIndex++)
+        {
+          groundTiles[byteIndex * 8 + bitIndex] = (tileByte >> bitIndex) & 1;
+        }
     }
 
     numEnemies = 0;
@@ -51,7 +55,7 @@ bool Entity_Ground::isGroundAt(int posX) {
     }
 
     // Return true if there's ground at the index, false otherwise
-    return groundArray[index] == 1;
+    return groundTiles[index] == 1;
 }
 
 bool Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius) {
@@ -95,10 +99,10 @@ void Entity_Ground::draw(Arduboy2 &arduboy) {
         Sprites::drawOverwrite(newX, y, environmentgroundmiddle, 0);
       }
 
-      if (groundArray[i] == 1) {
-        if (i > 0 && groundArray[i - 1] == 0) {
+      if (groundTiles[i] == 1) {
+        if (i > 0 && groundTiles[i - 1] == 0) {
           Sprites::drawOverwrite(newX, y, environmentgroundstart, 0);
-        } else if (i < GROUND_DEFINITION_SIZE - 1 && groundArray[i + 1] == 0) {
+        } else if (i < GROUND_DEFINITION_SIZE - 1 && groundTiles[i + 1] == 0) {
           Sprites::drawOverwrite(newX, y, environmentgroundend, 0);
         } else {
           drawRandomGround(i, newX, y);

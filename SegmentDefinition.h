@@ -58,68 +58,31 @@ struct CoinDefinition {
 };
 
 struct SegmentDefinition {
-    uint8_t groundArray[GROUND_DEFINITION_SIZE];
+    uint8_t groundArray[GROUND_DEFINITION_SIZE / 8];
     EnemyDefinition enemies[MAX_ENEMIES_PER_SEGMENT];  // Define MAX_ENEMIES_PER_SEGMENT as needed
     CoinDefinition coins[MAX_COINS_PER_SEGMENT];       // Define MAX_COINS_PER_SEGMENT as needed
 };
 
 // change this if you add/remove groundDefinitions.
-#define GROUND_DEFINITION_COUNT 5
+#define GROUND_DEFINITION_COUNT 2
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
-    {
-      // Ground array for segment 0
-      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-      // Enemies for segment 0
-      {
+        // segment 0
+        {
+                {255, 255, 195},
+                {
 
-      },
-      {
-
-      }
-    },
-    {
-      // Ground array for segment 0
-      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1},
-      // Enemies for segment 0
-      {
-        {1, 20}, // Enemy 1
-      },
-      {
-
-      }
-    },
-    {
-      // Ground array for segment 0
-      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1},
-      // Enemies for segment 0
-      {
-         {2, 20}, // Enemy 1
-      },
-      {
-
-      }
-    },
-    {
-      // Ground array for segment 0
-      {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-      // Enemies for segment 0
-      {
-        //{1, 50, 28}, // Enemy 1
-      },
-      {
-
-      }
-    },
-    {
-      // Ground array for segment 0
-      {1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1},
-      // Enemies for segment 0
-      {
-      },
-      {
-
-      }
-    },
+                },
+                {
+                }
+        },
+        // segment 1
+        {
+                {127, 248, 176},
+                {
+                },
+                {
+                }
+        },
 };
 
 #endif // SEGMENTDEFINITION_H

@@ -23,7 +23,7 @@ public:
     bool enemyCollision(int playerX, int playerY, int playerRadius);
 
 private:
-    uint8_t groundArray[GROUND_DEFINITION_SIZE];
+    uint8_t groundTiles[GROUND_DEFINITION_SIZE];
 
     Entity_Enemy* enemyArray[MAX_ENEMIES_PER_SEGMENT]; // Array of pointers to Entity_Enemy
     int numEnemies;
