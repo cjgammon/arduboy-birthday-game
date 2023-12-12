@@ -79,9 +79,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 
     // Update logic
     if (arduboy.justPressed(B_BUTTON)) {
-      if (stateChangeCallback != nullptr) {
-          stateChangeCallback(STATE_START_MENU);
-      }
+      stateChangeCallback(STATE_START_MENU);
     }
 
     cameraX = -speed * globalSpeedMultiplier;

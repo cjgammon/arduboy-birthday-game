@@ -15,14 +15,6 @@ GameState_Titlescreen startMenuState;
 GameState_CharacterSelection characterSelectionState;
 GameState_Play gamePlayState;
 
-GameState* gameStates[] = {
-  &startMenuState,
-  &characterSelectionState,
-  &gamePlayState
-};
-
-const int numGameStates = sizeof(gameStates) / sizeof(gameStates[0]);
-
 void setup() {
   
   Serial.begin(9600);
@@ -30,9 +22,9 @@ void setup() {
   arduboy.boot();
   arduboy.setFrameRate(60);
 
-  for (int i = 0; i < numGameStates; i++) {
-    gameStates[i]->setStateChangeCallback(changeGameState);
-  }
+  startMenuState.setStateChangeCallback(changeGameState);
+  characterSelectionState.setStateChangeCallback(changeGameState);
+  gamePlayState.setStateChangeCallback(changeGameState);
 
   stateManager.setState(&startMenuState);
 }
