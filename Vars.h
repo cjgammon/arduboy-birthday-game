@@ -6,6 +6,8 @@
 
 #include "SegmentDefinition.h"
 
+//#define DEBUG_DRAW_HITBOXES
+
 #define PLAYER_W 16
 #define PLAYER_HALF_W 8
 #define PLAYER_H 32
@@ -26,7 +28,6 @@ extern int lives;
 extern int score;
 extern float globalSpeedMultiplier;
 extern bool godModeEnabled;
-extern bool debugDraw;
 
 extern float cameraX;
 extern float cameraY;
