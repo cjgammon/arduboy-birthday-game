@@ -22,7 +22,7 @@
 #define MAX_ENEMIES_PER_SEGMENT 3  // Adjust as needed
 #define MAX_COINS_PER_SEGMENT 5   // Adjust as needed
 
-struct Enemy {
+struct EnemyDefinition {
     uint8_t type;
     uint8_t x;
     uint8_t y;
@@ -74,7 +74,7 @@ struct Coin {
 
 struct SegmentDefinition {
     uint8_t groundArray[GROUND_DEFINITION_SIZE];
-    Enemy enemies[MAX_ENEMIES_PER_SEGMENT];  // Define MAX_ENEMIES_PER_SEGMENT as needed
+    EnemyDefinition enemies[MAX_ENEMIES_PER_SEGMENT];  // Define MAX_ENEMIES_PER_SEGMENT as needed
     Coin coins[MAX_COINS_PER_SEGMENT];       // Define MAX_COINS_PER_SEGMENT as needed
 };
 

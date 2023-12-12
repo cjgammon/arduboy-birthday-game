@@ -19,7 +19,7 @@ public:
 
     void drawEnemies(Arduboy2 &arduboy);
     bool isGroundAt(int posX);
-    void addEnemy(const Enemy& enemyData);
+    void addEnemy(const EnemyDefinition& enemyDefinition);
     bool enemyCollision(int playerX, int playerY, int playerRadius);
 
 private:

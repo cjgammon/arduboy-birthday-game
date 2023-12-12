@@ -22,18 +22,18 @@ Entity_Ground::Entity_Ground(int initialX, int initialY, int arrayIndex)
 
     numEnemies = 0;
     for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
-        Enemy enemyData;
+        EnemyDefinition enemyDefinition;
         
-        memcpy_P(&enemyData, &groundDefinitions[arrayIndex].enemies[i], sizeof(Enemy));
-        if (enemyData.type != 0) { // Assuming type 0 means no enemy
-            addEnemy(enemyData);
+        memcpy_P(&enemyDefinition, &groundDefinitions[arrayIndex].enemies[i], sizeof(EnemyDefinition));
+        if (enemyDefinition.type != 0) { // Assuming type 0 means no enemy
+            addEnemy(enemyDefinition);
         }
     }
 }
 
-void Entity_Ground::addEnemy(const Enemy& enemyData) {
+void Entity_Ground::addEnemy(const EnemyDefinition& enemyDefinition) {
     if (numEnemies < MAX_ENEMIES_PER_SEGMENT) {
-        enemyArray[numEnemies] = new Entity_Enemy(enemyData.type, enemyData.x, enemyData.y);
+        enemyArray[numEnemies] = new Entity_Enemy(enemyDefinition.type, enemyDefinition.x, enemyDefinition.y);
         numEnemies++;
     }
 }
