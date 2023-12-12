@@ -3,11 +3,12 @@
 
 #include "EntityManager.h"
 #include "Entity_Ground.h"
+#include "Vars.h"
 
 class EntityManager_Ground : public EntityManager {
 public:
     EntityManager_Ground();
-    void update(Arduboy2 &arduboy, float xDelta) override;
+    void update(Arduboy2 &arduboy) override;
     bool isGroundAt(int x); // Check if there is ground at the given coordinates
     bool enemyCollision(int playerX, int playerY);
 
