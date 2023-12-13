@@ -11,11 +11,10 @@ class Entity_Enemy : public Entity {
 
 public:
     Entity_Enemy();
-    void setData(const EnemyDefinition& enemyDefinition, float groundX);
+    void setData(const EnemyDefinition& enemyDefinition, float segmentX);
 
     void update(float newX);
     void draw(Arduboy2 &arduboy) override;
-    int getAbsoluteX();
 
     int getCollisionX();
     int getCollisionY();
@@ -30,7 +29,7 @@ public:
     bool enabled;
 
 private:
-    int offsetX;
+    int positionInSegmentX;
 };
 
 #endif // ENTITY_ENEMY_H

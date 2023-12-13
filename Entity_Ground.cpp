@@ -74,9 +74,6 @@ bool Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius)
         continue;
       }
 
-      //int enemyX = enemy->getAbsoluteX() + enemy->getWidth() / 2;
-      //int enemyY = enemy->getY() + enemy->getHeight() / 2;
-      //int enemyRadius = enemy->getWidth() / 2;
       int enemyX = enemy->getCollisionX();
       int enemyY = enemy->getCollisionY();
       int enemyRadius = enemy->getColliderRadius();
