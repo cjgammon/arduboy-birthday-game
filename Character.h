@@ -28,6 +28,7 @@ public:
     virtual ~Character();
 
     void setState(CharacterState newState);
+    bool isAlive() { return state != CharacterState::FALL; }
 
     CharacterType getCharacterType() const { return characterType; };
     void setType(CharacterType newType);
@@ -55,6 +56,7 @@ public:
     int getLives() const { return lives; }
 
     bool isJumping() { return state == CharacterState::JUMP || state == CharacterState::DESCEND; }
+    float velocityY = 0;
 
 protected:
 
@@ -73,7 +75,7 @@ protected:
     int frameCount_Fall;
 
     int groundLevel;
-    float velocityY = 0;
+    
 
     float frameCounterRaw;
     int currentFrame;

@@ -4,6 +4,7 @@
 #include "GameState_Titlescreen.h"
 #include "GameState_CharacterSelection.h"
 #include "GameState_Play.h"
+#include "Vars.h"
 
 Arduboy2 arduboy;
 ArduboyTones sound(arduboy.audio.enabled);
@@ -14,6 +15,10 @@ GameStateManager stateManager;
 GameState_Titlescreen startMenuState;
 GameState_CharacterSelection characterSelectionState;
 GameState_Play gamePlayState;
+
+#ifdef CHEAT_MODE_ENABLED
+int cheatMode = CheatMode::Disabled;
+#endif
 
 void setup() {
   
@@ -36,8 +41,33 @@ void loop() {
   arduboy.clear();
   arduboy.pollButtons();
 
+#ifdef CHEAT_MODE_ENABLED
+  // update cheat mode.
+  if (arduboy.justPressed(DOWN_BUTTON))
+  {
+    cheatMode = (cheatMode + 1) % CheatMode::Total;
+  }
+#endif
+
   stateManager.update(arduboy);
   stateManager.draw(arduboy);
+
+#ifdef CHEAT_MODE_ENABLED
+  // draw cheat mode.
+  arduboy.setCursor(30, 0);
+  if (cheatMode == CheatMode::GodMode)
+  {
+    arduboy.print("G");
+  }
+  else if (cheatMode == CheatMode::NoCollisions)
+  {
+    arduboy.print("xC");
+  }
+  else if (cheatMode == CheatMode::NoFalling)
+  {
+    arduboy.print("xF");
+  }
+#endif
 
   arduboy.display();
 }

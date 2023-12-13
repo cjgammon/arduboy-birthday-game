@@ -25,7 +25,19 @@ extern int selectedCharacter;
 extern int lives;
 extern int score;
 extern float globalSpeedMultiplier;
-extern bool godModeEnabled;
+
+#define CHEAT_MODE_ENABLED
+
+#ifdef CHEAT_MODE_ENABLED
+enum CheatMode : uint8_t {
+    Disabled,
+    GodMode,
+    NoFalling,
+    NoCollisions,
+    Total
+};
+extern int cheatMode;
+#endif
 
 extern float cameraX;
 extern float cameraY;

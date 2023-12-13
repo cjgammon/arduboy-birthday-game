@@ -16,13 +16,10 @@ float timeToReachMaxSpeedInSeconds = 60.0;
 float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (timeToReachMaxSpeedInSeconds * 60.0);
 bool autoSpeedupEnabled = true;
 
-bool godModeEnabled = false;
-
 #define MAX_VISIBLE_GROUND_PIECES 3
 Entity_Ground groundPieces[MAX_VISIBLE_GROUND_PIECES];
 
 void GameState_Play::init() {
-    godModeEnabled = false;
 
     // Initialization code
     globalSpeedMultiplier = 0.85;
@@ -65,11 +62,6 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       autoSpeedupEnabled = !autoSpeedupEnabled;
     }
 
-    if (arduboy.justPressed(DOWN_BUTTON))
-    {
-      godModeEnabled = !godModeEnabled;
-    }
-
     if (autoSpeedupEnabled)
     {
       globalSpeedMultiplier += speedMultiplierIncreasePerFrame;
@@ -94,16 +86,28 @@ void GameState_Play::update(Arduboy2 &arduboy) {
     //CHECK IF CHARACTER Y IS ON GROUND POSITION AND NO GROUND IS PRESENT AT setX
     if (playerCharacter->getY() == groundLevel) {
       // todo :: account for different character width?
-      if (!godModeEnabled && !groundManager.isGroundAt(characterCenterPosX - 3) && ! groundManager.isGroundAt(characterCenterPosX + 3))
+      if (
+#ifdef CHEAT_MODE_ENABLED
+              (cheatMode != CheatMode::GodMode && cheatMode != CheatMode::NoFalling) &&
+#endif
+              !groundManager.isGroundAt(characterCenterPosX - 3)
+              && ! groundManager.isGroundAt(characterCenterPosX + 3)
+          )
       {
         playerCharacter->setState(CharacterState::FALL);
         speed = 0;
       }
     }
 
-    if (!godModeEnabled && groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius()))
+    if (
+            playerCharacter->isAlive()
+#ifdef CHEAT_MODE_ENABLED
+            && (cheatMode != CheatMode::GodMode && cheatMode != CheatMode::NoCollisions)
+#endif
+            && groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius()))
     {
-      //explosion???
+      playerCharacter->velocityY = -3.6;
+      playerCharacter->setState(CharacterState::FALL);
       speed = 0;
     }
 
