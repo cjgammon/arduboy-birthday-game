@@ -8,6 +8,9 @@ Entity_Enemy::Entity_Enemy() : Entity()
 
 void Entity_Enemy::setData(const EnemyDefinition& enemyDefinition, float segmentX)
 {
+    enemyType = enemyDefinition.enemyType;
+    entityType = EntityType::ENEMY;
+
     const EnemyTypeDefinition& enemyTypeDefinition = getEnemyTypeDefinition();
 
     positionInSegmentX = enemyDefinition.x;
@@ -16,8 +19,6 @@ void Entity_Enemy::setData(const EnemyDefinition& enemyDefinition, float segment
     y = enemyTypeDefinition.y;
     yRaw = y;
 
-    enemyType = enemyDefinition.enemyType;
-    entityType = EntityType::ENEMY;
     width = enemyTypeDefinition.spriteWidth;
     height = enemyTypeDefinition.spriteHeight;
 }
@@ -46,10 +47,13 @@ void Entity_Enemy::draw(Arduboy2 &arduboy) {
   }
 
   if (enemyType == EnemyType::TROLL) {
-    Sprites::drawSelfMasked(x, 28, enemy_troll, 0);
+    Sprites::drawSelfMasked(x, y, enemy_troll, 0);
   } else if (enemyType == EnemyType::SPIDER) {
-    Sprites::drawSelfMasked(x, 0, enemy_spider, 0);
+    Sprites::drawSelfMasked(x, y, enemy_spider, 0);
   }
+
+  arduboy.setCursor(x, y);
+  arduboy.print(getCollisionY());
 
 #ifdef DEBUG_DRAW_HITBOXES
   arduboy.drawCircle(getCollisionX(), getCollisionY(), getColliderRadius());
