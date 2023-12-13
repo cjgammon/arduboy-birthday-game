@@ -101,9 +101,10 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
-    if (!godModeEnabled && groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius()))
+    if (playerCharacter->isAlive() && !godModeEnabled && groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius()))
     {
-      //explosion???
+      playerCharacter->velocityY = -3.6;
+      playerCharacter->setState(CharacterState::FALL);
       speed = 0;
     }
 
