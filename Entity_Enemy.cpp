@@ -6,28 +6,24 @@ Entity_Enemy::Entity_Enemy() : Entity()
 
 }
 
-void Entity_Enemy::setData(const EnemyDefinition& enemyDefinition, float groundX)
+void Entity_Enemy::setData(const EnemyDefinition& enemyDefinition, float segmentX)
 {
     const EnemyTypeDefinition& enemyTypeDefinition = getEnemyTypeDefinition();
 
-    x = enemyDefinition.x;
+    positionInSegmentX = enemyDefinition.x;
+    x = segmentX + positionInSegmentX;
     xRaw = x;
     y = enemyTypeDefinition.y;
     yRaw = y;
 
     enemyType = enemyDefinition.enemyType;
     entityType = EntityType::ENEMY;
-    offsetX = groundX;
     width = enemyTypeDefinition.spriteWidth;
     height = enemyTypeDefinition.spriteHeight;
 }
 
-int Entity_Enemy::getAbsoluteX() {
-  return offsetX + x;
-}
-
 int Entity_Enemy::getCollisionX() {
-  return offsetX + x + getColliderX();
+  return x + getColliderX();
 }
 
 int Entity_Enemy::getCollisionY() {
@@ -40,7 +36,7 @@ void Entity_Enemy::update(float newX) {
     return;
   }
 
-  offsetX = newX;
+  x = newX + positionInSegmentX;
 }
 
 void Entity_Enemy::draw(Arduboy2 &arduboy) {
@@ -50,9 +46,9 @@ void Entity_Enemy::draw(Arduboy2 &arduboy) {
   }
 
   if (enemyType == EnemyType::TROLL) {
-    Sprites::drawSelfMasked(getAbsoluteX(), 28, enemy_troll, 0);
+    Sprites::drawSelfMasked(x, 28, enemy_troll, 0);
   } else if (enemyType == EnemyType::SPIDER) {
-    Sprites::drawSelfMasked(getAbsoluteX(), 0, enemy_spider, 0);
+    Sprites::drawSelfMasked(x, 0, enemy_spider, 0);
   }
 
 #ifdef DEBUG_DRAW_HITBOXES
