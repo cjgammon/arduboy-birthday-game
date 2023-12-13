@@ -37,8 +37,8 @@ const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] = {
                 32, // sprite width
                 32, // sprite height
                 14, // collider x
-                20, // collider y
-                10// collider radius
+                22, // collider y
+                7// collider radius
         },
         {
                 // 1 - spider
@@ -46,8 +46,8 @@ const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] = {
                 32, // sprite width
                 32, // sprite height
                 12, // collider x
-                20, // collider y
-                10// collider radius
+                21, // collider y
+                6// collider radius
         },
 };
 
