@@ -96,6 +96,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       {
         playerCharacter->setState(CharacterState::FALL);
         speed = 0;
+        globalSpeedMultiplier = 0.8;
       }
     }
 
@@ -109,6 +110,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       playerCharacter->velocityY = -3.6;
       playerCharacter->setState(CharacterState::FALL);
       speed = 0;
+      globalSpeedMultiplier = 0.8;
     }
 
     playerCharacter->update(arduboy);
