@@ -52,9 +52,6 @@ void Entity_Enemy::draw(Arduboy2 &arduboy) {
     Sprites::drawSelfMasked(x, y, enemy_spider, 0);
   }
 
-  arduboy.setCursor(x, y);
-  arduboy.print(getCollisionY());
-
 #ifdef DEBUG_DRAW_HITBOXES
   arduboy.drawCircle(getCollisionX(), getCollisionY(), getColliderRadius());
 #endif
