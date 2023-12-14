@@ -12,6 +12,8 @@ enum CharacterType : uint8_t {
   RUHAAN,
   JAXON,
   NOLA,
+
+  TOTAL_CHARACTERS
 };
 
 enum CharacterState : uint8_t {
@@ -96,6 +98,23 @@ protected:
 public:
     const char* name; // Character's name
     const char* description;
+
+private:
+    float gravity = 0.3;
+    float currentGravity = 0.3;
+    float jumpPower = -5.0;
+    float extraJumpPower = -5.0;
+// jump damping - this controls how much your jump speed is reduced when you release the jump button.
+    float stopJumpDamping = 0.5;
+// jump buffer - this provides a little bit of a window before we hit the ground for a second jump to register.
+// this is a lot more user friendly because people always mis-time when your character is actually 'on the ground'
+    float jumpBufferLengthInFrames = 30.0;
+    float jumpBufferCountRaw = 0.0;
+// how many jumps do they have
+// this is like double jumps in awesomenauts (i.e. lonestar) - the ability to jump again while in mid air.
+    int jumpCount = 1;
+    int jumpsRemaining = 1;
+    bool canHover = false;
 };
 
 #endif // CHARACTER_H

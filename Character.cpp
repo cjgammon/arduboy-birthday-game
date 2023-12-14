@@ -1,22 +1,6 @@
 #include "Character.h"
+#include "CharacterDefinition.h"
 #include "Vars.h"
-
-// todo :: all this stuff should be properties on the character probably.  but adding it here is a little easier rn
-float gravity = 0.3;
-float currentGravity = 0.3;
-float jumpPower = -5.0;
-float extraJumpPower = -5.0;
-// jump damping - this controls how much your jump speed is reduced when you release the jump button.
-float stopJumpDamping = 0.5;
-// jump buffer - this provides a little bit of a window before we hit the ground for a second jump to register.
-// this is a lot more user friendly because people always mis-time when your character is actually 'on the ground'
-float jumpBufferLengthInFrames = 30.0;
-float jumpBufferCountRaw = 0.0;
-// how many jumps do they have
-// this is like double jumps in awesomenauts (i.e. lonestar) - the ability to jump again while in mid air.
-int jumpCount = 1;
-int jumpsRemaining = 1;
-bool canHover = false;
 
 Character::Character(int initialX, int initialY, CharacterType initialType) {
   x = initialX;
@@ -117,130 +101,88 @@ void Character::update(Arduboy2 &arduboy) {
 void Character::setType(CharacterType newType) {
   characterType = newType;
 
-  frameCount_Idle = 2;
-  frameCount_Walking = 8;
-  frameCount_Jump = 1;
-  frameCount_Descend = 1;
-  frameCount_Fall = 1;
-  frameChangeInterval_Idle = 10;
-  frameChangeInterval_Walking = 6;
-  frameChangeInterval_Jump = 1;
-  frameChangeInterval_Descend = 1;
-  frameChangeInterval_Fall = 1;
-  gravity = 0.3;
-  jumpPower = -5.0;
-  extraJumpPower = -5.0;
-  stopJumpDamping = 0.5;
-  jumpCount = 1;
-  jumpsRemaining = 1;
-  radius = 8;
-  canHover = false;
+  CharacterDefinition characterDefinition;
 
-  switch (characterType) {
-    case CharacterType::JONAS:
-      name = "JONAS";
-      description = "ABILITY: Hover";
-      idleSprite = character_jonas_idle;
-      walkSprite = character_jonas_run;
-      jumpSprite = character_jonas_jump;
-      descendSprite = character_jonas_jump;
-      fallSprite = character_jonas_fall;
-      jumpPower = -3.3;
-      gravity = 0.2;
-      stopJumpDamping = 0.3;
-      //jumpCount = 8;
-      //jumpsRemaining = 8;
-      //extraJumpPower = -1.0;
-      canHover = true;
-      // notes: kinda normal single jump, then you can press the butotn a bunch to sorta hover.
-    break;
-    case CharacterType::HENRY:
-      name = "HENRY";
-      description = "ABILITY: Double Ollie";
-      frameCount_Walking = 6;
-      idleSprite = character_skaterboy_idle;
-      walkSprite = character_skaterboy_run;
-      jumpSprite = character_skaterboy_jump;
-      descendSprite = character_skaterboy_jump;
-      fallSprite = character_skaterboy_fall;
-      jumpPower = -4.0;
-      gravity = 0.3;
-      jumpCount = 2;
-      jumpsRemaining = 2;
-      extraJumpPower = -4.0;
-      // notes: pretty basic double jump
-    break;
-    case CharacterType::JAXON:
-      name = "JAXON";
-      description = "ABILITY: Butt Stomp";
-      frameCount_Idle = 4;
-      frameChangeInterval_Idle = 16;
-      idleSprite = character_caliban_idle;
-      walkSprite = character_caliban_run;
-      jumpSprite = character_caliban_jump;
-      descendSprite = character_caliban_jump;
-      fallSprite = character_caliban_fall;
-      jumpPower = -4.6;
-      gravity = 0.22;
-      jumpCount = 2;
-      jumpsRemaining = 2;
-      extraJumpPower = 9;// positive on purpose!
-      stopJumpDamping = 0.1;
-      // notes: big floaty jump, pressing the button again sends you downward quickly, like a butt stomp/ground pound.
-    break;
-    case CharacterType::MASON:
-      name = "MASON";
-      description = "ABILITY: Double Jump";
-      idleSprite = character_calvin_idle;
-      walkSprite = character_calvin_run;
-      jumpSprite = character_calvin_jump;
-      descendSprite = character_calvin_jump;
-      fallSprite = character_calvin_fall;
-      jumpPower = -2.1;
-      extraJumpPower = -3.1;
-      gravity = 0.18;
-      jumpCount = 2;
-      jumpsRemaining = 2;
-      radius = 5;
-      // notes: weak single jump, nice double jump
-    break;
-    case CharacterType::RUHAAN:
-      name = "RUHAAN";
-      description = "ABILITY: Dragon Punch";
-      idleSprite = character_lyle_idle;
-      walkSprite = character_lyle_run;
-      jumpSprite = character_lyle_jump;
-      descendSprite = character_lyle_jump;
-      fallSprite = character_lyle_fall;
-      frameChangeInterval_Idle = 20;
-      jumpPower = -4.0;
-      extraJumpPower = -2.3;
-      gravity = 0.25;
-      stopJumpDamping = 0.2;
-      jumpCount = 2;
-      jumpsRemaining = 2;
-      // notes: very basic single jump.  perhaps he can punch through enemies while he's jumping??
-    break;
-    case CharacterType::NOLA:
-      name = "NOLA";
-      description = "ABILITY: Triple Jump";
-      idleSprite = character_nola_idle;
-      walkSprite = character_nola_run;
-      jumpSprite = character_nola_jump;
-      descendSprite = character_nola_descend;
-      fallSprite = character_nola_fall;
-      frameCount_Idle = 3;
-      frameCount_Descend = 2;
-      frameChangeInterval_Descend = 5;
-      jumpPower = -3.0;
-      gravity = 0.18;
-      stopJumpDamping = 0.5;
-      jumpCount = 3;
-      jumpsRemaining = 3;
-      extraJumpPower = -2.25;
-      // notes: floaty jump, with a couple additional flutters
-    break;
+  if (characterType == CharacterType::JONAS)
+  {
+    memcpy_P(&characterDefinition, &CharacterDefinition_Jonas, sizeof(CharacterDefinition));
+    idleSprite = character_jonas_idle;
+    walkSprite = character_jonas_run;
+    jumpSprite = character_jonas_jump;
+    descendSprite = character_jonas_jump;
+    fallSprite = character_jonas_fall;
   }
+  else if (characterType == CharacterType::HENRY)
+  {
+    memcpy_P(&characterDefinition, &CharacterDefinition_Henry, sizeof(CharacterDefinition));
+    idleSprite = character_skaterboy_idle;
+    walkSprite = character_skaterboy_run;
+    jumpSprite = character_skaterboy_jump;
+    descendSprite = character_skaterboy_jump;
+    fallSprite = character_skaterboy_fall;
+  }
+  else if (characterType == CharacterType::JAXON)
+  {
+    memcpy_P(&characterDefinition, &CharacterDefinition_Jaxon, sizeof(CharacterDefinition));
+    idleSprite = character_caliban_idle;
+    walkSprite = character_caliban_run;
+    jumpSprite = character_caliban_jump;
+    descendSprite = character_caliban_jump;
+    fallSprite = character_caliban_fall;
+  }
+  else if (characterType == CharacterType::MASON)
+  {
+    memcpy_P(&characterDefinition, &CharacterDefinition_Mason, sizeof(CharacterDefinition));
+    idleSprite = character_calvin_idle;
+    walkSprite = character_calvin_run;
+    jumpSprite = character_calvin_jump;
+    descendSprite = character_calvin_jump;
+    fallSprite = character_calvin_fall;
+  }
+  else if (characterType == CharacterType::RUHAAN)
+  {
+    memcpy_P(&characterDefinition, &CharacterDefinition_Ruhaan, sizeof(CharacterDefinition));
+    idleSprite = character_lyle_idle;
+    walkSprite = character_lyle_run;
+    jumpSprite = character_lyle_jump;
+    descendSprite = character_lyle_jump;
+    fallSprite = character_lyle_fall;
+  }
+  else if (characterType == CharacterType::NOLA)
+  {
+    memcpy_P(&characterDefinition, &CharacterDefinition_Nola, sizeof(CharacterDefinition));
+    idleSprite = character_nola_idle;
+    walkSprite = character_nola_run;
+    jumpSprite = character_nola_jump;
+    descendSprite = character_nola_descend;
+    fallSprite = character_nola_fall;
+  }
+
+  // copy character definition
+  name = characterDefinition.name;
+  description = characterDefinition.description;
+
+  frameCount_Idle = characterDefinition.frameCount_Idle;
+  frameCount_Walking = characterDefinition.frameCount_Walking;
+  frameCount_Jump = characterDefinition.frameCount_Jump;
+  frameCount_Descend = characterDefinition.frameCount_Descend;
+  frameCount_Fall = characterDefinition.frameCount_Fall;
+
+  frameChangeInterval_Idle = characterDefinition.frameChangeInterval_Idle;
+  frameChangeInterval_Walking = characterDefinition.frameChangeInterval_Walking;
+  frameChangeInterval_Jump = characterDefinition.frameChangeInterval_Jump;
+  frameChangeInterval_Descend = characterDefinition.frameChangeInterval_Descend;
+  frameChangeInterval_Fall = characterDefinition.frameChangeInterval_Fall;
+
+  radius = characterDefinition.radius;
+  gravity = characterDefinition.gravity;
+  jumpPower = characterDefinition.jumpPower;
+  extraJumpPower = characterDefinition.extraJumpPower;
+  stopJumpDamping = characterDefinition.stopJumpDamping;
+  jumpCount = characterDefinition.jumpCount;
+  canHover = characterDefinition.canHover;
+
+
 
   setState(state);
 }
