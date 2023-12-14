@@ -20,20 +20,19 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     }
 
     if (arduboy.justPressed(RIGHT_BUTTON)) {
-      selectedCharacter = (selectedCharacter + 1) % numCharacters;
-      changeCharacter();
+      changeCharacter((selectedCharacter + 1) % numCharacters);
     }
 
     if (arduboy.justPressed(LEFT_BUTTON)) {
-      selectedCharacter = (selectedCharacter - 1 + numCharacters) % numCharacters;
-      changeCharacter();
+      changeCharacter((selectedCharacter - 1 + numCharacters) % numCharacters);
     }
 
     // don't update the character here unless you want them to handle input and process physics.
     //playerCharacter->update(arduboy);
 }
 
-void GameState_CharacterSelection::changeCharacter() {
+void GameState_CharacterSelection::changeCharacter(uint8_t newIndex) {
+  selectedCharacter = newIndex;
   playerCharacter->setType(selectedCharacter);
 }
 
