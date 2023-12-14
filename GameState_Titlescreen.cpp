@@ -40,7 +40,7 @@ void GameState_Titlescreen::draw(Arduboy2 &arduboy) {
   }
 
   //arduboy.fillRoundRect(textX - 2, textY, textWidthInPixels + 4, 12, 2, BLACK);
-  arduboy.drawRoundRect(textX - 2, textY, textWidthInPixels + 4, 12, 2, WHITE);
+  //arduboy.drawRoundRect(textX - 2, textY, textWidthInPixels + 4, 12, 2, WHITE);
 
   if (showText) {
     arduboy.setCursor(textX + 1, textY + 2);
