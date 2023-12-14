@@ -20,6 +20,13 @@ GameState_Play gamePlayState;
 int cheatMode = CheatMode::Disabled;
 #endif
 
+uint8_t screenWidth = 128;
+
+uint8_t getTextWidthInPixels(char* text)
+{
+  return strlen(text) * CHAR_WIDTH;
+}
+
 void setup() {
   
   Serial.begin(9600);

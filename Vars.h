@@ -9,16 +9,13 @@
 //#define DEBUG_DRAW_HITBOXES
 
 #define PLAYER_W 16
-#define PLAYER_H 32
 #define PLAYER_HALF_W 8
 #define PLAYER_HALF_H 16
 
-
-#define SCREEN_WIDTH 128 
+extern uint8_t screenWidth;
 #define SCREEN_HEIGHT 64
-#define HALF_SCREEN_WIDTH SCREEN_WIDTH / 2
-#define CHAR_WIDTH 6 // character width in pixels including inter-character spacing
-#define GROUND_SIZE 6 
+#define CHAR_WIDTH 6
+#define GROUND_SIZE 6
 
 
 extern int selectedCharacter;
@@ -41,6 +38,8 @@ extern int cheatMode;
 
 extern float cameraX;
 extern float cameraY;
+
+uint8_t getTextWidthInPixels(char* text);
 
 #endif // VARS_H
 

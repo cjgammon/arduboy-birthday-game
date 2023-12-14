@@ -20,8 +20,7 @@ void GameUI::draw(Arduboy2 &arduboy) {
 }
 
 void GameUI::drawName(Arduboy2 &arduboy) {
-  byte textWidthInPixels = strlen(name) * CHAR_WIDTH;
-  arduboy.setCursor(SCREEN_WIDTH - textWidthInPixels, 0);
+  arduboy.setCursor(screenWidth - getTextWidthInPixels(name), 0);
   arduboy.print(name);
 }
 
@@ -33,7 +32,7 @@ void GameUI::drawScore(Arduboy2 &arduboy) {
 
 void GameUI::drawLives(Arduboy2 &arduboy) {
   // Draw the number of lives on the screen
-  byte textWidthInPixels = strlen(name) * CHAR_WIDTH;
+  byte textWidthInPixels = getTextWidthInPixels(name);
   byte startX = textWidthInPixels;
 
   byte totalLives = maxLives;

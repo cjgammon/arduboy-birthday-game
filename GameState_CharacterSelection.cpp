@@ -9,7 +9,7 @@ int selectedCharacter = 0;
 int currentCharacter = 0;
 
 void GameState_CharacterSelection::init() {
-    int x = (SCREEN_WIDTH / 2) - (16 / 2);
+    int x = (screenWidth / 2) - (16 / 2);
     int y = 28;
     playerCharacter = new Character(x, y, currentCharacter);
 }
@@ -49,8 +49,7 @@ void GameState_CharacterSelection::changeCharacter() {
 
 void drawCenteredText(Arduboy2 &arduboy, char* text, uint8_t y)
 {
-  int textWidthInPixels = strlen(text) * CHAR_WIDTH;
-  int textX = HALF_SCREEN_WIDTH - (textWidthInPixels / 2);
+  int textX = screenWidth/2 - (getTextWidthInPixels(text) / 2);
   arduboy.setCursor(textX, y);
   arduboy.print(text);
 }
