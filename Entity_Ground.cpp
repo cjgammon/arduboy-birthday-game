@@ -9,10 +9,12 @@ Entity_Ground::Entity_Ground(): Entity() {
       enemies[i] = new Entity_Enemy();
     }
 
+#ifdef COINS_ENALBED
     for (int coinIndex = 0; coinIndex < MAX_COINS_PER_SEGMENT; coinIndex++)
     {
       coins[coinIndex] = new Entity_Enemy();
     }
+#endif
 }
 
 void Entity_Ground::init(int initialX, int initialY)
