@@ -22,20 +22,12 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     }
 
     if (arduboy.justPressed(RIGHT_BUTTON)) {
-      if (currentCharacter < numCharacters - 1) {
-        currentCharacter++;
-      } else {
-        currentCharacter = 0;
-      }
+      currentCharacter = (currentCharacter + 1) % numCharacters;
       changeCharacter();
     }
 
     if (arduboy.justPressed(LEFT_BUTTON)) {
-      if (currentCharacter > 0) {
-        currentCharacter--;
-      } else {
-        currentCharacter = numCharacters - 1;
-      }
+      currentCharacter = (currentCharacter - 1 + numCharacters) % numCharacters;
       changeCharacter();
     }
 
