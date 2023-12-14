@@ -60,7 +60,7 @@ bool EntityManager_Ground::isGroundAt(int x) {
     return false;
 }
  
-bool EntityManager_Ground::enemyCollision(int playerX, int playerY, int playerRadius) {
+Entity_Enemy* EntityManager_Ground::enemyCollision(int playerX, int playerY, int playerRadius) {
   for (int i = 0; i < numEntities; i++) {
     if (entities[i] != nullptr) {
       Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[i]);
@@ -71,7 +71,7 @@ bool EntityManager_Ground::enemyCollision(int playerX, int playerY, int playerRa
       }
     }
   }
-  return false;
+  return nullptr;
 }
 
 

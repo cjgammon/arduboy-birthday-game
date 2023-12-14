@@ -105,12 +105,17 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 #ifdef CHEAT_MODE_ENABLED
             && (cheatMode != CheatMode::GodMode && cheatMode != CheatMode::NoCollisions)
 #endif
-            && groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius()))
+      )
     {
-      playerCharacter->velocityY = -3.6;
-      playerCharacter->setState(CharacterState::FALL);
-      speed = 0;
-      globalSpeedMultiplier = 0.8;
+      Entity_Enemy* collidingEnemy = groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius());
+      if (collidingEnemy != nullptr)
+      {
+        // todo :: enemy type switch?
+        playerCharacter->velocityY = -3.6;
+        playerCharacter->setState(CharacterState::FALL);
+        speed = 0;
+        globalSpeedMultiplier = 0.8;
+      }
     }
 
     playerCharacter->update(arduboy);

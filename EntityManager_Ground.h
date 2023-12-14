@@ -10,7 +10,7 @@ public:
     EntityManager_Ground();
     void update(Arduboy2 &arduboy) override;
     bool isGroundAt(int x); // Check if there is ground at the given coordinates
-    bool enemyCollision(int playerX, int playerY, int playerRadius);
+    Entity_Enemy* enemyCollision(int playerX, int playerY, int playerRadius);
 
 private:
     void recycleGroundEntity(int index);

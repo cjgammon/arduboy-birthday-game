@@ -5,7 +5,7 @@
 
 enum EntityType : uint8_t {
     GROUND,
-    COIN,
+    COIN_ENTITY,
     ENEMY,
 };
 

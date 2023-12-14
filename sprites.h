@@ -29,6 +29,16 @@ const unsigned char PROGMEM enemy_troll[] =
 };
 
 
+const unsigned char PROGMEM item_coin[] =
+{
+#ifdef USE_ASSETS
+// width, height
+8, 8,
+// TILE 00
+0x00, 0xfc, 0x03, 0x7b, 0x7b, 0x03, 0xfc, 0x00, 
+#endif
+};
+
 //TITLESCREEN
 
 const unsigned char PROGMEM ui_logo_jonas[] =
