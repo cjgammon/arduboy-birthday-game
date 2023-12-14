@@ -22,7 +22,12 @@
 
 
 extern int selectedCharacter;
+
+#define LIVES_ENABLED
+#ifdef LIVES_ENABLED
 extern int lives;
+#endif
+
 extern int score;
 extern float globalSpeedMultiplier;
 

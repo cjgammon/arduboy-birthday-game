@@ -6,7 +6,9 @@
 float cameraX = 0;
 float cameraY = 0;
 
+#ifdef LIVES_ENABLED
 int lives = 3;
+#endif
 float speed = 2;
 int groundLevel = 28;
 
@@ -30,15 +32,20 @@ void GameState_Play::init() {
     playerCharacter = new Character(0, 28, playerType);
 
     char* name = playerCharacter->getName();
-    int maxLives = playerCharacter->getLives();
+
 
     playerCharacter->setX(0);
     playerCharacter->setY(groundLevel);
     playerCharacter->setGround(groundLevel);
     playerCharacter->setState(CharacterState::WALK);
-    lives = maxLives;
 
+#ifdef LIVES_ENABLED
+    int maxLives = playerCharacter->getLives();
+    lives = maxLives;
     gameUI.init(name, maxLives, maxLives);
+#else
+    gameUI.init(name);
+#endif
 
     groundManager.init();
 

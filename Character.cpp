@@ -26,7 +26,10 @@ Character::Character(int initialX, int initialY, CharacterType initialType) {
 
   velocityY = 0;
   currentFrame = 0;
+  
+#ifdef LIVES_ENABLED
   lives = 3;
+#endif
 
   setType(initialType);
   setState(CharacterState::IDLE);
