@@ -132,9 +132,6 @@ Entity_Enemy* Entity_Ground::enemyCollision(int playerX, int playerY, int player
       int enemyY = enemy->getCollisionY();
       int enemyRadius = enemy->getColliderRadius();
 
-      int px = playerX - x;
-      int py = playerY;
-
       int dx = playerX - enemyX;
       int dy = playerY - enemyY;
       int distanceSquared = dx * dx + dy * dy;
