@@ -18,9 +18,16 @@ void Entity_Enemy::setData(const EnemyDefinition& enemyDefinition, float segment
     xRaw = x;
     y = enemyTypeDefinition.y;
     yRaw = y;
+    startY = y;
 
     width = enemyTypeDefinition.spriteWidth;
     height = enemyTypeDefinition.spriteHeight;
+
+    if (enemyType == EnemyType::SKULL_1)
+    {
+      currentOscillationPos = 0.0;
+      oscillationSpeed = 0.1;
+    }
 }
 
 int Entity_Enemy::getCollisionX() {
@@ -38,6 +45,11 @@ void Entity_Enemy::update(float newX) {
   }
 
   x = newX + positionInSegmentX;
+
+  if (enemyType == EnemyType::SKULL_1) {
+    currentOscillationPos += oscillationSpeed;
+    y = startY + sin(currentOscillationPos) * 20.0;
+  }
 }
 
 void Entity_Enemy::draw(Arduboy2 &arduboy) {
@@ -50,6 +62,8 @@ void Entity_Enemy::draw(Arduboy2 &arduboy) {
     Sprites::drawSelfMasked(x, y, enemy_troll, 0);
   } else if (enemyType == EnemyType::SPIDER) {
     Sprites::drawSelfMasked(x, y, enemy_spider, 0);
+  } else if (enemyType == EnemyType::SKULL_1) {
+    Sprites::drawSelfMasked(x, y, enemy_skull, 0);
   }
 
 #ifdef DEBUG_DRAW_HITBOXES

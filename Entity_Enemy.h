@@ -30,6 +30,9 @@ public:
 
 private:
     int positionInSegmentX;
+    float startY;
+    float oscillationSpeed;
+    float currentOscillationPos;
 };
 
 #endif // ENTITY_ENEMY_H

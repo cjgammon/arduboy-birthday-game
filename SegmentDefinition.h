@@ -24,6 +24,7 @@ enum EnemyType : uint8_t {
     NONE,
     TROLL,
     SPIDER,
+    SKULL_1,
     // leave this.
     TOTAL
 };
@@ -48,6 +49,15 @@ const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] = {
                 12, // collider x
                 21, // collider y
                 6// collider radius
+        },
+        {
+                // 2 - skull
+                16,  // y
+                8, // sprite width
+                8, // sprite height
+                4, // collider x
+                4, // collider y
+                4// collider radius
         },
 };
 
@@ -84,6 +94,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         {
                 {255, 7, 224},
                 {
+                        {3, 48}, // Enemy
                 },
                 {
                 }
@@ -102,6 +113,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         {
                 {255, 255, 255},
                 {
+                        {3, 48}, // Enemy
                 },
                 {
                 }
@@ -120,6 +132,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         {
                 {255, 7, 224},
                 {
+                        {3, 48}, // Enemy
                 },
                 {
                 }
@@ -138,6 +151,46 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         {
                 {255, 255, 255},
                 {
+                        {3, 48}, // Enemy
+                },
+                {
+                }
+        },
+        // segment 0
+        {
+                {255, 255, 255},
+                {
+                        {2, 48}, // Enemy
+                        {1, 113}, // Enemy
+                },
+                {
+
+                }
+        },
+        // segment 1
+        {
+                {255, 7, 224},
+                {
+                        {3, 48}, // Enemy
+                },
+                {
+                }
+        },
+        // segment 2
+        {
+                {255, 255, 255},
+                {
+                        {2, 12}, // Enemy
+                        {2, 36}, // Enemy
+                },
+                {
+                }
+        },
+        // segment 3
+        {
+                {255, 255, 255},
+                {
+                        {3, 48}, // Enemy
                 },
                 {
                 }
@@ -156,6 +209,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         {
                 {255, 7, 224},
                 {
+                        {3, 48}, // Enemy
                 },
                 {
                 }
@@ -174,42 +228,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         {
                 {255, 255, 255},
                 {
-                },
-                {
-                }
-        },
-        // segment 0
-        {
-                {255, 255, 255},
-                {
-                        {2, 48}, // Enemy
-                        {1, 113}, // Enemy
-                },
-                {
-                }
-        },
-        // segment 1
-        {
-                {255, 7, 224},
-                {
-                },
-                {
-                }
-        },
-        // segment 2
-        {
-                {255, 255, 255},
-                {
-                        {2, 12}, // Enemy
-                        {2, 36}, // Enemy
-                },
-                {
-                }
-        },
-        // segment 3
-        {
-                {255, 255, 255},
-                {
+                        {3, 48}, // Enemy
                 },
                 {
                 }
