@@ -1,16 +1,24 @@
 #ifndef ENTITYMANAGER_GROUND_H
 #define ENTITYMANAGER_GROUND_H
 
-#include "EntityManager.h"
 #include "Entity_Ground.h"
 #include "Vars.h"
 
-class EntityManager_Ground : public EntityManager {
+class EntityManager_Ground {
 public:
     EntityManager_Ground();
-    void update(Arduboy2 &arduboy) override;
+    void init(); // Initialize the entities
+    void update(Arduboy2 &arduboy);
+    void draw(Arduboy2 &arduboy); // Draw all entities
+    void cleanup();
+
+    void addEntity(Entity* entity);
     bool isGroundAt(int x); // Check if there is ground at the given coordinates
     Entity_Enemy* enemyCollision(int playerX, int playerY, int playerRadius);
+
+    static const int MAX_ENTITIES = 10; // Maximum number of entities (adjust as needed)
+    Entity* entities[MAX_ENTITIES]; // Store all entities
+    int numEntities; // Number of currently added entities
 
 private:
     void recycleGroundEntity(int index);
