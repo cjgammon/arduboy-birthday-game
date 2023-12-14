@@ -128,12 +128,10 @@ Entity_Enemy* Entity_Ground::enemyCollision(int playerX, int playerY, int player
         continue;
       }
 
-      int enemyX = enemy->getCollisionX();
-      int enemyY = enemy->getCollisionY();
       int enemyRadius = enemy->getColliderRadius();
 
-      int dx = playerX - enemyX;
-      int dy = playerY - enemyY;
+      int dx = playerX - enemy->getCollisionX();
+      int dy = playerY - enemy->getCollisionY();
       int distanceSquared = dx * dx + dy * dy;
 
       int radiiSumSquared = (playerRadius + enemyRadius) * (playerRadius + enemyRadius);
