@@ -73,7 +73,7 @@ void Character::update(Arduboy2 &arduboy) {
     if (jumpJustPressed)
     {
       currentGravity = 0.0;
-      velocityY = 0.25;
+      velocityY = 0.33;
     }
     else if (jumpJustReleased)
     {
@@ -164,7 +164,7 @@ void Character::setType(CharacterType newType) {
       descendSprite = character_skaterboy_jump;
       fallSprite = character_skaterboy_fall;
       jumpPower = -4.0;
-      gravity = 0.35;
+      gravity = 0.3;
       jumpCount = 2;
       jumpsRemaining = 2;
       extraJumpPower = -4.0;

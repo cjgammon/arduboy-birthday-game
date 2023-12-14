@@ -10,9 +10,9 @@ int lives = 3;
 float speed = 2;
 int groundLevel = 28;
 
-float globalSpeedMultiplier = 0.85;
-float maxSpeed = 1.6;
-float timeToReachMaxSpeedInSeconds = 60.0;
+float globalSpeedMultiplier = 0.95;
+float maxSpeed = 2.2;
+float timeToReachMaxSpeedInSeconds = 80.0;
 float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (timeToReachMaxSpeedInSeconds * 60.0);
 bool autoSpeedupEnabled = true;
 
@@ -22,7 +22,7 @@ Entity_Ground groundPieces[MAX_VISIBLE_GROUND_PIECES];
 void GameState_Play::init() {
 
     // Initialization code
-    globalSpeedMultiplier = 0.85;
+    globalSpeedMultiplier = 0.95;
     cameraX = 0;
     speed = 2;
 
