@@ -3,6 +3,7 @@
 
 // todo :: all this stuff should be properties on the character probably.  but adding it here is a little easier rn
 float gravity = 0.3;
+float currentGravity = 0.3;
 float jumpPower = -5.0;
 float extraJumpPower = -5.0;
 // jump damping - this controls how much your jump speed is reduced when you release the jump button.
@@ -15,6 +16,7 @@ float jumpBufferCountRaw = 0.0;
 // this is like double jumps in awesomenauts (i.e. lonestar) - the ability to jump again while in mid air.
 int jumpCount = 1;
 int jumpsRemaining = 1;
+bool canHover = false;
 
 Character::Character(int initialX, int initialY, CharacterType initialType) {
   x = initialX;
@@ -62,7 +64,20 @@ void Character::update(Arduboy2 &arduboy) {
       jumpBufferCountRaw = 0;
       velocityY = (jumpsRemaining == jumpCount) ? jumpPower : extraJumpPower;
       jumpsRemaining--;
+      currentGravity = gravity;
       setState(CharacterState::JUMP);
+    }
+  }
+  else if (canHover)
+  {
+    if (jumpJustPressed)
+    {
+      currentGravity = 0.0;
+      velocityY = 0.25;
+    }
+    else if (jumpJustReleased)
+    {
+      currentGravity = gravity;
     }
   }
 
@@ -81,7 +96,7 @@ void Character::update(Arduboy2 &arduboy) {
     case CharacterState::JUMP:
     case CharacterState::DESCEND:
       y += velocityY * globalSpeedMultiplier;
-      velocityY += gravity * globalSpeedMultiplier;
+      velocityY += currentGravity * globalSpeedMultiplier;
       if (y >= groundLevel)
       {
         y = groundLevel;
@@ -119,6 +134,7 @@ void Character::setType(CharacterType newType) {
   jumpCount = 1;
   jumpsRemaining = 1;
   radius = 8;
+  canHover = false;
 
   switch (characterType) {
     case CharacterType::JONAS:
@@ -132,9 +148,10 @@ void Character::setType(CharacterType newType) {
       jumpPower = -3.3;
       gravity = 0.2;
       stopJumpDamping = 0.3;
-      jumpCount = 8;
-      jumpsRemaining = 8;
-      extraJumpPower = -1.0;
+      //jumpCount = 8;
+      //jumpsRemaining = 8;
+      //extraJumpPower = -1.0;
+      canHover = true;
       // notes: kinda normal single jump, then you can press the butotn a bunch to sorta hover.
     break;
     case CharacterType::HENRY:
