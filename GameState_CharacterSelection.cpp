@@ -5,7 +5,7 @@
 int numCharacters = 6;
 Character* playerCharacter;
 
-int selectedCharacter = 0;
+uint8_t selectedCharacter = 0;
 
 void GameState_CharacterSelection::init() {
     int x = (screenWidth / 2) - (16 / 2);

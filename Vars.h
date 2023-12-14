@@ -18,7 +18,7 @@ extern uint8_t screenWidth;
 #define GROUND_SIZE 6
 
 
-extern int selectedCharacter;
+extern uint8_t selectedCharacter;
 extern int lives;
 extern int score;
 extern float globalSpeedMultiplier;
