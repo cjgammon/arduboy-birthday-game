@@ -6,28 +6,26 @@ int numCharacters = 6;
 Character* playerCharacter;
 
 int selectedCharacter = 0;
-int currentCharacter = 0;
 
 void GameState_CharacterSelection::init() {
     int x = (screenWidth / 2) - (16 / 2);
     int y = 28;
-    playerCharacter = new Character(x, y, currentCharacter);
+    playerCharacter = new Character(x, y, selectedCharacter);
 }
 
 void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justReleased(A_BUTTON)) {
-      selectedCharacter = currentCharacter;
       stateChangeCallback(STATE_GAME_PLAY);
     }
 
     if (arduboy.justPressed(RIGHT_BUTTON)) {
-      currentCharacter = (currentCharacter + 1) % numCharacters;
+      selectedCharacter = (selectedCharacter + 1) % numCharacters;
       changeCharacter();
     }
 
     if (arduboy.justPressed(LEFT_BUTTON)) {
-      currentCharacter = (currentCharacter - 1 + numCharacters) % numCharacters;
+      selectedCharacter = (selectedCharacter - 1 + numCharacters) % numCharacters;
       changeCharacter();
     }
 
@@ -36,7 +34,7 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
 }
 
 void GameState_CharacterSelection::changeCharacter() {
-  playerCharacter->setType(currentCharacter); 
+  playerCharacter->setType(selectedCharacter);
 }
 
 void drawCenteredText(Arduboy2 &arduboy, char* text, uint8_t y)
