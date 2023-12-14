@@ -33,11 +33,11 @@ const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL] = {
         },// first one is NONE, intentionally left empty.
         {
                 // 0 - troll
-                28, // y
-                32, // sprite width
-                32, // sprite height
-                14, // collider x
-                22, // collider y
+                44, // y
+                19, // sprite width
+                16, // sprite height
+                7, // collider x
+                8, // collider y
                 7// collider radius
         },
         {
