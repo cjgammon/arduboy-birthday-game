@@ -3,6 +3,7 @@
 //
 
 #include "Coin.h"
+#include "sprites.h"
 
 Coin::Coin()
 {
@@ -11,18 +12,27 @@ Coin::Coin()
 
 void Coin::init(int x, int y)
 {
+  this->positionInSegmentX = x;
   this->x = x;
   this->xRaw = x;
   this->y = y;
   this->yRaw = y;
 }
 
-void Coin::update(int x)
+void Coin::update(int newX)
 {
-
+  if (!enabled)
+  {
+    return;
+  }
+  x = newX + positionInSegmentX;
 }
 
 void Coin::draw(Arduboy2 &arduboy)
 {
-
+  if (!enabled)
+  {
+    return;
+  }
+  Sprites::drawSelfMasked(x, y, item_coin, 0);
 }

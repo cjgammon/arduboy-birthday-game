@@ -67,12 +67,12 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
     memcpy_P(&coinDefinition, &segmentDefinition->coinFormations[coinFormationIndex], sizeof(CoinFormationDefinition));
     if (coinDefinition.formationType == 1)
     {
-      coinsArray[0]->init(x, 10);
+      coinsArray[0]->init(coinDefinition.x, 10);
     }
     else if (coinDefinition.formationType == 2)
     {
-      coinsArray[0]->init(x, 10);
-      coinsArray[1]->init(x + 10, 10);
+      coinsArray[0]->init(coinDefinition.x, 10);
+      coinsArray[1]->init(coinDefinition.x + 10, 10);
     }
     else if (coinDefinition.formationType == 3)
     {
@@ -81,7 +81,7 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
       {
         for (int col = 0; col < 2; ++col)
         {
-          coinsArray[index]->init(x + 10 * col, 10 + 10 * row);
+          coinsArray[index]->init(coinDefinition.x + 10 * col, 10 + 10 * row);
           index++;
         }
       }
@@ -90,7 +90,7 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
     {
       for (int col = 0; col < 4; ++col)
       {
-        coinsArray[col]->init(x + 10 * col, 10);
+        coinsArray[col]->init(coinDefinition.x + 10 * col, 10);
       }
     }
   }
