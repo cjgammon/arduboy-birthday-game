@@ -9,12 +9,12 @@ Entity_Ground::Entity_Ground(): Entity() {
       enemies[i] = new Entity_Enemy();
     }
 
-//#ifdef COINS_ENABLED
+#ifdef COINS_ENABLED
     for (int coinIndex = 0; coinIndex < MAX_COINS_PER_SEGMENT; ++coinIndex)
     {
       coinsArray[coinIndex] = new Coin();
     }
-//#endif
+#endif
 }
 
 void Entity_Ground::init(int initialX, int initialY)
@@ -58,7 +58,7 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
   // reset all coins
   for (int coinIndex = 0; coinIndex < MAX_COINS_PER_SEGMENT; ++coinIndex)
   {
-    coins[coinIndex]->enabled = false;
+    coinsArray[coinIndex]->enabled = false;
   }
 
   for (int coinFormationIndex = 0; coinFormationIndex < 1; coinFormationIndex++)
@@ -67,15 +67,12 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
     memcpy_P(&coinDefinition, &segmentDefinition->coinFormations[coinFormationIndex], sizeof(CoinFormationDefinition));
     if (coinDefinition.formationType == 1)
     {
-      coins[0]->setData(enemyDefinitionForCoin, x);
-      coins[0]->setY(10);
+      coinsArray[0]->init(x, 10);
     }
     else if (coinDefinition.formationType == 2)
     {
-      coins[0]->setData(enemyDefinitionForCoin, x);
-      coins[0]->setY(10);
-      coins[1]->setData(enemyDefinitionForCoin, x + 10);
-      coins[1]->setY(10);
+      coinsArray[0]->init(x, 10);
+      coinsArray[1]->init(x + 10, 10);
     }
     else if (coinDefinition.formationType == 3)
     {
@@ -84,8 +81,7 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
       {
         for (int col = 0; col < 2; ++col)
         {
-          coins[index]->setData(enemyDefinitionForCoin, x + 10 * col);
-          coins[index]->setY(10 + 10 * row);
+          coinsArray[index]->init(x + 10 * col, 10 + 10 * row);
           index++;
         }
       }
@@ -94,8 +90,7 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
     {
       for (int col = 0; col < 4; ++col)
       {
-        coins[col]->setData(enemyDefinitionForCoin, x + 10 * col);
-        coins[col]->setY(10);
+        coinsArray[col]->init(x + 10 * col, 10);
       }
     }
   }
@@ -150,7 +145,7 @@ void Entity_Ground::update() {
 
 #ifdef COINS_ENABLED
   for (int i = 0; i < MAX_COINS_PER_SEGMENT; ++i) {
-    Entity_Enemy* coin = coins[i];
+    Coin* coin = coinsArray[i];
     coin->update(x);
   }
 #endif
@@ -192,7 +187,7 @@ Entity_Ground::~Entity_Ground() {
 
 #ifdef COINS_ENABLED
   for (int i = 0; i < MAX_COINS_PER_SEGMENT; ++i) {
-    delete coins[i];
+    delete coinsArray[i];
   }
 #endif
 }

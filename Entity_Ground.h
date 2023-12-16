@@ -2,7 +2,7 @@
 #ifndef ENTITY_GROUND_H
 #define ENTITY_GROUND_H
 
-//#define COINS_ENABLED
+#define COINS_ENABLED
 
 #include "Vars.h"
 #include "Entity.h"

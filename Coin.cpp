@@ -17,6 +17,11 @@ void Coin::init(int x, int y)
   this->yRaw = y;
 }
 
+void Coin::update(int x)
+{
+
+}
+
 void Coin::draw(Arduboy2 &arduboy)
 {
 

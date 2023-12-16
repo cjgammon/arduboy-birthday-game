@@ -11,12 +11,15 @@ class Coin {
 public:
     Coin();
     void init(int x, int y);
+    void update(int x);
     void draw(Arduboy2 &arduboy);
     int x;
     int y;
     float xRaw;
     float yRaw;
     int positionInSegmentX;
+
+    bool enabled;
 };
 
 
