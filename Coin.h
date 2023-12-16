@@ -10,7 +10,8 @@
 class Coin {
 public:
     Coin();
-    void init(int x, int y);
+    void init(int segmentX, int localPositionX, int localPositionY);
+    //void init(int x, int y);
     void update(int x);
     void draw(Arduboy2 &arduboy);
     int x;

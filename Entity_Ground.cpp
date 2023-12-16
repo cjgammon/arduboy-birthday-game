@@ -63,34 +63,34 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
 
   for (int coinFormationIndex = 0; coinFormationIndex < 1; coinFormationIndex++)
   {
-    CoinFormationDefinition coinDefinition;
-    memcpy_P(&coinDefinition, &segmentDefinition->coinFormations[coinFormationIndex], sizeof(CoinFormationDefinition));
-    if (coinDefinition.formationType == 1)
+    CoinFormationDefinition coinFormationDefinition;
+    memcpy_P(&coinFormationDefinition, &segmentDefinition->coinFormations[coinFormationIndex], sizeof(CoinFormationDefinition));
+    if (coinFormationDefinition.formationType == 1)
     {
-      coinsArray[0]->init(coinDefinition.x, 10);
+      coinsArray[0]->init(x, coinFormationDefinition.x, 10);
     }
-    else if (coinDefinition.formationType == 2)
+    else if (coinFormationDefinition.formationType == 2)
     {
-      coinsArray[0]->init(coinDefinition.x, 10);
-      coinsArray[1]->init(coinDefinition.x + 10, 10);
+      coinsArray[0]->init(x, coinFormationDefinition.x, 10);
+      coinsArray[1]->init(x, coinFormationDefinition.x + 10, 10);
     }
-    else if (coinDefinition.formationType == 3)
+    else if (coinFormationDefinition.formationType == 3)
     {
       int index = 0;
       for (int row = 0; row < 2; ++row)
       {
         for (int col = 0; col < 2; ++col)
         {
-          coinsArray[index]->init(coinDefinition.x + 10 * col, 10 + 10 * row);
+          coinsArray[index]->init(x, coinFormationDefinition.x + 10 * col, 10 + 10 * row);
           index++;
         }
       }
     }
-    else if (coinDefinition.formationType == 4)
+    else if (coinFormationDefinition.formationType == 4)
     {
       for (int col = 0; col < 4; ++col)
       {
-        coinsArray[col]->init(coinDefinition.x + 10 * col, 10);
+        coinsArray[col]->init(x, coinFormationDefinition.x + 10 * col, 10);
       }
     }
   }
@@ -171,13 +171,20 @@ void Entity_Ground::draw(Arduboy2 &arduboy) {
       }
     }
     //arduboy.drawRect(x, y, width, 64, WHITE); // Adjust color and size as needed
-    drawEnemies(arduboy);
-}
 
-void Entity_Ground::drawEnemies(Arduboy2 &arduboy) {
-    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
+    // draw enemies
+    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i)
+    {
       enemies[i]->draw(arduboy);
     }
+
+#ifdef COINS_ENABLED
+    for (int i = 0; i < MAX_COINS_PER_SEGMENT; ++i)
+    {
+      coinsArray[i]->draw(arduboy);
+    }
+#endif
+
 }
 
 Entity_Ground::~Entity_Ground() {

@@ -10,13 +10,14 @@ Coin::Coin()
 
 }
 
-void Coin::init(int x, int y)
+void Coin::init(int segmentX, int x, int y)
 {
   this->positionInSegmentX = x;
-  this->x = x;
+  this->x = x + segmentX;
   this->xRaw = x;
   this->y = y;
   this->yRaw = y;
+  this->enabled = true;
 }
 
 void Coin::update(int newX)

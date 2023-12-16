@@ -22,7 +22,6 @@ public:
     void update() override;
     void draw(Arduboy2 &arduboy) override;
 
-    void drawEnemies(Arduboy2 &arduboy);
     bool isGroundAt(int posX);
     Entity_Enemy* enemyCollision(int playerX, int playerY, int playerRadius);
 
