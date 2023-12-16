@@ -9,6 +9,7 @@
 #include <Arduboy2.h>
 #include "sprites.h"
 #include "Entity_Enemy.h"
+#include "Coin.h"
 
 class Entity_Ground : public Entity {
 public:
@@ -28,7 +29,7 @@ public:
 private:
     uint8_t groundTiles[GROUND_DEFINITION_SIZE];
     Entity_Enemy* enemies[MAX_ENEMIES_PER_SEGMENT];
-    Entity_Enemy* coins[MAX_COINS_PER_SEGMENT];
+    Coin* coinsArray[MAX_COINS_PER_SEGMENT];
 };
 
 #endif // ENTITY_GROUND_H
