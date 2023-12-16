@@ -125,6 +125,15 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
+    if (playerCharacter->isAlive())
+    {
+      Coin* collidingCoin = groundManager.coinCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius());
+      if (collidingCoin != nullptr)
+      {
+        collidingCoin->enabled = false;
+      }
+    }
+
     playerCharacter->update(arduboy);
 }
 

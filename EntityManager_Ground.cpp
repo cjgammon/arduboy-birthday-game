@@ -114,5 +114,20 @@ Entity_Enemy* EntityManager_Ground::enemyCollision(int playerX, int playerY, int
   return nullptr;
 }
 
+Coin* EntityManager_Ground::coinCollision(int playerX, int playerY, int playerRadius)
+{
+  for (int i = 0; i < numEntities; i++) {
+    if (entities[i] != nullptr) {
+      Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[i]);
+      int entityX = groundEntity->getX();
+      int entityWidth = groundEntity->getWidth();
+      if (playerX >= entityX && playerX <= entityX + entityWidth) {
+        return groundEntity->coinCollision(playerX, playerY, playerRadius);
+      }
+    }
+  }
+  return nullptr;
+}
+
 
 // Implement other methods specific to ground entities if needed

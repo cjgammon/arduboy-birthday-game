@@ -137,6 +137,30 @@ Entity_Enemy* Entity_Ground::enemyCollision(int playerX, int playerY, int player
     return nullptr;
 }
 
+Coin* Entity_Ground::coinCollision(int playerX, int playerY, int playerRadius)
+{
+  for (int i = 0; i < MAX_COINS_PER_SEGMENT; ++i) {
+    Coin* coin = coinsArray[i];
+
+    if (!coin->enabled)
+    {
+      continue;
+    }
+
+    int enemyRadius = 4;
+
+    int dx = playerX - (coin->x + 4);
+    int dy = playerY - (coin->y + 4);
+    int distanceSquared = dx * dx + dy * dy;
+
+    int radiiSumSquared = (playerRadius + enemyRadius) * (playerRadius + enemyRadius);
+    if (distanceSquared < radiiSumSquared) {
+      return coin; // Collision detected
+    }
+  }
+  return nullptr;
+}
+
 void Entity_Ground::update() {
   for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
     Entity_Enemy* enemy = enemies[i];

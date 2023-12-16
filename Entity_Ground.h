@@ -24,6 +24,7 @@ public:
 
     bool isGroundAt(int posX);
     Entity_Enemy* enemyCollision(int playerX, int playerY, int playerRadius);
+    Coin* coinCollision(int playerX, int playerY, int playerRadius);
 
 private:
     uint8_t groundTiles[GROUND_DEFINITION_SIZE];

@@ -79,7 +79,7 @@ const SegmentDefinition flatGround PROGMEM = {
 };
 
 // change this if you add/remove groundDefinitions.
-#define GROUND_DEFINITION_COUNT 3
+#define GROUND_DEFINITION_COUNT 4
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
         // segment 0
         {
@@ -109,6 +109,16 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
                 },
                 {
                         {3, 48}
+                }
+        },
+        // segment 0
+        {
+                {255, 255, 255},
+                {
+                        //{1, 113}, // Enemy
+                },
+                {
+                        {4, 48}
                 }
         },
 
