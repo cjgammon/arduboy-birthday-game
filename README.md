@@ -4,7 +4,20 @@
 
 ## directions
 
-runs on arduboy like hardware ex) Arduino Leonardo
+Runs on arduboy like hardware ex) Arduino Leonardo, Pro Micro
+
+Install the `arduino-cli`
+
+```
+brew update
+brew install arduino-cli
+```
+
+To export compiled binary:
+
+```
+sh build.sh
+```
 
 ### resources
 
