@@ -128,15 +128,10 @@ Entity_Enemy* Entity_Ground::enemyCollision(int playerX, int playerY, int player
         continue;
       }
 
-      int enemyX = enemy->getCollisionX();
-      int enemyY = enemy->getCollisionY();
       int enemyRadius = enemy->getColliderRadius();
 
-      int px = playerX - x;
-      int py = playerY;
-
-      int dx = playerX - enemyX;
-      int dy = playerY - enemyY;
+      int dx = playerX - enemy->getCollisionX();
+      int dy = playerY - enemy->getCollisionY();
       int distanceSquared = dx * dx + dy * dy;
 
       int radiiSumSquared = (playerRadius + enemyRadius) * (playerRadius + enemyRadius);
@@ -186,31 +181,7 @@ void Entity_Ground::draw(Arduboy2 &arduboy) {
 
 void Entity_Ground::drawEnemies(Arduboy2 &arduboy) {
     for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
-      Entity_Enemy* enemy = enemies[i];
-      /*
-
-      int enemyX = enemy->getAbsoluteX() + enemy->getWidth() / 2;
-      int enemyY = enemy->getY() + enemy->getHeight() / 2;
-      int enemyRadius = enemy->getWidth() / 2;
-
-      int px = _playerX - x;
-      int py = _playerY;
-      int playerRadius = PLAYER_HALF_W; // Radius of player
-
-      int dx = px - enemyX;
-      int dy = py - enemyY;
-      int distanceSquared = dx * dx + dy * dy;
-
-      int radiiSumSquared = (playerRadius + enemyRadius) * (playerRadius + enemyRadius);
-
-      arduboy.drawCircle(enemyX, enemyY, enemyRadius);
-
-      arduboy.setCursor(enemy->getAbsoluteX(), enemy->getY());
-      arduboy.print(distanceSquared);
-      arduboy.print(",");
-      arduboy.print(radiiSumSquared);
-      */
-      enemy->draw(arduboy);
+      enemies[i]->draw(arduboy);
     }
 }
 

@@ -15,7 +15,7 @@ public:
     void cleanup() override;
 
 private:
-    void changeCharacter();
+    void changeCharacter(uint8_t newIndex);
 };
 
 #endif

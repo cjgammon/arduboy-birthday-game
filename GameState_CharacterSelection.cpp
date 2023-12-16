@@ -5,52 +5,40 @@
 int numCharacters = 6;
 Character* playerCharacter;
 
-int selectedCharacter = 0;
-int currentCharacter = 0;
+uint8_t selectedCharacter = 0;
 
 void GameState_CharacterSelection::init() {
-    int x = (SCREEN_WIDTH / 2) - (16 / 2);
+    int x = (screenWidth / 2) - (16 / 2);
     int y = 28;
-    playerCharacter = new Character(x, y, currentCharacter);
+    playerCharacter = new Character(x, y, selectedCharacter);
 }
 
 void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justReleased(A_BUTTON)) {
-      selectedCharacter = currentCharacter;
       stateChangeCallback(STATE_GAME_PLAY);
     }
 
     if (arduboy.justPressed(RIGHT_BUTTON)) {
-      if (currentCharacter < numCharacters - 1) {
-        currentCharacter++;
-      } else {
-        currentCharacter = 0;
-      }
-      changeCharacter();
+      changeCharacter((selectedCharacter + 1) % numCharacters);
     }
 
     if (arduboy.justPressed(LEFT_BUTTON)) {
-      if (currentCharacter > 0) {
-        currentCharacter--;
-      } else {
-        currentCharacter = numCharacters - 1;
-      }
-      changeCharacter();
+      changeCharacter((selectedCharacter - 1 + numCharacters) % numCharacters);
     }
 
     // don't update the character here unless you want them to handle input and process physics.
     //playerCharacter->update(arduboy);
 }
 
-void GameState_CharacterSelection::changeCharacter() {
-  playerCharacter->setType(currentCharacter); 
+void GameState_CharacterSelection::changeCharacter(uint8_t newIndex) {
+  selectedCharacter = newIndex;
+  playerCharacter->setType(selectedCharacter);
 }
 
 void drawCenteredText(Arduboy2 &arduboy, char* text, uint8_t y)
 {
-  int textWidthInPixels = strlen(text) * CHAR_WIDTH;
-  int textX = HALF_SCREEN_WIDTH - (textWidthInPixels / 2);
+  int textX = screenWidth/2 - (getTextWidthInPixels(text) / 2);
   arduboy.setCursor(textX, y);
   arduboy.print(text);
 }

@@ -1,6 +1,5 @@
 #include <Arduboy2.h>
 #include <ArduboyTones.h>
-#include "GameStateManager.h"
 #include "GameState_Titlescreen.h"
 #include "GameState_CharacterSelection.h"
 #include "GameState_Play.h"
@@ -9,16 +8,22 @@
 Arduboy2 arduboy;
 ArduboyTones sound(arduboy.audio.enabled);
 
-GameStateManager stateManager;
-
 //states
-GameState_Titlescreen startMenuState;
-GameState_CharacterSelection characterSelectionState;
-GameState_Play gamePlayState;
+GameState *currentState;
+GameState_Titlescreen* startMenuState = new GameState_Titlescreen();
+GameState_CharacterSelection* characterSelectionState = new GameState_CharacterSelection();
+GameState_Play* gamePlayState = new GameState_Play();
 
 #ifdef CHEAT_MODE_ENABLED
 int cheatMode = CheatMode::Disabled;
 #endif
+
+uint8_t screenWidth = 128;
+
+uint8_t getTextWidthInPixels(char* text)
+{
+  return strlen(text) * CHAR_WIDTH;
+}
 
 void setup() {
   
@@ -27,11 +32,12 @@ void setup() {
   arduboy.boot();
   arduboy.setFrameRate(60);
 
-  startMenuState.setStateChangeCallback(changeGameState);
-  characterSelectionState.setStateChangeCallback(changeGameState);
-  gamePlayState.setStateChangeCallback(changeGameState);
+  startMenuState->setStateChangeCallback(changeGameState);
+  characterSelectionState->setStateChangeCallback(changeGameState);
+  gamePlayState->setStateChangeCallback(changeGameState);
 
-  stateManager.setState(&startMenuState);
+  currentState = startMenuState;
+  currentState->init();
 }
 
 void loop() {
@@ -49,8 +55,8 @@ void loop() {
   }
 #endif
 
-  stateManager.update(arduboy);
-  stateManager.draw(arduboy);
+  currentState->update(arduboy);
+  currentState->draw(arduboy);
 
 #ifdef CHEAT_MODE_ENABLED
   // draw cheat mode.
@@ -73,17 +79,19 @@ void loop() {
 }
 
 void changeGameState(GameStateID newState) {
-  stateManager.getCurrentState()->cleanup();
+  currentState->cleanup();
 
   switch (newState) {
     case STATE_START_MENU:
-      stateManager.setState(&startMenuState);
+      currentState = startMenuState;
       break;
     case STATE_CHARACTER_SELECTION:
-      stateManager.setState(&characterSelectionState);
+      currentState = characterSelectionState;
       break;
     case STATE_GAME_PLAY:
-      stateManager.setState(&gamePlayState);
+      currentState = gamePlayState;
       break;
   }
+
+  currentState->init();
 }
