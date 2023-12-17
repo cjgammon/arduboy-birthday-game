@@ -55,13 +55,15 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
   }
 
 #ifdef COINS_ENABLED
-  // reset all coins
+
+  // start by turning all the coins off
   for (int coinIndex = 0; coinIndex < MAX_COINS_PER_SEGMENT; ++coinIndex)
   {
     coinsArray[coinIndex]->enabled = false;
   }
 
-  for (int coinFormationIndex = 0; coinFormationIndex < 1; coinFormationIndex++)
+  // now loop over all our coin formations in data and build them
+  for (int coinFormationIndex = 0; coinFormationIndex < MAX_COIN_FORMATIONS_PER_SEGMENT; coinFormationIndex++)
   {
     CoinFormationDefinition coinFormationDefinition;
     memcpy_P(&coinFormationDefinition, &segmentDefinition->coinFormations[coinFormationIndex], sizeof(CoinFormationDefinition));

@@ -4,6 +4,7 @@
 #define GROUND_DEFINITION_SIZE 24
 #define MAX_ENEMIES_PER_SEGMENT 3  // Adjust as needed
 #define MAX_COINS_PER_SEGMENT 5   // Adjust as needed
+#define MAX_COIN_FORMATIONS_PER_SEGMENT 5
 
 struct EnemyDefinition {
     uint8_t enemyType;
@@ -71,58 +72,76 @@ struct CoinFormationDefinition {
 struct SegmentDefinition {
     uint8_t groundArray[GROUND_DEFINITION_SIZE / 8];
     EnemyDefinition enemies[MAX_ENEMIES_PER_SEGMENT];  // Define MAX_ENEMIES_PER_SEGMENT as needed
-    CoinFormationDefinition coinFormations[MAX_COINS_PER_SEGMENT];       // Define MAX_COINS_PER_SEGMENT as needed
+    CoinFormationDefinition coinFormations[MAX_COIN_FORMATIONS_PER_SEGMENT];       // Define MAX_COINS_PER_SEGMENT as needed
 };
 
 const SegmentDefinition flatGround PROGMEM = {
         {255, 255, 255}, {}, {}
 };
 
-// change this if you add/remove groundDefinitions.
-#define GROUND_DEFINITION_COUNT 4
+#define GROUND_DEFINITION_COUNT 6
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
-        // segment 0
-        {
-                {255, 255, 255},
-                {
-                        //{2, 48}, // Enemy
-                        //{1, 113}, // Enemy
-                },
-                {
-                        {1, 48}
-                }
-        },
-        // segment 0
-        {
-                {255, 255, 255},
-                {
-                },
-                {
-                        {2, 48}
-                }
-        },
-        // segment 0
-        {
-                {255, 255, 255},
-                {
-                        //{1, 113}, // Enemy
-                },
-                {
-                        {3, 48}
-                }
-        },
-        // segment 0
-        {
-                {255, 255, 255},
-                {
-                        //{1, 113}, // Enemy
-                },
-                {
-                        {4, 48}
-                }
-        },
-
+    // segment 0
+  {
+    {7, 255, 255},
+    {
+      {1, 104}, // Enemy
+    },
+    {
+      {3, 21}, // Item
+    }
+  },
+    // segment 1
+  {
+    {255, 255, 255},
+    {
+    },
+    {
+      {4, 23}, // Item
+      {4, 93}, // Item
+    }
+  },
+    // segment 2
+  {
+    {255, 127, 240},
+    {
+      {2, 6}, // Enemy
+    },
+    {
+      {3, 93}, // Item
+    }
+  },
+    // segment 3
+  {
+    {63, 254, 248},
+    {
+    },
+    {
+      {2, 38}, // Item
+      {2, 98}, // Item
+    }
+  },
+    // segment 4
+  {
+    {255, 255, 255},
+    {
+      {1, 66}, // Enemy
+    },
+    {
+      {3, 70}, // Item
+    }
+  },
+    // segment 5
+  {
+    {255, 255, 255},
+    {
+    },
+    {
+      {4, 56}, // Item
+    }
+  },
 };
+
 
 #endif // SEGMENTDEFINITION_H
 
