@@ -56,7 +56,7 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     //highScore int to char* 
     int highScore = playerCharacter->getHighScore();
     char highScoreString[12]; // Buffer to hold the string representation of the integer
-    sprintf(highScoreString, "HIGH: %d", highScore); // Convert the integer to a string
+    sprintf(highScoreString, "BEST: %d", highScore); // Convert the integer to a string
 
 
     drawCenteredText(arduboy, playerCharacter->getName(), 0);
