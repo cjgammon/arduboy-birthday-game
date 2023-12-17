@@ -66,7 +66,20 @@ void Character::update(Arduboy2 &arduboy) {
         )
     {
 #ifdef SOUND_ENABLED
-      sound.tone(jumpsRemaining == jumpCount ? NOTE_A2 : NOTE_D3, 100);// jump
+      int jumpsUsed = jumpCount - jumpsRemaining;
+      if (jumpsUsed == 0)
+      {
+        sound.tone(NOTE_A2, 100);// single jump
+      }
+      else if (jumpsUsed == 1)
+      {
+        sound.tone(NOTE_D3, 100);// double jump
+      }
+      else if (jumpsUsed == 2)
+      {
+        sound.tone(NOTE_F3, 100);// triple jump
+      }
+
 #endif
 
       jumpBufferCountRaw = 0;
