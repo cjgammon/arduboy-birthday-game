@@ -4,6 +4,7 @@
 #include "Vars.h"
 #include "sprites.h"
 #include <Arduboy2.h>
+#include "Sound.h"
 
 class GameUI {
 public:
@@ -19,7 +20,12 @@ public:
 
     void setName(char *newName) {name = newName;};
 
-    void incScore() {score += 1;};
+    void incScore() {
+      score += 1;
+#ifdef SOUND_ENABLED
+      sound.tone(score %2 == 0 ? NOTE_B7 : NOTE_AS7, 40);// coin collect
+#endif
+    };
     void setScore(int newScore) {score = newScore;};
 
 #ifdef LIVES_ENABLED
