@@ -8,6 +8,13 @@ Entity_Ground::Entity_Ground(): Entity() {
     {
       enemies[i] = new Entity_Enemy();
     }
+
+#ifdef COINS_ENABLED
+    for (int coinIndex = 0; coinIndex < MAX_COINS_PER_SEGMENT; ++coinIndex)
+    {
+      coinsArray[coinIndex] = new Coin();
+    }
+#endif
 }
 
 void Entity_Ground::init(int initialX, int initialY)
@@ -46,6 +53,48 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
       enemies[i]->enabled = false;
     }
   }
+
+#ifdef COINS_ENABLED
+  // reset all coins
+  for (int coinIndex = 0; coinIndex < MAX_COINS_PER_SEGMENT; ++coinIndex)
+  {
+    coinsArray[coinIndex]->enabled = false;
+  }
+
+  for (int coinFormationIndex = 0; coinFormationIndex < 1; coinFormationIndex++)
+  {
+    CoinFormationDefinition coinFormationDefinition;
+    memcpy_P(&coinFormationDefinition, &segmentDefinition->coinFormations[coinFormationIndex], sizeof(CoinFormationDefinition));
+    if (coinFormationDefinition.formationType == 1)
+    {
+      coinsArray[0]->init(x, coinFormationDefinition.x, 10);
+    }
+    else if (coinFormationDefinition.formationType == 2)
+    {
+      coinsArray[0]->init(x, coinFormationDefinition.x, 10);
+      coinsArray[1]->init(x, coinFormationDefinition.x + 10, 10);
+    }
+    else if (coinFormationDefinition.formationType == 3)
+    {
+      int index = 0;
+      for (int row = 0; row < 2; ++row)
+      {
+        for (int col = 0; col < 2; ++col)
+        {
+          coinsArray[index]->init(x, coinFormationDefinition.x + 10 * col, 10 + 10 * row);
+          index++;
+        }
+      }
+    }
+    else if (coinFormationDefinition.formationType == 4)
+    {
+      for (int col = 0; col < 4; ++col)
+      {
+        coinsArray[col]->init(x, coinFormationDefinition.x + 10 * col, 10);
+      }
+    }
+  }
+#endif
 }
 
 bool Entity_Ground::isGroundAt(int posX) {
@@ -64,7 +113,7 @@ bool Entity_Ground::isGroundAt(int posX) {
     return groundTiles[index] == 1;
 }
 
-bool Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius)
+Entity_Enemy* Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius)
 {
     for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
       Entity_Enemy* enemy = enemies[i];
@@ -74,30 +123,56 @@ bool Entity_Ground::enemyCollision(int playerX, int playerY, int playerRadius)
         continue;
       }
 
-      int enemyX = enemy->getCollisionX();
-      int enemyY = enemy->getCollisionY();
       int enemyRadius = enemy->getColliderRadius();
 
-      int px = playerX - x;
-      int py = playerY;
-
-      int dx = playerX - enemyX;
-      int dy = playerY - enemyY;
+      int dx = playerX - enemy->getCollisionX();
+      int dy = playerY - enemy->getCollisionY();
       int distanceSquared = dx * dx + dy * dy;
 
       int radiiSumSquared = (playerRadius + enemyRadius) * (playerRadius + enemyRadius);
       if (distanceSquared < radiiSumSquared) {
-        return true; // Collision detected
+        return enemy; // Collision detected
       }
     }
-    return false;
+    return nullptr;
+}
+
+Coin* Entity_Ground::coinCollision(int playerX, int playerY, int playerRadius)
+{
+  for (int i = 0; i < MAX_COINS_PER_SEGMENT; ++i) {
+    Coin* coin = coinsArray[i];
+
+    if (!coin->enabled)
+    {
+      continue;
+    }
+
+    int enemyRadius = 4;
+
+    int dx = playerX - (coin->x + 4);
+    int dy = playerY - (coin->y + 4);
+    int distanceSquared = dx * dx + dy * dy;
+
+    int radiiSumSquared = (playerRadius + enemyRadius) * (playerRadius + enemyRadius);
+    if (distanceSquared < radiiSumSquared) {
+      return coin; // Collision detected
+    }
+  }
+  return nullptr;
 }
 
 void Entity_Ground::update() {
-    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
-      Entity_Enemy* enemy = enemies[i];
-      enemy->update(x);
-    }
+  for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
+    Entity_Enemy* enemy = enemies[i];
+    enemy->update(x);
+  }
+
+#ifdef COINS_ENABLED
+  for (int i = 0; i < MAX_COINS_PER_SEGMENT; ++i) {
+    Coin* coin = coinsArray[i];
+    coin->update(x);
+  }
+#endif
 }
 
 void Entity_Ground::draw(Arduboy2 &arduboy) {
@@ -120,41 +195,30 @@ void Entity_Ground::draw(Arduboy2 &arduboy) {
       }
     }
     //arduboy.drawRect(x, y, width, 64, WHITE); // Adjust color and size as needed
-    drawEnemies(arduboy);
-}
 
-void Entity_Ground::drawEnemies(Arduboy2 &arduboy) {
-    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
-      Entity_Enemy* enemy = enemies[i];
-      /*
-
-      int enemyX = enemy->getAbsoluteX() + enemy->getWidth() / 2;
-      int enemyY = enemy->getY() + enemy->getHeight() / 2;
-      int enemyRadius = enemy->getWidth() / 2;
-
-      int px = _playerX - x;
-      int py = _playerY;
-      int playerRadius = PLAYER_HALF_W; // Radius of player
-
-      int dx = px - enemyX;
-      int dy = py - enemyY;
-      int distanceSquared = dx * dx + dy * dy;
-
-      int radiiSumSquared = (playerRadius + enemyRadius) * (playerRadius + enemyRadius);
-
-      arduboy.drawCircle(enemyX, enemyY, enemyRadius);
-
-      arduboy.setCursor(enemy->getAbsoluteX(), enemy->getY());
-      arduboy.print(distanceSquared);
-      arduboy.print(",");
-      arduboy.print(radiiSumSquared);
-      */
-      enemy->draw(arduboy);
+    // draw enemies
+    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i)
+    {
+      enemies[i]->draw(arduboy);
     }
+
+#ifdef COINS_ENABLED
+    for (int i = 0; i < MAX_COINS_PER_SEGMENT; ++i)
+    {
+      coinsArray[i]->draw(arduboy);
+    }
+#endif
+
 }
 
 Entity_Ground::~Entity_Ground() {
-    for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
-        delete enemies[i];
-    }
+  for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i) {
+    delete enemies[i];
+  }
+
+#ifdef COINS_ENABLED
+  for (int i = 0; i < MAX_COINS_PER_SEGMENT; ++i) {
+    delete coinsArray[i];
+  }
+#endif
 }

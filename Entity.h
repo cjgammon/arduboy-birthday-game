@@ -5,7 +5,7 @@
 
 enum EntityType : uint8_t {
     GROUND,
-    COIN,
+    COIN_ENTITY,
     ENEMY,
 };
 
@@ -48,10 +48,6 @@ protected:
 };
 
 inline Entity::Entity() {};
-inline Entity::Entity(int initialX, int initialY) : x(initialX), y(initialY) {
-  xRaw = x;
-  yRaw = y;
-}
 inline Entity::~Entity() {}
 inline void Entity::move(float dx, float dy) {
   xRaw += dx;

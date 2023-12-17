@@ -53,7 +53,10 @@ public:
 
     const char* getName() const { return name; } // Getter for the character's name
     const char* getDescription() const { return description; }
+
+#ifdef LIVES_ENABLED
     int getLives() const { return lives; }
+#endif
 
     bool isJumping() { return state == CharacterState::JUMP || state == CharacterState::DESCEND; }
     float velocityY = 0;
@@ -91,8 +94,11 @@ protected:
     float x; // X coordinate
     float y; // Y coordinate
     float radius;
-    
+
+#ifdef LIVES_ENABLED
     int lives;
+#endif
+
 public:
     const char* name; // Character's name
     const char* description;

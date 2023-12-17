@@ -1,8 +1,16 @@
 #include "EntityManager_Ground.h"
 
-EntityManager_Ground::EntityManager_Ground() : EntityManager() {
-    // Additional initialization for ground entities, if needed
+EntityManager_Ground::EntityManager_Ground() {
+  init();
 }
+
+void EntityManager_Ground::init() {
+  for (int i = 0; i < MAX_ENTITIES; i++) {
+    entities[i] = nullptr;
+  }
+  numEntities = 0;
+}
+
 
 void EntityManager_Ground::update(Arduboy2 &arduboy) {
     // Override update method to specifically handle ground entities
@@ -15,6 +23,38 @@ void EntityManager_Ground::update(Arduboy2 &arduboy) {
             entities[i]->update();
         }
     }
+}
+
+void EntityManager_Ground::draw(Arduboy2 &arduboy) {
+  for (int i = 0; i < numEntities; i++) {
+    if (entities[i] != nullptr) {
+      entities[i]->draw(arduboy);
+    }
+  }
+}
+
+void EntityManager_Ground::cleanup() {
+  // Iterate through the array of entity pointers
+  for (int i = 0; i < numEntities; i++) {
+    // Check if the pointer is not null
+    if (entities[i] != nullptr) {
+      // Delete the entity object
+      //delete entities[i];// don't delete, these are managed elsewhere!
+
+      // Set the pointer to null to avoid dangling references
+      entities[i] = nullptr;
+    }
+  }
+
+  // Reset the number of entities to 0
+  numEntities = 0;
+}
+
+void EntityManager_Ground::addEntity(Entity* entity) {
+  if (numEntities < MAX_ENTITIES) {
+    entities[numEntities] = entity;
+    numEntities++;
+  }
 }
 
 void EntityManager_Ground::recycleGroundEntity(int index) {
@@ -60,7 +100,7 @@ bool EntityManager_Ground::isGroundAt(int x) {
     return false;
 }
  
-bool EntityManager_Ground::enemyCollision(int playerX, int playerY, int playerRadius) {
+Entity_Enemy* EntityManager_Ground::enemyCollision(int playerX, int playerY, int playerRadius) {
   for (int i = 0; i < numEntities; i++) {
     if (entities[i] != nullptr) {
       Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[i]);
@@ -71,7 +111,22 @@ bool EntityManager_Ground::enemyCollision(int playerX, int playerY, int playerRa
       }
     }
   }
-  return false;
+  return nullptr;
+}
+
+Coin* EntityManager_Ground::coinCollision(int playerX, int playerY, int playerRadius)
+{
+  for (int i = 0; i < numEntities; i++) {
+    if (entities[i] != nullptr) {
+      Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[i]);
+      int entityX = groundEntity->getX();
+      int entityWidth = groundEntity->getWidth();
+      if (playerX >= entityX && playerX <= entityX + entityWidth) {
+        return groundEntity->coinCollision(playerX, playerY, playerRadius);
+      }
+    }
+  }
+  return nullptr;
 }
 
 

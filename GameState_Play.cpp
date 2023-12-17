@@ -6,7 +6,9 @@
 float cameraX = 0;
 float cameraY = 0;
 
+#ifdef LIVES_ENABLED
 int lives = 3;
+#endif
 float speed = 2;
 int groundLevel = 28;
 
@@ -30,15 +32,20 @@ void GameState_Play::init() {
     playerCharacter = new Character(0, 28, playerType);
 
     char* name = playerCharacter->getName();
-    int maxLives = playerCharacter->getLives();
+
 
     playerCharacter->setX(0);
     playerCharacter->setY(groundLevel);
     playerCharacter->setGround(groundLevel);
     playerCharacter->setState(CharacterState::WALK);
-    lives = maxLives;
 
+#ifdef LIVES_ENABLED
+    int maxLives = playerCharacter->getLives();
+    lives = maxLives;
     gameUI.init(name, maxLives, maxLives);
+#else
+    gameUI.init(name);
+#endif
 
     groundManager.init();
 
@@ -105,12 +112,26 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 #ifdef CHEAT_MODE_ENABLED
             && (cheatMode != CheatMode::GodMode && cheatMode != CheatMode::NoCollisions)
 #endif
-            && groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius()))
+      )
     {
-      playerCharacter->velocityY = -3.6;
-      playerCharacter->setState(CharacterState::FALL);
-      speed = 0;
-      globalSpeedMultiplier = 0.8;
+      Entity_Enemy* collidingEnemy = groundManager.enemyCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius());
+      if (collidingEnemy != nullptr)
+      {
+        // todo :: enemy type switch?
+        playerCharacter->velocityY = -3.6;
+        playerCharacter->setState(CharacterState::FALL);
+        speed = 0;
+        globalSpeedMultiplier = 0.8;
+      }
+    }
+
+    if (playerCharacter->isAlive())
+    {
+      Coin* collidingCoin = groundManager.coinCollision(playerCharacter->getCenterX(), playerCharacter->getCenterY(), playerCharacter->getRadius());
+      if (collidingCoin != nullptr)
+      {
+        collidingCoin->enabled = false;
+      }
     }
 
     playerCharacter->update(arduboy);

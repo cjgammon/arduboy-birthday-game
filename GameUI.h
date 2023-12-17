@@ -9,12 +9,20 @@ class GameUI {
 public:
     GameUI(); // Constructor
 
-    void init(char *initialName, int initialLives, int initialMaxLives); // Initialization method
+    void init(char *initialName
+#ifdef LIVES_ENABLED
+              , int initialLives, int initialMaxLives
+#endif
+    );
+
     void draw(Arduboy2 &arduboy); // Drawing method
 
     void setName(char *newName) {name = newName;};
+
+#ifdef LIVES_ENABLED
     void setLives(int newLives) {lives = newLives;};
     void setMaxLives(int newMaxLives) {maxLives = newMaxLives;};
+#endif
 
 private:
     char *name;
