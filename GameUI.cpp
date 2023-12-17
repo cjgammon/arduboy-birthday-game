@@ -20,7 +20,7 @@ void GameUI::init(char *initialName
 }
 
 void GameUI::draw(Arduboy2 &arduboy) {
-    drawName(arduboy);
+    //drawName(arduboy);
 
 #ifdef LIVES_ENABLED
     //drawLives(arduboy);
@@ -39,7 +39,7 @@ void GameUI::drawScore(Arduboy2 &arduboy) {
     char scoreStr[6]; // 5 digits + 1 for the null terminator
     sprintf(scoreStr, "%05d", score); // Format the score as a 5-digit number, padding with zeros
 
-    arduboy.setCursor(0, 0);
+    arduboy.setCursor(98, 0);
     arduboy.print(scoreStr);
 }
 
