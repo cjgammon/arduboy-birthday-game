@@ -1,10 +1,15 @@
 #include "EntityManager_Ground.h"
 
+
+const int fixedSeedValue = 122; // Example fixed seed value
+
 EntityManager_Ground::EntityManager_Ground() {
   init();
 }
 
 void EntityManager_Ground::init() {
+  randomSeed(fixedSeedValue); // Seed the random number generator with a fixed value
+                              //
   for (int i = 0; i < MAX_ENTITIES; i++) {
     entities[i] = nullptr;
   }
