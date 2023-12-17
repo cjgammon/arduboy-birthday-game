@@ -7,7 +7,7 @@
 
 //#define DEBUG_DRAW_HITBOXES
 
-//#define SOUND_ENABLED
+#define SOUND_ENABLED
 
 #define PLAYER_W 16
 #define PLAYER_HALF_W 8
