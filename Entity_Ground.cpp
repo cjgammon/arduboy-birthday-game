@@ -55,14 +55,12 @@ void Entity_Ground::setData(SegmentDefinition * segmentDefinition)
   }
 
 #ifdef COINS_ENABLED
-  // reset all coins
-  for (int coinIndex = 0; coinIndex < MAX_COINS_PER_SEGMENT; ++coinIndex)
-  {
-    coinsArray[coinIndex]->enabled = false;
-  }
 
-  for (int coinFormationIndex = 0; coinFormationIndex < 1; coinFormationIndex++)
+  for (int coinFormationIndex = 0; coinFormationIndex < MAX_COINS_PER_SEGMENT; coinFormationIndex++)
   {
+    // reset all coins
+    coinsArray[coinFormationIndex]->enabled = false;
+
     CoinFormationDefinition coinFormationDefinition;
     memcpy_P(&coinFormationDefinition, &segmentDefinition->coinFormations[coinFormationIndex], sizeof(CoinFormationDefinition));
     if (coinFormationDefinition.formationType == 1)
