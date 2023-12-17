@@ -23,6 +23,7 @@ private:
     EntityManager_Ground groundManager;
 
     void createGroundEntities();
+    void playerDie();
 };
 
 

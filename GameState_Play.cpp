@@ -17,6 +17,7 @@ float maxSpeed = 2.2;
 float timeToReachMaxSpeedInSeconds = 80.0;
 float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (timeToReachMaxSpeedInSeconds * 60.0);
 bool autoSpeedupEnabled = true;
+bool gameover = false;
 
 #define MAX_VISIBLE_GROUND_PIECES 3
 Entity_Ground groundPieces[MAX_VISIBLE_GROUND_PIECES];
@@ -27,6 +28,7 @@ void GameState_Play::init() {
     globalSpeedMultiplier = 0.95;
     cameraX = 0;
     speed = 2;
+    gameover = false;
 
     int playerType = selectedCharacter;
     playerCharacter = new Character(0, 28, playerType);
@@ -80,7 +82,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 
     // Update logic
     if (arduboy.justPressed(A_BUTTON)) {
-      if (!playerCharacter->isAlive()) {
+      if (gameover) {
         stateChangeCallback(STATE_START_MENU);
       }
     }
@@ -106,9 +108,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
               && ! groundManager.isGroundAt(characterCenterPosX + 3)
           )
       {
-        playerCharacter->setState(CharacterState::FALL);
-        speed = 0;
-        globalSpeedMultiplier = 0.8;
+        playerDie();
       }
     }
 
@@ -124,10 +124,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       {
         // todo :: enemy type switch?
         playerCharacter->velocityY = -3.6;
-        playerCharacter->setState(CharacterState::FALL);
-        speed = 0;
-        globalSpeedMultiplier = 0.8;
-        sound.tone(NOTE_G3, 200);
+        playerDie();
       }
     }
 
@@ -143,6 +140,14 @@ void GameState_Play::update(Arduboy2 &arduboy) {
     }
 
     playerCharacter->update(arduboy);
+}
+
+void GameState_Play::playerDie() {
+    playerCharacter->setState(CharacterState::FALL);
+    speed = 0;
+    globalSpeedMultiplier = 0.8;
+    sound.tone(NOTE_G3, 200);
+    gameover = true;
 }
 
 void GameState_Play::createGroundEntities()
@@ -169,7 +174,7 @@ void GameState_Play::draw(Arduboy2 &arduboy) {
     groundManager.draw(arduboy);
     playerCharacter->draw(arduboy);
     
-    if (!playerCharacter->isAlive()) {
+    if (gameover) {
       int x = SCREEN_WIDTH / 2 - (CHAR_WIDTH * 5);
       int y = SCREEN_HEIGHT / 2;
       arduboy.setCursor(x, y);
