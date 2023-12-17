@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "Vars.h"
+#include "GlobalMethods.h"
 
 // todo :: all this stuff should be properties on the character probably.  but adding it here is a little easier rn
 float gravity = 0.3;
@@ -26,6 +27,7 @@ Character::Character(int initialX, int initialY, CharacterType initialType) {
 
   velocityY = 0;
   currentFrame = 0;
+  highScore = 0;
   
 #ifdef LIVES_ENABLED
   lives = 3;
@@ -119,6 +121,8 @@ void Character::update(Arduboy2 &arduboy) {
 
 void Character::setType(CharacterType newType) {
   characterType = newType;
+
+  highScore = loadHighScore(newType, highScore);
 
   frameCount_Idle = 2;
   frameCount_Walking = 8;

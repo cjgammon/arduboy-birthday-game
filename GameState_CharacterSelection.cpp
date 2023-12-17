@@ -45,8 +45,16 @@ void drawCenteredText(Arduboy2 &arduboy, char* text, uint8_t y)
 
 void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     // Drawing code
+    
+    //highScore int to char* 
+    int highScore = playerCharacter->getHighScore();
+    char highScoreString[12]; // Buffer to hold the string representation of the integer
+    sprintf(highScoreString, "HIGH: %d", highScore); // Convert the integer to a string
+
+
     drawCenteredText(arduboy, playerCharacter->getName(), 0);
     drawCenteredText(arduboy, playerCharacter->getDescription(), 11);
+    drawCenteredText(arduboy, highScoreString, 21);
 
     playerCharacter->draw(arduboy);
 
@@ -54,10 +62,7 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     int x = 0;
     for (int i = 0; i < 21; i++) {
       const uint8_t* sprite;
-
       drawRandomGround(i, x, 60);
-
-      //Sprites::drawOverwrite(x, 60, environmentgroundmiddle, 0);
       x += 6;
     }
 }

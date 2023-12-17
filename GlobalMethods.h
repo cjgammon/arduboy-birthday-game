@@ -26,7 +26,6 @@ inline void drawRandomGround(int i, int x, int y)
   }
 }
 
-
 void saveHighScore(int addr, int highScore);
 
 inline void saveHighScore(int addr, int highScore) {

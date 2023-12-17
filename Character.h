@@ -46,6 +46,9 @@ public:
     int getHalfSpriteWidth() { return PLAYER_HALF_W; }// todo :: make variable/cache?
     int getHalfSpriteHeight() { return PLAYER_HALF_H; }// todo :: make variable/cache?
 
+    int getType() { return characterType; }
+    int getHighScore() const { return highScore; }
+
     void setX(int newX) { x = newX; }
     void setY(int newY) { y = newY; }
 
@@ -94,6 +97,8 @@ protected:
     float x; // X coordinate
     float y; // Y coordinate
     float radius;
+
+    int highScore;
 
 #ifdef LIVES_ENABLED
     int lives;

@@ -21,6 +21,7 @@ public:
 
     void incScore() {score += 1;};
     void setScore(int newScore) {score = newScore;};
+    int getScore() {return score;};
 
 #ifdef LIVES_ENABLED
     void setLives(int newLives) {lives = newLives;};

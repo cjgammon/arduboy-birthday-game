@@ -2,6 +2,7 @@
 #include "GameState_Play.h"
 #include "Vars.h"
 #include "Sound.h"
+#include "GlobalMethods.h"
 
 float cameraX = 0;
 float cameraY = 0;
@@ -149,6 +150,11 @@ void GameState_Play::playerDie() {
     gameover = true;
 
     //check hiscore
+    int score = GameUI.getScore();
+    int playerHighScore = playerCharacter->getHighScore();
+    if (score > playerHighScore) {
+      saveHighScore(playerCharacter->getType(), score);
+    }
 }
 
 void GameState_Play::createGroundEntities()
