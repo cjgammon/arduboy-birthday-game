@@ -13,7 +13,7 @@ void GameState_Titlescreen::init() {
 
 void GameState_Titlescreen::update(Arduboy2 &arduboy) {
     // Update logic
-    if (arduboy.justPressed(A_BUTTON)) {
+    if (arduboy.justReleased(A_BUTTON)) {
       stateChangeCallback(STATE_CHARACTER_SELECTION);
     }
 }
