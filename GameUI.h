@@ -19,6 +19,9 @@ public:
 
     void setName(char *newName) {name = newName;};
 
+    void incScore() {score += 1;};
+    void setScore(int newScore) {score = newScore;};
+
 #ifdef LIVES_ENABLED
     void setLives(int newLives) {lives = newLives;};
     void setMaxLives(int newMaxLives) {maxLives = newMaxLives;};
@@ -28,6 +31,7 @@ private:
     char *name;
     int lives;
     int maxLives;
+    int score;
     
     // Define UI element drawing functions here
     void drawName(Arduboy2 &arduboy);

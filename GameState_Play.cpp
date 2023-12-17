@@ -1,7 +1,7 @@
 // GameState_Play.cpp
 #include "GameState_Play.h"
 #include "Vars.h"
-
+#include "Sound.h"
 
 float cameraX = 0;
 float cameraY = 0;
@@ -32,7 +32,6 @@ void GameState_Play::init() {
     playerCharacter = new Character(0, 28, playerType);
 
     char* name = playerCharacter->getName();
-
 
     playerCharacter->setX(0);
     playerCharacter->setY(groundLevel);
@@ -128,6 +127,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
         playerCharacter->setState(CharacterState::FALL);
         speed = 0;
         globalSpeedMultiplier = 0.8;
+        sound.tone(NOTE_G3, 200);
       }
     }
 
@@ -137,6 +137,8 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       if (collidingCoin != nullptr)
       {
         collidingCoin->enabled = false;
+        gameUI.incScore();
+        sound.tone(NOTE_C1, 100);
       }
     }
 
@@ -166,6 +168,13 @@ void GameState_Play::draw(Arduboy2 &arduboy) {
     gameUI.draw(arduboy);
     groundManager.draw(arduboy);
     playerCharacter->draw(arduboy);
+    
+    if (!playerCharacter->isAlive()) {
+      int x = SCREEN_WIDTH / 2 - (CHAR_WIDTH * 5);
+      int y = SCREEN_HEIGHT / 2;
+      arduboy.setCursor(x, y);
+      arduboy.print("GAME OVER");
+    }
 }
 
 void GameState_Play::cleanup()

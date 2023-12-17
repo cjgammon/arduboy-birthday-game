@@ -3,7 +3,6 @@
 #define VARS_H
 
 #include <avr/pgmspace.h>
-
 #include "SegmentDefinition.h"
 
 //#define DEBUG_DRAW_HITBOXES
@@ -14,6 +13,7 @@
 
 extern uint8_t screenWidth;
 #define SCREEN_HEIGHT 64
+#define SCREEN_WIDTH 128
 #define CHAR_WIDTH 6
 #define GROUND_SIZE 6
 
