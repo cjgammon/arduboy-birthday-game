@@ -140,9 +140,6 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       {
         collidingCoin->enabled = false;
         gameUI.incScore();
-#ifdef SOUND_ENABLED
-        sound.tone(NOTE_B7, 40);// coin collect
-#endif
       }
     }
 
