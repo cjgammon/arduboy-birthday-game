@@ -123,7 +123,9 @@ void Character::update(Arduboy2 &arduboy) {
       {
         y = groundLevel;
         setState(CharacterState::WALK);
-        sound.tone(NOTE_A1, 100);// land
+#ifdef SOUND_ENABLED
+        sound.tone(NOTE_G1, 40);// land
+#endif
       }
       else if (velocityY > 0 && state != CharacterState::DESCEND)
       {
