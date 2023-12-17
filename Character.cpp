@@ -144,7 +144,8 @@ void Character::update(Arduboy2 &arduboy) {
 void Character::setType(CharacterType newType) {
   characterType = newType;
 
-  highScore = loadHighScore(newType, highScore);
+  int addr = highScoreBaseAddress + static_cast<int>(newType) * highScoreAddressMultiplier;
+  highScore = loadHighScore(addr, highScore);
 
   frameCount_Idle = 2;
   frameCount_Walking = 8;

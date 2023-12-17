@@ -23,6 +23,9 @@ int cheatMode = CheatMode::Disabled;
 
 uint8_t screenWidth = 128;
 
+int highScoreBaseAddress = 0x50;
+int highScoreAddressMultiplier = 5;
+
 uint8_t getTextWidthInPixels(char* text)
 {
   return strlen(text) * CHAR_WIDTH;

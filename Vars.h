@@ -46,6 +46,10 @@ extern int cheatMode;
 extern float cameraX;
 extern float cameraY;
 
+extern int highScoreBaseAddress;
+extern int highScoreAddressMultiplier;
+
+
 uint8_t getTextWidthInPixels(char* text);
 
 #endif // VARS_H

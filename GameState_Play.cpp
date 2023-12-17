@@ -150,10 +150,12 @@ void GameState_Play::playerDie() {
     gameover = true;
 
     //check hiscore
-    int score = GameUI.getScore();
+    int score = gameUI.getScore();
     int playerHighScore = playerCharacter->getHighScore();
     if (score > playerHighScore) {
-      saveHighScore(playerCharacter->getType(), score);
+
+      int addr = highScoreBaseAddress + playerCharacter->getType() * highScoreAddressMultiplier;
+      saveHighScore(addr, score);
     }
 }
 

@@ -46,7 +46,7 @@ public:
     int getHalfSpriteWidth() { return PLAYER_HALF_W; }// todo :: make variable/cache?
     int getHalfSpriteHeight() { return PLAYER_HALF_H; }// todo :: make variable/cache?
 
-    int getType() { return characterType; }
+    int getType() { return static_cast<int>(characterType); }
     int getHighScore() const { return highScore; }
 
     void setX(int newX) { x = newX; }
