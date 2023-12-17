@@ -101,6 +101,7 @@ void changeGameState(GameStateID newState) {
       currentState = characterSelectionState;
       break;
     case STATE_GAME_PLAY:
+      randomSeed(123);
       currentState = gamePlayState;
       break;
   }
