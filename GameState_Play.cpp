@@ -91,6 +91,9 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 
     if (arduboy.justPressed(B_BUTTON)) {
       stateChangeCallback(STATE_START_MENU);
+#ifdef SOUND_ENABLED
+      sound.tone(NOTE_B3, 80);// exit to title screen
+#endif
     }
 
     cameraX = -speed * globalSpeedMultiplier;
@@ -138,7 +141,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
         collidingCoin->enabled = false;
         gameUI.incScore();
 #ifdef SOUND_ENABLED
-        sound.tone(NOTE_B3, 40);// coin collect
+        sound.tone(NOTE_B7, 40);// coin collect
 #endif
       }
     }
