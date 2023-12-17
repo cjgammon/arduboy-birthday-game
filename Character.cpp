@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "Vars.h"
+#include "Sound.h"
 
 // todo :: all this stuff should be properties on the character probably.  but adding it here is a little easier rn
 float gravity = 0.3;
@@ -64,11 +65,16 @@ void Character::update(Arduboy2 &arduboy) {
         || (isJumping() && jumpJustPressed)
         )
     {
+#ifdef SOUND_ENABLED
+      sound.tone(jumpsRemaining == jumpCount ? NOTE_A2 : NOTE_D3, 100);// jump
+#endif
+
       jumpBufferCountRaw = 0;
       velocityY = (jumpsRemaining == jumpCount) ? jumpPower : extraJumpPower;
       jumpsRemaining--;
       currentGravity = gravity;
       setState(CharacterState::JUMP);
+
     }
   }
   else if (canHover)
@@ -104,6 +110,7 @@ void Character::update(Arduboy2 &arduboy) {
       {
         y = groundLevel;
         setState(CharacterState::WALK);
+        sound.tone(NOTE_A1, 100);// land
       }
       else if (velocityY > 0 && state != CharacterState::DESCEND)
       {
