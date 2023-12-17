@@ -26,6 +26,8 @@ uint8_t screenWidth = 128;
 int highScoreBaseAddress = 0x50;
 int highScoreAddressMultiplier = 5;
 
+const int fixedSeedValue = 12345; // Example fixed seed value
+
 uint8_t getTextWidthInPixels(char* text)
 {
   return strlen(text) * CHAR_WIDTH;
@@ -34,6 +36,8 @@ uint8_t getTextWidthInPixels(char* text)
 void setup() {
   
   Serial.begin(9600);
+
+  randomSeed(fixedSeedValue); // Seed the random number generator with a fixed value
 
   //arduboy.begin();
   arduboy.boot();
