@@ -81,11 +81,13 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 
 
     // Update logic
+    /*
     if (arduboy.justPressed(A_BUTTON)) {
       if (gameover) {
         stateChangeCallback(STATE_START_MENU);
       }
     }
+    */
 
     if (arduboy.justPressed(B_BUTTON)) {
       stateChangeCallback(STATE_START_MENU);
