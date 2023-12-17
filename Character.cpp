@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "Vars.h"
+#include "GlobalMethods.h"
 #include "Sound.h"
 
 // todo :: all this stuff should be properties on the character probably.  but adding it here is a little easier rn
@@ -27,6 +28,7 @@ Character::Character(int initialX, int initialY, CharacterType initialType) {
 
   velocityY = 0;
   currentFrame = 0;
+  highScore = 0;
   
 #ifdef LIVES_ENABLED
   lives = 3;
@@ -141,6 +143,9 @@ void Character::update(Arduboy2 &arduboy) {
 
 void Character::setType(CharacterType newType) {
   characterType = newType;
+
+  int addr = highScoreBaseAddress + static_cast<int>(newType) * highScoreAddressMultiplier;
+  highScore = loadHighScore(addr, highScore);
 
   frameCount_Idle = 2;
   frameCount_Walking = 8;

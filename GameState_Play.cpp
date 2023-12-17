@@ -2,6 +2,7 @@
 #include "GameState_Play.h"
 #include "Vars.h"
 #include "Sound.h"
+#include "GlobalMethods.h"
 
 float cameraX = 0;
 float cameraY = 0;
@@ -81,13 +82,6 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 
 
     // Update logic
-    /*
-    if (arduboy.justPressed(A_BUTTON)) {
-      if (gameover) {
-        stateChangeCallback(STATE_START_MENU);
-      }
-    }
-    */
 
     if (arduboy.justPressed(B_BUTTON)) {
       stateChangeCallback(STATE_START_MENU);
@@ -154,6 +148,15 @@ void GameState_Play::playerDie() {
     sound.tone(NOTE_G4, 250);// die
 #endif
     gameover = true;
+
+    //check hiscore
+    int score = gameUI.getScore();
+    int playerHighScore = playerCharacter->getHighScore();
+    if (score > playerHighScore) {
+
+      int addr = highScoreBaseAddress + playerCharacter->getType() * highScoreAddressMultiplier;
+      saveHighScore(addr, score);
+    }
 }
 
 void GameState_Play::createGroundEntities()

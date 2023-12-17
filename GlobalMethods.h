@@ -26,4 +26,26 @@ inline void drawRandomGround(int i, int x, int y)
   }
 }
 
+void saveHighScore(int addr, int highScore);
+
+inline void saveHighScore(int addr, int highScore) {
+    byte checksum = (byte)(highScore & 0xFF) ^ (byte)((highScore >> 8) & 0xFF);
+    EEPROM.put(addr, highScore);
+    EEPROM.write(addr + sizeof(highScore), checksum);
+}
+
+int loadHighScore(int addr, int highScore);
+
+inline int loadHighScore(int addr, int highScore) {
+    EEPROM.get(addr, highScore);
+    byte checksum = EEPROM.read(addr + sizeof(highScore));
+    byte calculatedChecksum = (byte)(highScore & 0xFF) ^ (byte)((highScore >> 8) & 0xFF);
+
+    if (checksum != calculatedChecksum) {
+        highScore = 0; // Reset to default value or handle accordingly
+    }
+    return highScore;
+}
+
+
 #endif //GLOBALMETHODS_H
