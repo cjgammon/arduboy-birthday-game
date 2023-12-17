@@ -135,7 +135,9 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       {
         collidingCoin->enabled = false;
         gameUI.incScore();
+#ifdef SOUND_ENABLED
         sound.tone(NOTE_C1, 100);
+#endif
       }
     }
 
@@ -146,7 +148,9 @@ void GameState_Play::playerDie() {
     playerCharacter->setState(CharacterState::FALL);
     speed = 0;
     globalSpeedMultiplier = 0.8;
+#ifdef SOUND_ENABLED
     sound.tone(NOTE_G3, 200);
+#endif
     gameover = true;
 }
 

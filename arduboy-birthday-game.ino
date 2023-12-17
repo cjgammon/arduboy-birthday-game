@@ -7,7 +7,9 @@
 #include "Sound.h"
 
 Arduboy2 arduboy;
+#ifdef SOUND_ENABLED
 ArduboyTones sound(arduboy.audio.enabled);
+#endif
 
 //states
 GameState *currentState;
@@ -32,8 +34,9 @@ void setup() {
 
   //arduboy.begin();
   arduboy.boot();
+#ifdef SOUND_ENABLED
   arduboy.audio.begin();
-
+#endif
   arduboy.setFrameRate(60);
 
   startMenuState->setStateChangeCallback(changeGameState);

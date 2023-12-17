@@ -2,10 +2,11 @@
 #ifndef SOUND_H
 #define SOUND_H
 
+#include "Vars.h"
+
+#ifdef SOUND_ENABLED
 #include <ArduboyTones.h>
-
 extern ArduboyTones sound;
-
-extern BeepPin1 beep;
+#endif
 
 #endif // SOUND_H
