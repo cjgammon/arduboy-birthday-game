@@ -81,13 +81,6 @@ void GameState_Play::update(Arduboy2 &arduboy) {
 
 
     // Update logic
-    /*
-    if (arduboy.justPressed(A_BUTTON)) {
-      if (gameover) {
-        stateChangeCallback(STATE_START_MENU);
-      }
-    }
-    */
 
     if (arduboy.justPressed(B_BUTTON)) {
       stateChangeCallback(STATE_START_MENU);
@@ -154,6 +147,8 @@ void GameState_Play::playerDie() {
     sound.tone(NOTE_G3, 200);
 #endif
     gameover = true;
+
+    //check hiscore
 }
 
 void GameState_Play::createGroundEntities()
