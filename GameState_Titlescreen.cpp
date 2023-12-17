@@ -1,6 +1,7 @@
 // GameState_Titlescreen.cpp
 #include "GameState_Titlescreen.h"
 #include "sprites.h"
+#include "Sound.h"
 
 unsigned long lastBlinkTime = 0;
 bool showText = true; // Initial state is to show the text
@@ -14,6 +15,9 @@ void GameState_Titlescreen::init() {
 void GameState_Titlescreen::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justPressed(A_BUTTON)) {
+#ifdef SOUND_ENABLED
+      sound.tone(NOTE_C5, 40);// title screen start
+#endif
       stateChangeCallback(STATE_CHARACTER_SELECTION);
     }
 }

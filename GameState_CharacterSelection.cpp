@@ -1,6 +1,7 @@
 // GameState_CharacterSelection.cpp
 #include "GameState_CharacterSelection.h"
 #include "GlobalMethods.h"
+#include "Sound.h"
 
 int numCharacters = 6;
 Character* playerCharacter;
@@ -17,6 +18,9 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
     // Update logic
     if (arduboy.justPressed(A_BUTTON)) {
       stateChangeCallback(STATE_GAME_PLAY);
+#ifdef SOUND_ENABLED
+      sound.tone(NOTE_C5, 40);// character confirm
+#endif
     }
 
     if (arduboy.justPressed(RIGHT_BUTTON)) {
@@ -34,6 +38,9 @@ void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
 void GameState_CharacterSelection::changeCharacter(uint8_t newIndex) {
   selectedCharacter = newIndex;
   playerCharacter->setType(selectedCharacter);
+#ifdef SOUND_ENABLED
+  sound.tone(NOTE_B2, 40);// change character
+#endif
 }
 
 void drawCenteredText(Arduboy2 &arduboy, char* text, uint8_t y)
