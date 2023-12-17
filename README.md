@@ -16,7 +16,13 @@ brew install arduino-cli
 To export compiled binary:
 
 ```
-sh build.sh
+sh shell/build.sh
+```
+
+To upload compiled binary:
+
+```
+sh shell/upload.sh
 ```
 
 ### resources
