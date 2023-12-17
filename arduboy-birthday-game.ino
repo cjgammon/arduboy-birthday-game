@@ -4,9 +4,12 @@
 #include "GameState_CharacterSelection.h"
 #include "GameState_Play.h"
 #include "Vars.h"
+#include "Sound.h"
 
 Arduboy2 arduboy;
+#ifdef SOUND_ENABLED
 ArduboyTones sound(arduboy.audio.enabled);
+#endif
 
 //states
 GameState *currentState;
@@ -29,7 +32,11 @@ void setup() {
   
   Serial.begin(9600);
 
+  //arduboy.begin();
   arduboy.boot();
+#ifdef SOUND_ENABLED
+  arduboy.audio.begin();
+#endif
   arduboy.setFrameRate(60);
 
   startMenuState->setStateChangeCallback(changeGameState);
