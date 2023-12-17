@@ -21,12 +21,12 @@ void GameState_Titlescreen::update(Arduboy2 &arduboy) {
       stateChangeCallback(STATE_CHARACTER_SELECTION);
     }
 
-
     if (arduboy.justPressed(B_BUTTON)) {
       if (arduboy.audio.enabled()) {
         arduboy.audio.off();
       } else {
         arduboy.audio.on();
+        sound.tone(NOTE_C1, 40);// title screen start
       }
     }
 }
@@ -58,5 +58,11 @@ void GameState_Titlescreen::draw(Arduboy2 &arduboy) {
   if (showText) {
     arduboy.setCursor(textX + 1, textY + 2);
     arduboy.print(startText);
+  }
+
+
+  if (!arduboy.audio.enabled()) {
+    arduboy.setCursor(0, SCREEN_HEIGHT - 6);
+    arduboy.print("M");
   }
 }
