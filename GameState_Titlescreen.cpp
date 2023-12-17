@@ -20,6 +20,15 @@ void GameState_Titlescreen::update(Arduboy2 &arduboy) {
 #endif
       stateChangeCallback(STATE_CHARACTER_SELECTION);
     }
+
+
+    if (arduboy.justPressed(B_BUTTON)) {
+      if (arduboy.audio.enabled()) {
+        arduboy.audio.off();
+      } else {
+        arduboy.audio.on();
+      }
+    }
 }
 
 void GameState_Titlescreen::draw(Arduboy2 &arduboy) {

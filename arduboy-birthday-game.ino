@@ -37,6 +37,8 @@ void setup() {
 
   //arduboy.begin();
   arduboy.boot();
+  //arduboy.display();
+  //arduboy.systemButtons();
 #ifdef SOUND_ENABLED
   arduboy.audio.begin();
 #endif
