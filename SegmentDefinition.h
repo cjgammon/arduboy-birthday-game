@@ -75,7 +75,7 @@ struct SegmentDefinition {
     uint8_t groundArray[GROUND_DEFINITION_SIZE / 8];
     EnemyDefinition enemies[MAX_ENEMIES_PER_SEGMENT];  // Define MAX_ENEMIES_PER_SEGMENT as needed
     CoinFormationDefinition coinFormations[MAX_COIN_FORMATIONS_PER_SEGMENT];       // Define MAX_COINS_PER_SEGMENT as needed
-    int difficulty;
+    uint8_t difficulty;
 };
 
 const SegmentDefinition flatGround PROGMEM = {

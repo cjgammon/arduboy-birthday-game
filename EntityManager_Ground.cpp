@@ -77,7 +77,7 @@ void EntityManager_Ground::recycleGroundEntity(int index) {
         int eligibleSegments[GROUND_DEFINITION_COUNT];
         int eligibleCount = 0;
         for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
-              int segmentDifficulty = pgm_read_word_near(&groundDefinitions[i].difficulty);
+              int segmentDifficulty = pgm_read_byte(&groundDefinitions[i].difficulty);
 
             if (segmentDifficulty <= currentDifficultyLevel) {
                 eligibleSegments[eligibleCount++] = i;
