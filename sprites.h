@@ -766,7 +766,7 @@ const unsigned char PROGMEM character_calvin_run[] =
  
  
  
- /*
+#ifdef INCLUDE_NOLA
  
 const unsigned char PROGMEM character_nola_fall[] =
 {
@@ -907,11 +907,9 @@ const unsigned char PROGMEM character_nola_run[] =
 #endif
 };
  
+#endif
+ 
 
- */
- 
- 
- 
  
 const unsigned char PROGMEM character_ruhaan_fall[] =
 {

@@ -3,7 +3,12 @@
 #include "GlobalMethods.h"
 #include "Sound.h"
 
-int numCharacters = 6;
+#ifdef INCLUDE_NOLA
+    int numCharacters = 6;
+#else
+    int numCharacters = 5;
+#endif
+
 Character* playerCharacter;
 
 uint8_t selectedCharacter = 0;

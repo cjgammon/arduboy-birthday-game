@@ -58,6 +58,7 @@ void GameState_Play::init() {
 
 void GameState_Play::update() {
     // manage speed up
+#ifdef DEBUG_SPEED_CONTROLS
     if (arduboy.justPressed(RIGHT_BUTTON))
     {
       globalSpeedMultiplier += 0.25;
@@ -72,6 +73,7 @@ void GameState_Play::update() {
     {
       autoSpeedupEnabled = !autoSpeedupEnabled;
     }
+#endif
 
     if (autoSpeedupEnabled)
     {

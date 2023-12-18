@@ -11,7 +11,9 @@ enum CharacterType : uint8_t {
   MASON,
   RUHAAN,
   JAXON,
+#ifdef INCLUDE_NOLA
   NOLA,
+#endif
 };
 
 enum CharacterState : uint8_t {
