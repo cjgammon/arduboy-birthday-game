@@ -12,7 +12,7 @@ extern Arduboy2 arduboy;
 //#define DEBUG_DRAW_VARS
 //#define DEBUG_DRAW_HITBOXES
 
-//#define INCLUDE_NOLA
+#define INCLUDE_NOLA
 
 #define SOUND_ENABLED
 
