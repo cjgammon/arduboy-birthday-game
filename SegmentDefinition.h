@@ -2,9 +2,9 @@
 #define SEGMENTDEFINITION_H
 
 #define GROUND_DEFINITION_SIZE 24
-#define MAX_ENEMIES_PER_SEGMENT 3  // Adjust as needed
+#define MAX_ENEMIES_PER_SEGMENT 2  // Adjust as needed
 #define MAX_COINS_PER_SEGMENT 5   // Adjust as needed
-#define MAX_COIN_FORMATIONS_PER_SEGMENT 5
+#define MAX_COIN_FORMATIONS_PER_SEGMENT 3
 
 #define MAX_DIFFICULTY 3
 
