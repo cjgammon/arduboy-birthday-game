@@ -82,7 +82,7 @@ const SegmentDefinition flatGround PROGMEM = {
         {255, 255, 255}, {}, {}, {}
 };
 
-#define GROUND_DEFINITION_COUNT 8
+#define GROUND_DEFINITION_COUNT 10
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     // segment 0
   {
@@ -145,7 +145,7 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     {
     },
     {
-      {4, 56}, // Item
+      {3, 72}, // Item
     },
     0 //Difficulty
   },
@@ -171,8 +171,29 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     },
     3 //Difficulty
   },
+    // segment 8
+  {
+    {255, 227, 255},
+    {
+    },
+    {
+      {1, 96}, // Item
+      {2, 27}, // Item
+    },
+    0 //Difficulty
+  },
+    // segment 9
+  {
+    {255, 255, 255},
+    {
+      {1, 34}, // Enemy
+      {2, 66}, // Enemy
+    },
+    {
+    },
+    3 //Difficulty
+  },
 };
-
 
 
 #endif // SEGMENTDEFINITION_H
