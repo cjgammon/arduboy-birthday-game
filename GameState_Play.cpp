@@ -40,14 +40,6 @@ void GameState_Play::init() {
     playerCharacter->setGround(groundLevel);
     playerCharacter->setState(CharacterState::WALK);
 
-#ifdef LIVES_ENABLED
-    int maxLives = playerCharacter->getLives();
-    lives = maxLives;
-    gameUI.init(name, maxLives, maxLives);
-#else
-    gameUI.init(name);
-#endif
-
     groundManager.init();
 }
 
@@ -132,7 +124,11 @@ void GameState_Play::update() {
       if (collidingCoin != nullptr)
       {
         collidingCoin->enabled = false;
-        gameUI.incScore();
+        score ++;
+#ifdef SOUND_ENABLED
+      sound.tone(score %2 == 0 ? NOTE_B7 : NOTE_AS7, 40);// coin collect
+#endif
+
       }
     }
 
@@ -149,7 +145,6 @@ void GameState_Play::playerDie() {
     gameover = true;
 
     //check hiscore
-    int score = gameUI.getScore();
     int playerHighScore = playerCharacter->getHighScore();
     if (score > playerHighScore) {
 
@@ -159,7 +154,6 @@ void GameState_Play::playerDie() {
 }
 
 void GameState_Play::draw() {
-    gameUI.draw();
     groundManager.draw();
     playerCharacter->draw();
 
@@ -169,6 +163,13 @@ void GameState_Play::draw() {
       arduboy.setCursor(x, y);
       arduboy.print("GAME OVER");
     }
+
+    //draw score
+    char scoreStr[6]; // 5 digits + 1 for the null terminator
+    sprintf(scoreStr, "%05d", score); // Format the score as a 5-digit number, padding with zeros
+
+    arduboy.setCursor(screenWidth - getTextWidthInPixels(scoreStr), 0);
+    arduboy.print(scoreStr);
 }
 
 void GameState_Play::cleanup()
@@ -180,4 +181,5 @@ void GameState_Play::cleanup()
   }
 
   groundManager.cleanup();
+
 }
