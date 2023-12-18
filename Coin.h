@@ -13,7 +13,7 @@ public:
     void init(int segmentX, int localPositionX, int localPositionY);
     //void init(int x, int y);
     void update(int x);
-    void draw(Arduboy2 &arduboy);
+    void draw();
     int x;
     int y;
     float xRaw;

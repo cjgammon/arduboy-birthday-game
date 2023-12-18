@@ -11,7 +11,6 @@ void GameUI::init(char *initialName
 #endif
                   ) {
   name = initialName;
-  score = 0;
 
 #ifdef LIVES_ENABLED
   lives = initialLives;
@@ -19,23 +18,26 @@ void GameUI::init(char *initialName
 #endif
 }
 
-void GameUI::draw(Arduboy2 &arduboy) {
-    drawName(arduboy);
+void GameUI::draw() {
+    drawName();
 
 #ifdef LIVES_ENABLED
-    //drawLives(arduboy);
+    //drawLives();
 #endif
 
-    drawScore(arduboy);
-    //drawSpeed(arduboy);
+    drawScore();
+
+#ifdef DEBUG_DRAW_VARS
+    drawSpeed();
+#endif
 }
 
-void GameUI::drawName(Arduboy2 &arduboy) {
+void GameUI::drawName() {
   arduboy.setCursor(screenWidth - getTextWidthInPixels(name), 0);
   arduboy.print(name);
 }
 
-void GameUI::drawScore(Arduboy2 &arduboy) {
+void GameUI::drawScore() {
     char scoreStr[6]; // 5 digits + 1 for the null terminator
     sprintf(scoreStr, "%05d", score); // Format the score as a 5-digit number, padding with zeros
 
@@ -44,7 +46,7 @@ void GameUI::drawScore(Arduboy2 &arduboy) {
 }
 
 #ifdef LIVES_ENABLED
-void GameUI::drawLives(Arduboy2 &arduboy) {
+void GameUI::drawLives() {
   // Draw the number of lives on the screen
   byte textWidthInPixels = getTextWidthInPixels(name);
   byte startX = textWidthInPixels;
@@ -64,7 +66,7 @@ void GameUI::drawLives(Arduboy2 &arduboy) {
 }
 #endif
 
-void GameUI::drawSpeed(Arduboy2 &arduboy) {
-  arduboy.setCursor(0, 0);
+void GameUI::drawSpeed() {
+  arduboy.setCursor(0, 20);
   arduboy.print(globalSpeedMultiplier);
 }

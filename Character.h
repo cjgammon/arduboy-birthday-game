@@ -11,7 +11,9 @@ enum CharacterType : uint8_t {
   MASON,
   RUHAAN,
   JAXON,
+#ifdef INCLUDE_NOLA
   NOLA,
+#endif
 };
 
 enum CharacterState : uint8_t {
@@ -33,8 +35,8 @@ public:
     CharacterType getCharacterType() const { return characterType; };
     void setType(CharacterType newType);
 
-    void update(Arduboy2 &arduboy);
-    void draw(Arduboy2 &arduboy);
+    void update();
+    void draw();
 
     int getX() const { return x; }
     int getY() const { return y; }

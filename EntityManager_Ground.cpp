@@ -17,7 +17,7 @@ void EntityManager_Ground::init() {
 }
 
 
-void EntityManager_Ground::update(Arduboy2 &arduboy) {
+void EntityManager_Ground::update() {
     // Override update method to specifically handle ground entities
     for (int i = 0; i < numEntities; i++) {
         if (entities[i] != nullptr && entities[i]->getEntityType() == EntityType::GROUND) {
@@ -30,10 +30,10 @@ void EntityManager_Ground::update(Arduboy2 &arduboy) {
     }
 }
 
-void EntityManager_Ground::draw(Arduboy2 &arduboy) {
+void EntityManager_Ground::draw() {
   for (int i = 0; i < numEntities; i++) {
     if (entities[i] != nullptr) {
-      entities[i]->draw(arduboy);
+      entities[i]->draw();
     }
   }
 }
@@ -71,9 +71,46 @@ void EntityManager_Ground::recycleGroundEntity(int index) {
         Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[index]);
         groundEntity->setX(maxRightX);
 
+        int currentDifficultyLevel = calculateDifficultyLevel();
+
+       // Create an array of eligible segments based on the current difficulty
+        int eligibleSegments[GROUND_DEFINITION_COUNT];
+        int eligibleCount = 0;
+        for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
+              int segmentDifficulty = pgm_read_byte(&groundDefinitions[i].difficulty);
+
+            if (segmentDifficulty <= currentDifficultyLevel) {
+                eligibleSegments[eligibleCount++] = i;
+            }
+        }
+
+        // Randomly select a segment from the eligible array
+        if (eligibleCount > 0) {
+            int randomIndex = eligibleSegments[random(0, eligibleCount)];
+            groundEntity->setData(&groundDefinitions[randomIndex]);
+        }
+
         // pick a new random section
-        groundEntity->setData(&groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]);
+        //groundEntity->setData(&groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]);
     }
+}
+
+int EntityManager_Ground::calculateDifficultyLevel() {
+    int difficultyLevel = 0;
+
+    if (globalSpeedMultiplier > 2.0) {
+      difficultyLevel = 1;
+    } else if (globalSpeedMultiplier > 1.7) {
+      difficultyLevel = 2;
+    } else if (globalSpeedMultiplier > 1.5) {
+      difficultyLevel = 3;
+    } else if (globalSpeedMultiplier > 1.2) {
+      difficultyLevel = 2;
+    } else if (globalSpeedMultiplier > 1.0) {
+      difficultyLevel = 1;
+    }
+
+    return difficultyLevel;
 }
 
 int EntityManager_Ground::findMaxRightX() {

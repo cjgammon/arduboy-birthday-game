@@ -2,9 +2,11 @@
 #define SEGMENTDEFINITION_H
 
 #define GROUND_DEFINITION_SIZE 24
-#define MAX_ENEMIES_PER_SEGMENT 3  // Adjust as needed
+#define MAX_ENEMIES_PER_SEGMENT 2  // Adjust as needed
 #define MAX_COINS_PER_SEGMENT 5   // Adjust as needed
-#define MAX_COIN_FORMATIONS_PER_SEGMENT 5
+#define MAX_COIN_FORMATIONS_PER_SEGMENT 3
+
+#define MAX_DIFFICULTY 3
 
 struct EnemyDefinition {
     uint8_t enemyType;
@@ -62,13 +64,14 @@ struct SegmentDefinition {
     uint8_t groundArray[GROUND_DEFINITION_SIZE / 8];
     EnemyDefinition enemies[MAX_ENEMIES_PER_SEGMENT];  // Define MAX_ENEMIES_PER_SEGMENT as needed
     CoinFormationDefinition coinFormations[MAX_COIN_FORMATIONS_PER_SEGMENT];       // Define MAX_COINS_PER_SEGMENT as needed
+    uint8_t difficulty;
 };
 
 const SegmentDefinition flatGround PROGMEM = {
-        {255, 255, 255}, {}, {}
+        {255, 255, 255}, {}, {}, {}
 };
 
-#define GROUND_DEFINITION_COUNT 6
+#define GROUND_DEFINITION_COUNT 10
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     // segment 0
   {
@@ -78,7 +81,8 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     },
     {
       {3, 21}, // Item
-    }
+    },
+    2 //Difficulty
   },
     // segment 1
   {
@@ -88,7 +92,8 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     {
       {4, 23}, // Item
       {4, 93}, // Item
-    }
+    },
+    0 //Difficulty
   },
     // segment 2
   {
@@ -98,7 +103,8 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     },
     {
       {3, 93}, // Item
-    }
+    },
+    2 //Difficulty
   },
     // segment 3
   {
@@ -108,7 +114,8 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     {
       {2, 38}, // Item
       {2, 98}, // Item
-    }
+    },
+    2 //Difficulty
   },
     // segment 4
   {
@@ -118,7 +125,8 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     },
     {
       {3, 70}, // Item
-    }
+    },
+    1 //Difficulty
   },
     // segment 5
   {
@@ -126,8 +134,53 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     {
     },
     {
-      {4, 56}, // Item
-    }
+      {3, 72}, // Item
+    },
+    0 //Difficulty
+  },
+    // segment 6
+  {
+    {255, 255, 255},
+    {
+      {2, 58}, // Enemy
+    },
+    {
+    },
+    1 //Difficulty
+  },
+    // segment 7
+  {
+    {143, 227, 248},
+    {
+    },
+    {
+      {1, 29}, // Item
+      {1, 65}, // Item
+      {1, 101}, // Item
+    },
+    3 //Difficulty
+  },
+    // segment 8
+  {
+    {255, 227, 255},
+    {
+    },
+    {
+      {1, 96}, // Item
+      {2, 27}, // Item
+    },
+    0 //Difficulty
+  },
+    // segment 9
+  {
+    {255, 255, 255},
+    {
+      {1, 34}, // Enemy
+      {2, 66}, // Enemy
+    },
+    {
+    },
+    3 //Difficulty
   },
 };
 

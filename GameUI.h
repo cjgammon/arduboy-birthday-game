@@ -16,7 +16,7 @@ public:
 #endif
     );
 
-    void draw(Arduboy2 &arduboy); // Drawing method
+    void draw(); // Drawing method
 
     void setName(char *newName) {name = newName;};
 
@@ -38,13 +38,12 @@ private:
     char *name;
     int lives;
     int maxLives;
-    int score;
     
     // Define UI element drawing functions here
-    void drawName(Arduboy2 &arduboy);
-    void drawScore(Arduboy2 &arduboy);
-    void drawLives(Arduboy2 &arduboy);
-    void drawSpeed(Arduboy2 &arduboy);
+    void drawName();
+    void drawScore();
+    void drawLives();
+    void drawSpeed();
 };
 
 #endif // GAME_UI_H

@@ -14,7 +14,7 @@ public:
     void setData(const EnemyDefinition& enemyDefinition, float segmentX);
 
     void update(float newX);
-    void draw(Arduboy2 &arduboy) override;
+    void draw() override;
 
     int getCollisionX();
     int getCollisionY();

@@ -14,8 +14,8 @@
 class GameState_Play : public GameState {
 public:
     void init() override;
-    void update(Arduboy2 &arduboy) override;
-    void draw(Arduboy2 &arduboy) override;
+    void update() override;
+    void draw() override;
     void cleanup() override;
 private:
     GameUI gameUI; // Create an instance of the GameUI class 

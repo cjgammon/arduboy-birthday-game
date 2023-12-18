@@ -6,6 +6,7 @@
 
 float cameraX = 0;
 float cameraY = 0;
+int score = 0;
 
 #ifdef LIVES_ENABLED
 int lives = 3;
@@ -30,6 +31,7 @@ void GameState_Play::init() {
     cameraX = 0;
     speed = 2;
     gameover = false;
+    score = 0;
 
     int playerType = selectedCharacter;
     playerCharacter = new Character(0, 28, playerType);
@@ -54,8 +56,9 @@ void GameState_Play::init() {
     GameState_Play::createGroundEntities();
 }
 
-void GameState_Play::update(Arduboy2 &arduboy) {
+void GameState_Play::update() {
     // manage speed up
+#ifdef DEBUG_SPEED_CONTROLS
     if (arduboy.justPressed(RIGHT_BUTTON))
     {
       globalSpeedMultiplier += 0.25;
@@ -70,6 +73,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
     {
       autoSpeedupEnabled = !autoSpeedupEnabled;
     }
+#endif
 
     if (autoSpeedupEnabled)
     {
@@ -91,7 +95,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
     }
 
     cameraX = -speed * globalSpeedMultiplier;
-    groundManager.update(arduboy);
+    groundManager.update();
 
     int characterCenterPosY = playerCharacter->getCenterY();
     int characterCenterPosX = playerCharacter->getCenterX();
@@ -137,7 +141,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
-    playerCharacter->update(arduboy);
+    playerCharacter->update();
 }
 
 void GameState_Play::playerDie() {
@@ -159,30 +163,50 @@ void GameState_Play::playerDie() {
     }
 }
 
+//TODO:: move this to entity ground manager?
 void GameState_Play::createGroundEntities()
 {
   // create as many ground entities as can possibly be visible at once.
   int lastX = 0;
+  int eligibleSegments[GROUND_DEFINITION_COUNT];
+  int eligibleCount = 0;
+  int currentDifficultyLevel = groundManager.calculateDifficultyLevel();  
+
+  for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
+    int segmentDifficulty = pgm_read_byte(&groundDefinitions[i].difficulty);
+
+      if (segmentDifficulty <= currentDifficultyLevel) {
+          eligibleSegments[eligibleCount++] = i;
+      }
+  }
+
   for (int i = 0; i < MAX_VISIBLE_GROUND_PIECES; i++)
   {
     Entity_Ground* groundEntity = &groundPieces[i];
     groundEntity->init(lastX, 60);
     groundManager.addEntity(groundEntity);
     lastX += GROUND_DEFINITION_SIZE * GROUND_SIZE;
-    groundEntity->setData(
-            i == 0
-            ? &flatGround
-            : &groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]
-      );
+
+    if (i == 0 || eligibleCount == 0) {
+        groundEntity->setData(&flatGround);
+    } else {
+        int randomIndex = eligibleSegments[random(0, eligibleCount)];
+        groundEntity->setData(&groundDefinitions[randomIndex]);
+    }
   }
   
 }
 
-void GameState_Play::draw(Arduboy2 &arduboy) {
-    gameUI.draw(arduboy);
-    groundManager.draw(arduboy);
-    playerCharacter->draw(arduboy);
+void GameState_Play::draw() {
+    gameUI.draw();
+    groundManager.draw();
+    playerCharacter->draw();
     
+#ifdef DEBUG_DRAW_VARS
+    arduboy.setCursor(0, 10);
+    arduboy.print(groundManager.calculateDifficultyLevel());
+#endif
+
     if (gameover) {
       int x = SCREEN_WIDTH / 2 - (CHAR_WIDTH * 5);
       int y = SCREEN_HEIGHT / 2;

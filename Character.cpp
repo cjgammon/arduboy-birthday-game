@@ -40,7 +40,7 @@ Character::Character(int initialX, int initialY, CharacterType initialType) {
 
 Character::~Character() {}
 
-void Character::update(Arduboy2 &arduboy) {
+void Character::update() {
   bool jumpJustPressed = arduboy.justPressed(A_BUTTON);
   bool jumpJustReleased = arduboy.justReleased(A_BUTTON);
 
@@ -251,6 +251,7 @@ void Character::setType(CharacterType newType) {
       jumpsRemaining = 2;
       // notes: very basic single jump.  perhaps he can punch through enemies while he's jumping??
     break;
+#ifdef INCLUDE_NOLA
     case CharacterType::NOLA:
       name = "NOLA";
       description = "ABILITY: Triple Jump";
@@ -270,6 +271,7 @@ void Character::setType(CharacterType newType) {
       extraJumpPower = -2.25;
       // notes: floaty jump, with a couple additional flutters
     break;
+#endif
   }
 
   setState(state);
@@ -312,7 +314,7 @@ void Character::setState(CharacterState newState) {
   }
 }
 
-void Character::draw(Arduboy2 &arduboy)
+void Character::draw()
 {
   // calculate new animation frame.
   frameCounterRaw += 1 * globalSpeedMultiplier;
