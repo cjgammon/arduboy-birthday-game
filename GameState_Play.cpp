@@ -44,7 +44,6 @@ void GameState_Play::init() {
 }
 
 void GameState_Play::update() {
-    // manage speed up
 #ifdef DEBUG_SPEED_CONTROLS
     if (arduboy.justPressed(RIGHT_BUTTON))
     {
@@ -70,9 +69,6 @@ void GameState_Play::update() {
         globalSpeedMultiplier = maxSpeed;
       }
     }
-
-
-    // Update logic
 
     if (arduboy.justPressed(B_BUTTON)) {
       stateChangeCallback(STATE_START_MENU);
