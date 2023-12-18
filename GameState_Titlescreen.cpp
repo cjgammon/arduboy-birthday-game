@@ -12,7 +12,7 @@ void GameState_Titlescreen::init() {
     lastBlinkTime = millis(); // Reset lastBlinkTime to the current time
 }
 
-void GameState_Titlescreen::update(Arduboy2 &arduboy) {
+void GameState_Titlescreen::update() {
     // Update logic
     if (arduboy.justPressed(A_BUTTON)) {
 #ifdef SOUND_ENABLED
@@ -31,7 +31,7 @@ void GameState_Titlescreen::update(Arduboy2 &arduboy) {
     }
 }
 
-void GameState_Titlescreen::draw(Arduboy2 &arduboy) {
+void GameState_Titlescreen::draw() {
     // Drawing code
   Sprites::drawOverwrite(5, 0, ui_logo_jonas, 0);
   Sprites::drawOverwrite(5, 7, ui_logo_super_birthday, 0);

@@ -54,7 +54,7 @@ void GameState_Play::init() {
     GameState_Play::createGroundEntities();
 }
 
-void GameState_Play::update(Arduboy2 &arduboy) {
+void GameState_Play::update() {
     // manage speed up
     if (arduboy.justPressed(RIGHT_BUTTON))
     {
@@ -91,7 +91,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
     }
 
     cameraX = -speed * globalSpeedMultiplier;
-    groundManager.update(arduboy);
+    groundManager.update();
 
     int characterCenterPosY = playerCharacter->getCenterY();
     int characterCenterPosX = playerCharacter->getCenterX();
@@ -137,7 +137,7 @@ void GameState_Play::update(Arduboy2 &arduboy) {
       }
     }
 
-    playerCharacter->update(arduboy);
+    playerCharacter->update();
 }
 
 void GameState_Play::playerDie() {
@@ -191,10 +191,10 @@ void GameState_Play::createGroundEntities()
   
 }
 
-void GameState_Play::draw(Arduboy2 &arduboy) {
-    gameUI.draw(arduboy);
-    groundManager.draw(arduboy);
-    playerCharacter->draw(arduboy);
+void GameState_Play::draw() {
+    gameUI.draw();
+    groundManager.draw();
+    playerCharacter->draw();
     
     if (gameover) {
       int x = SCREEN_WIDTH / 2 - (CHAR_WIDTH * 5);

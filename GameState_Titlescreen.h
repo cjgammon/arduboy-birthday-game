@@ -8,8 +8,8 @@
 class GameState_Titlescreen : public GameState {
 public:
     void init() override;
-    void update(Arduboy2 &arduboy) override;
-    void draw(Arduboy2 &arduboy) override;
+    void update() override;
+    void draw() override;
 };
 
 #endif

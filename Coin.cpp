@@ -29,7 +29,7 @@ void Coin::update(int newX)
   x = newX + positionInSegmentX;
 }
 
-void Coin::draw(Arduboy2 &arduboy)
+void Coin::draw()
 {
   if (!enabled)
   {

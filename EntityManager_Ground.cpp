@@ -17,23 +17,23 @@ void EntityManager_Ground::init() {
 }
 
 
-void EntityManager_Ground::update(Arduboy2 &arduboy) {
+void EntityManager_Ground::update() {
     // Override update method to specifically handle ground entities
     for (int i = 0; i < numEntities; i++) {
         if (entities[i] != nullptr && entities[i]->getEntityType() == EntityType::GROUND) {
             entities[i]->move(cameraX, 0.0);
             if (entities[i]->getX() + entities[i]->getWidth() < 0) {
-                recycleGroundEntity(i, arduboy);
+                recycleGroundEntity(i);
             }
             entities[i]->update();
         }
     }
 }
 
-void EntityManager_Ground::draw(Arduboy2 &arduboy) {
+void EntityManager_Ground::draw() {
   for (int i = 0; i < numEntities; i++) {
     if (entities[i] != nullptr) {
-      entities[i]->draw(arduboy);
+      entities[i]->draw();
     }
   }
 }
@@ -62,7 +62,7 @@ void EntityManager_Ground::addEntity(Entity* entity) {
   }
 }
 
-void EntityManager_Ground::recycleGroundEntity(int index, Arduboy2 &arduboy) {
+void EntityManager_Ground::recycleGroundEntity(int index) {
     // Find the rightmost position of the current ground segments
     int maxRightX = findMaxRightX();
 

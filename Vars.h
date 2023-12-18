@@ -4,7 +4,9 @@
 
 #include <avr/pgmspace.h>
 #include "SegmentDefinition.h"
+#include <Arduboy2.h>
 
+extern Arduboy2 arduboy;
 
 //#define DEBUG_DRAW_HITBOXES
 

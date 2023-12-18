@@ -7,6 +7,7 @@
 #include "Sound.h"
 
 Arduboy2 arduboy;
+
 #ifdef SOUND_ENABLED
 ArduboyTones sound(arduboy.audio.enabled);
 #endif
@@ -67,8 +68,8 @@ void loop() {
   }
 #endif
 
-  currentState->update(arduboy);
-  currentState->draw(arduboy);
+  currentState->update();
+  currentState->draw();
 
 #ifdef CHEAT_MODE_ENABLED
   // draw cheat mode.

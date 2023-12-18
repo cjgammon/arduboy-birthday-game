@@ -8,8 +8,8 @@ class EntityManager_Ground {
 public:
     EntityManager_Ground();
     void init(); // Initialize the entities
-    void update(Arduboy2 &arduboy);
-    void draw(Arduboy2 &arduboy); // Draw all entities
+    void update();
+    void draw(); // Draw all entities
     void cleanup();
 
     void addEntity(Entity* entity);
@@ -23,7 +23,7 @@ public:
     int calculateDifficultyLevel();
 
 private:
-    void recycleGroundEntity(int index, Arduboy2 &arduboy);
+    void recycleGroundEntity(int index);
     int findMaxRightX();
 };
 

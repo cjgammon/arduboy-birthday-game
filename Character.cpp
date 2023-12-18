@@ -40,7 +40,7 @@ Character::Character(int initialX, int initialY, CharacterType initialType) {
 
 Character::~Character() {}
 
-void Character::update(Arduboy2 &arduboy) {
+void Character::update() {
   bool jumpJustPressed = arduboy.justPressed(A_BUTTON);
   bool jumpJustReleased = arduboy.justReleased(A_BUTTON);
 
@@ -314,7 +314,7 @@ void Character::setState(CharacterState newState) {
   }
 }
 
-void Character::draw(Arduboy2 &arduboy)
+void Character::draw()
 {
   // calculate new animation frame.
   frameCounterRaw += 1 * globalSpeedMultiplier;

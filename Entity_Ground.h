@@ -20,7 +20,7 @@ public:
     void setData(SegmentDefinition * segmentDefinition);
 
     void update() override;
-    void draw(Arduboy2 &arduboy) override;
+    void draw() override;
 
     bool isGroundAt(int posX);
     Entity_Enemy* enemyCollision(int playerX, int playerY, int playerRadius);

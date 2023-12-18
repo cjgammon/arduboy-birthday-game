@@ -17,7 +17,7 @@ public:
 
     void move(float dx, float dy);
     virtual void update();
-    virtual void draw(Arduboy2 &arduboy);
+    virtual void draw();
 
     int getX() const { return x; }
     int getY() const { return y; }
@@ -56,7 +56,7 @@ inline void Entity::move(float dx, float dy) {
   y = yRaw;
 }
 inline void Entity::update() {}
-inline void Entity::draw(Arduboy2 &arduboy) {}
+inline void Entity::draw() {}
 
 #endif
 

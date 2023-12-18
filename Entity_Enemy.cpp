@@ -40,7 +40,7 @@ void Entity_Enemy::update(float newX) {
   x = newX + positionInSegmentX;
 }
 
-void Entity_Enemy::draw(Arduboy2 &arduboy) {
+void Entity_Enemy::draw() {
   if (!enabled)
   {
     return;

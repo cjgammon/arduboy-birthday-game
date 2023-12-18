@@ -14,7 +14,7 @@ void GameState_CharacterSelection::init() {
     playerCharacter = new Character(x, y, selectedCharacter);
 }
 
-void GameState_CharacterSelection::update(Arduboy2 &arduboy) {
+void GameState_CharacterSelection::update() {
     // Update logic
     if (arduboy.justPressed(A_BUTTON)) {
       stateChangeCallback(STATE_GAME_PLAY);
@@ -43,14 +43,14 @@ void GameState_CharacterSelection::changeCharacter(uint8_t newIndex) {
 #endif
 }
 
-void drawCenteredText(Arduboy2 &arduboy, char* text, uint8_t y)
+void drawCenteredText(char* text, uint8_t y)
 {
   int textX = screenWidth/2 - (getTextWidthInPixels(text) / 2);
   arduboy.setCursor(textX, y);
   arduboy.print(text);
 }
 
-void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
+void GameState_CharacterSelection::draw() {
     // Drawing code
     
     //highScore int to char* 
@@ -59,11 +59,11 @@ void GameState_CharacterSelection::draw(Arduboy2 &arduboy) {
     sprintf(highScoreString, "BEST: %d", highScore); // Convert the integer to a string
 
 
-    drawCenteredText(arduboy, playerCharacter->getName(), 0);
-    drawCenteredText(arduboy, playerCharacter->getDescription(), 11);
-    drawCenteredText(arduboy, highScoreString, 21);
+    drawCenteredText(playerCharacter->getName(), 0);
+    drawCenteredText(playerCharacter->getDescription(), 11);
+    drawCenteredText(highScoreString, 21);
 
-    playerCharacter->draw(arduboy);
+    playerCharacter->draw();
 
     //draw ground
     int x = 0;

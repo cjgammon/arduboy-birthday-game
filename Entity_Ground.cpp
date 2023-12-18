@@ -177,7 +177,7 @@ void Entity_Ground::update() {
 #endif
 }
 
-void Entity_Ground::draw(Arduboy2 &arduboy) {
+void Entity_Ground::draw() {
     // Draw the ground segment
     for (int i = 0; i < GROUND_DEFINITION_SIZE; i ++) {
       int newX = x + (i * GROUND_SIZE);
@@ -201,13 +201,13 @@ void Entity_Ground::draw(Arduboy2 &arduboy) {
     // draw enemies
     for (int i = 0; i < MAX_ENEMIES_PER_SEGMENT; ++i)
     {
-      enemies[i]->draw(arduboy);
+      enemies[i]->draw();
     }
 
 #ifdef COINS_ENABLED
     for (int i = 0; i < MAX_COINS_PER_SEGMENT; ++i)
     {
-      coinsArray[i]->draw(arduboy);
+      coinsArray[i]->draw();
     }
 #endif
 
