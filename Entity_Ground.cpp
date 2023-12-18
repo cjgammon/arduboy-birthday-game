@@ -178,6 +178,7 @@ void Entity_Ground::update() {
 }
 
 void Entity_Ground::draw() {
+
     // Draw the ground segment
     for (int i = 0; i < GROUND_DEFINITION_SIZE; i ++) {
       int newX = x + (i * GROUND_SIZE);

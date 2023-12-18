@@ -11,7 +11,6 @@ void GameUI::init(char *initialName
 #endif
                   ) {
   name = initialName;
-  score = 0;
 
 #ifdef LIVES_ENABLED
   lives = initialLives;
@@ -27,7 +26,10 @@ void GameUI::draw() {
 #endif
 
     drawScore();
+
+#ifdef DEBUG_DRAW_VARS
     drawSpeed();
+#endif
 }
 
 void GameUI::drawName() {

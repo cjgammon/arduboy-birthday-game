@@ -6,6 +6,7 @@
 
 float cameraX = 0;
 float cameraY = 0;
+int score = 0;
 
 #ifdef LIVES_ENABLED
 int lives = 3;
@@ -30,6 +31,7 @@ void GameState_Play::init() {
     cameraX = 0;
     speed = 2;
     gameover = false;
+    score = 0;
 
     int playerType = selectedCharacter;
     playerCharacter = new Character(0, 28, playerType);
@@ -159,20 +161,22 @@ void GameState_Play::playerDie() {
     }
 }
 
+//TODO:: move this to entity ground manager?
 void GameState_Play::createGroundEntities()
 {
   // create as many ground entities as can possibly be visible at once.
   int lastX = 0;
   int eligibleSegments[GROUND_DEFINITION_COUNT];
-  int eligibleCount;
+  int eligibleCount = 0;
   int currentDifficultyLevel = groundManager.calculateDifficultyLevel();  
 
-    eligibleCount = 0;
-    for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
-        if (groundDefinitions[i].difficulty <= currentDifficultyLevel) {
-            eligibleSegments[eligibleCount++] = i;
-        }
-    }
+  for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
+    int segmentDifficulty = pgm_read_word_near(&groundDefinitions[i].difficulty);
+
+      if (segmentDifficulty <= currentDifficultyLevel) {
+          eligibleSegments[eligibleCount++] = i;
+      }
+  }
 
   for (int i = 0; i < MAX_VISIBLE_GROUND_PIECES; i++)
   {
@@ -196,6 +200,11 @@ void GameState_Play::draw() {
     groundManager.draw();
     playerCharacter->draw();
     
+#ifdef DEBUG_DRAW_VARS
+    arduboy.setCursor(0, 10);
+    arduboy.print(groundManager.calculateDifficultyLevel());
+#endif
+
     if (gameover) {
       int x = SCREEN_WIDTH / 2 - (CHAR_WIDTH * 5);
       int y = SCREEN_HEIGHT / 2;

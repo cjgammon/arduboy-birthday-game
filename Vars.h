@@ -8,6 +8,7 @@
 
 extern Arduboy2 arduboy;
 
+//#define DEBUG_DRAW_VARS
 //#define DEBUG_DRAW_HITBOXES
 
 #define SOUND_ENABLED

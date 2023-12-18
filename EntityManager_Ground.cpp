@@ -77,7 +77,9 @@ void EntityManager_Ground::recycleGroundEntity(int index) {
         int eligibleSegments[GROUND_DEFINITION_COUNT];
         int eligibleCount = 0;
         for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
-            if (groundDefinitions[i].difficulty <= currentDifficultyLevel) {
+              int segmentDifficulty = pgm_read_word_near(&groundDefinitions[i].difficulty);
+
+            if (segmentDifficulty <= currentDifficultyLevel) {
                 eligibleSegments[eligibleCount++] = i;
             }
         }
@@ -95,6 +97,21 @@ void EntityManager_Ground::recycleGroundEntity(int index) {
 
 int EntityManager_Ground::calculateDifficultyLevel() {
     int difficultyLevel = 0;
+
+    if (score > 10) {
+      difficultyLevel = 1;
+    } 
+    if (score > 60) {
+      difficultyLevel = 2;
+    }
+    if (score > 120) {
+      difficultyLevel = 3;
+    }
+
+    if (difficultyLevel > MAX_DIFFICULTY) {
+      difficultyLevel = MAX_DIFFICULTY;
+    }
+
     return difficultyLevel;
 }
 

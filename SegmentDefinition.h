@@ -6,6 +6,8 @@
 #define MAX_COINS_PER_SEGMENT 5   // Adjust as needed
 #define MAX_COIN_FORMATIONS_PER_SEGMENT 5
 
+#define MAX_DIFFICULTY 3
+
 struct EnemyDefinition {
     uint8_t enemyType;
     uint8_t x;
@@ -80,7 +82,7 @@ const SegmentDefinition flatGround PROGMEM = {
         {255, 255, 255}, {}, {}, {}
 };
 
-#define GROUND_DEFINITION_COUNT 6
+#define GROUND_DEFINITION_COUNT 8
 const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     // segment 0
   {
@@ -147,7 +149,30 @@ const SegmentDefinition groundDefinitions[GROUND_DEFINITION_COUNT] PROGMEM = {
     },
     0 //Difficulty
   },
+    // segment 6
+  {
+    {255, 255, 255},
+    {
+      {2, 58}, // Enemy
+    },
+    {
+    },
+    1 //Difficulty
+  },
+    // segment 7
+  {
+    {143, 227, 248},
+    {
+    },
+    {
+      {1, 29}, // Item
+      {1, 65}, // Item
+      {1, 101}, // Item
+    },
+    3 //Difficulty
+  },
 };
+
 
 
 #endif // SEGMENTDEFINITION_H

@@ -38,7 +38,6 @@ private:
     char *name;
     int lives;
     int maxLives;
-    int score;
     
     // Define UI element drawing functions here
     void drawName();
