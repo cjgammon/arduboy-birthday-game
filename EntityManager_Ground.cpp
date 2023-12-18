@@ -98,18 +98,16 @@ void EntityManager_Ground::recycleGroundEntity(int index) {
 int EntityManager_Ground::calculateDifficultyLevel() {
     int difficultyLevel = 0;
 
-    if (score > 10) {
+    if (globalSpeedMultiplier > 2.0) {
       difficultyLevel = 1;
-    } 
-    if (score > 60) {
+    } else if (globalSpeedMultiplier > 1.7) {
       difficultyLevel = 2;
-    }
-    if (score > 120) {
+    } else if (globalSpeedMultiplier > 1.5) {
       difficultyLevel = 3;
-    }
-
-    if (difficultyLevel > MAX_DIFFICULTY) {
-      difficultyLevel = MAX_DIFFICULTY;
+    } else if (globalSpeedMultiplier > 1.2) {
+      difficultyLevel = 2;
+    } else if (globalSpeedMultiplier > 1.0) {
+      difficultyLevel = 1;
     }
 
     return difficultyLevel;
