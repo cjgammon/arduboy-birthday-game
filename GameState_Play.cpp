@@ -21,9 +21,6 @@ float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (ti
 bool autoSpeedupEnabled = true;
 bool gameover = false;
 
-#define MAX_VISIBLE_GROUND_PIECES 3
-Entity_Ground groundPieces[MAX_VISIBLE_GROUND_PIECES];
-
 void GameState_Play::init() {
 
     // Initialization code
@@ -52,8 +49,6 @@ void GameState_Play::init() {
 #endif
 
     groundManager.init();
-
-    GameState_Play::createGroundEntities();
 }
 
 void GameState_Play::update() {
@@ -163,49 +158,10 @@ void GameState_Play::playerDie() {
     }
 }
 
-//TODO:: move this to entity ground manager?
-void GameState_Play::createGroundEntities()
-{
-  // create as many ground entities as can possibly be visible at once.
-  int lastX = 0;
-  int eligibleSegments[GROUND_DEFINITION_COUNT];
-  int eligibleCount = 0;
-  int currentDifficultyLevel = groundManager.calculateDifficultyLevel();  
-
-  for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
-    int segmentDifficulty = pgm_read_byte(&groundDefinitions[i].difficulty);
-
-      if (segmentDifficulty <= currentDifficultyLevel) {
-          eligibleSegments[eligibleCount++] = i;
-      }
-  }
-
-  for (int i = 0; i < MAX_VISIBLE_GROUND_PIECES; i++)
-  {
-    Entity_Ground* groundEntity = &groundPieces[i];
-    groundEntity->init(lastX, 60);
-    groundManager.addEntity(groundEntity);
-    lastX += GROUND_DEFINITION_SIZE * GROUND_SIZE;
-
-    if (i == 0 || eligibleCount == 0) {
-        groundEntity->setData(&flatGround);
-    } else {
-        int randomIndex = eligibleSegments[random(0, eligibleCount)];
-        groundEntity->setData(&groundDefinitions[randomIndex]);
-    }
-  }
-  
-}
-
 void GameState_Play::draw() {
     gameUI.draw();
     groundManager.draw();
     playerCharacter->draw();
-    
-#ifdef DEBUG_DRAW_VARS
-    arduboy.setCursor(0, 10);
-    arduboy.print(groundManager.calculateDifficultyLevel());
-#endif
 
     if (gameover) {
       int x = SCREEN_WIDTH / 2 - (CHAR_WIDTH * 5);

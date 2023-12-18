@@ -1,10 +1,12 @@
 #include "EntityManager_Ground.h"
 
+#define MAX_VISIBLE_GROUND_PIECES 3
+
+Entity_Ground groundPieces[MAX_VISIBLE_GROUND_PIECES];
 
 const int fixedSeedValue = 122; // Example fixed seed value
 
 EntityManager_Ground::EntityManager_Ground() {
-  init();
 }
 
 void EntityManager_Ground::init() {
@@ -14,6 +16,7 @@ void EntityManager_Ground::init() {
     entities[i] = nullptr;
   }
   numEntities = 0;
+  createGroundEntities();
 }
 
 
@@ -62,36 +65,54 @@ void EntityManager_Ground::addEntity(Entity* entity) {
   }
 }
 
+const SegmentDefinition* EntityManager_Ground::selectSegmentBasedOnDifficulty() {
+    int eligibleSegments[GROUND_DEFINITION_COUNT];
+    int eligibleCount = 0;
+    int currentDifficultyLevel = calculateDifficultyLevel();
+
+    for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
+        int segmentDifficulty = pgm_read_byte(&groundDefinitions[i].difficulty);
+        if (segmentDifficulty <= currentDifficultyLevel) {
+          eligibleSegments[eligibleCount++] = i;
+        }
+    }
+
+    if (eligibleCount > 0) {
+        int randomIndex = eligibleSegments[random(0, eligibleCount)];
+        return &groundDefinitions[randomIndex];
+    } else {
+        return &flatGround;
+    }
+}
+
+void EntityManager_Ground::createGroundEntities() {
+    int lastX = 0;
+    for (int i = 0; i < MAX_VISIBLE_GROUND_PIECES; i++) {
+        Entity_Ground* groundEntity = &groundPieces[i];
+        groundEntity->init(lastX, 60);
+        addEntity(groundEntity);
+        lastX += GROUND_DEFINITION_SIZE * GROUND_SIZE;
+
+        if (i == 0) {
+          groundEntity->setData(&flatGround);
+        } else {
+          const SegmentDefinition* selectedSegment = selectSegmentBasedOnDifficulty();
+          groundEntity->setData(selectedSegment);
+        }
+
+    }
+}
+
 void EntityManager_Ground::recycleGroundEntity(int index) {
     // Find the rightmost position of the current ground segments
     int maxRightX = findMaxRightX();
 
-    // Move the recycled entity to the right of the rightmost ground entity
     if (entities[index] != nullptr && entities[index]->getEntityType() == EntityType::GROUND) {
         Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[index]);
         groundEntity->setX(maxRightX);
 
-        int currentDifficultyLevel = calculateDifficultyLevel();
-
-       // Create an array of eligible segments based on the current difficulty
-        int eligibleSegments[GROUND_DEFINITION_COUNT];
-        int eligibleCount = 0;
-        for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
-              int segmentDifficulty = pgm_read_byte(&groundDefinitions[i].difficulty);
-
-            if (segmentDifficulty <= currentDifficultyLevel) {
-                eligibleSegments[eligibleCount++] = i;
-            }
-        }
-
-        // Randomly select a segment from the eligible array
-        if (eligibleCount > 0) {
-            int randomIndex = eligibleSegments[random(0, eligibleCount)];
-            groundEntity->setData(&groundDefinitions[randomIndex]);
-        }
-
-        // pick a new random section
-        //groundEntity->setData(&groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]);
+        const SegmentDefinition* selectedSegment = selectSegmentBasedOnDifficulty();
+        groundEntity->setData(selectedSegment);
     }
 }
 

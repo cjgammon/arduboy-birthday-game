@@ -152,8 +152,8 @@ const uint8_t PROGMEM environmentgroundend[] = {
 #endif
 };
 
-//UI
 
+#ifdef LIVES_ENABLED
 const uint8_t PROGMEM uiheartfull[] = {
 #ifdef USE_ASSETS
 6, 6,
@@ -167,6 +167,7 @@ const uint8_t PROGMEM uiheartempty[] = {
 0x06, 0x09, 0x12, 0x09, 0x06, 0x00, 
 #endif
 };
+#endif
 
 
 
