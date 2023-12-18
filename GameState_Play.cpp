@@ -163,17 +163,30 @@ void GameState_Play::createGroundEntities()
 {
   // create as many ground entities as can possibly be visible at once.
   int lastX = 0;
+  int eligibleSegments[GROUND_DEFINITION_COUNT];
+  int eligibleCount;
+  int currentDifficultyLevel = groundManager.calculateDifficultyLevel();  
+
+    eligibleCount = 0;
+    for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
+        if (groundDefinitions[i].difficulty <= currentDifficultyLevel) {
+            eligibleSegments[eligibleCount++] = i;
+        }
+    }
+
   for (int i = 0; i < MAX_VISIBLE_GROUND_PIECES; i++)
   {
     Entity_Ground* groundEntity = &groundPieces[i];
     groundEntity->init(lastX, 60);
     groundManager.addEntity(groundEntity);
     lastX += GROUND_DEFINITION_SIZE * GROUND_SIZE;
-    groundEntity->setData(
-            i == 0
-            ? &flatGround
-            : &groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]
-      );
+
+    if (i == 0 || eligibleCount == 0) {
+        groundEntity->setData(&flatGround);
+    } else {
+        int randomIndex = eligibleSegments[random(0, eligibleCount)];
+        groundEntity->setData(&groundDefinitions[randomIndex]);
+    }
   }
   
 }

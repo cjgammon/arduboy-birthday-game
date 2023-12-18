@@ -251,6 +251,7 @@ void Character::setType(CharacterType newType) {
       jumpsRemaining = 2;
       // notes: very basic single jump.  perhaps he can punch through enemies while he's jumping??
     break;
+    /*
     case CharacterType::NOLA:
       name = "NOLA";
       description = "ABILITY: Triple Jump";
@@ -270,6 +271,7 @@ void Character::setType(CharacterType newType) {
       extraJumpPower = -2.25;
       // notes: floaty jump, with a couple additional flutters
     break;
+    */
   }
 
   setState(state);

@@ -27,7 +27,7 @@ void GameUI::draw(Arduboy2 &arduboy) {
 #endif
 
     drawScore(arduboy);
-    //drawSpeed(arduboy);
+    drawSpeed(arduboy);
 }
 
 void GameUI::drawName(Arduboy2 &arduboy) {
@@ -65,6 +65,6 @@ void GameUI::drawLives(Arduboy2 &arduboy) {
 #endif
 
 void GameUI::drawSpeed(Arduboy2 &arduboy) {
-  arduboy.setCursor(0, 0);
+  arduboy.setCursor(0, 20);
   arduboy.print(globalSpeedMultiplier);
 }

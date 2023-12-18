@@ -20,9 +20,10 @@ public:
     static const int MAX_ENTITIES = 10; // Maximum number of entities (adjust as needed)
     Entity* entities[MAX_ENTITIES]; // Store all entities
     int numEntities; // Number of currently added entities
+    int calculateDifficultyLevel();
 
 private:
-    void recycleGroundEntity(int index);
+    void recycleGroundEntity(int index, Arduboy2 &arduboy);
     int findMaxRightX();
 };
 

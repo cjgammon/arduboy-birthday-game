@@ -23,7 +23,7 @@ void EntityManager_Ground::update(Arduboy2 &arduboy) {
         if (entities[i] != nullptr && entities[i]->getEntityType() == EntityType::GROUND) {
             entities[i]->move(cameraX, 0.0);
             if (entities[i]->getX() + entities[i]->getWidth() < 0) {
-                recycleGroundEntity(i);
+                recycleGroundEntity(i, arduboy);
             }
             entities[i]->update();
         }
@@ -62,7 +62,7 @@ void EntityManager_Ground::addEntity(Entity* entity) {
   }
 }
 
-void EntityManager_Ground::recycleGroundEntity(int index) {
+void EntityManager_Ground::recycleGroundEntity(int index, Arduboy2 &arduboy) {
     // Find the rightmost position of the current ground segments
     int maxRightX = findMaxRightX();
 
@@ -71,9 +71,31 @@ void EntityManager_Ground::recycleGroundEntity(int index) {
         Entity_Ground* groundEntity = static_cast<Entity_Ground*>(entities[index]);
         groundEntity->setX(maxRightX);
 
+        int currentDifficultyLevel = calculateDifficultyLevel();
+
+       // Create an array of eligible segments based on the current difficulty
+        int eligibleSegments[GROUND_DEFINITION_COUNT];
+        int eligibleCount = 0;
+        for (int i = 0; i < GROUND_DEFINITION_COUNT; i++) {
+            if (groundDefinitions[i].difficulty <= currentDifficultyLevel) {
+                eligibleSegments[eligibleCount++] = i;
+            }
+        }
+
+        // Randomly select a segment from the eligible array
+        if (eligibleCount > 0) {
+            int randomIndex = eligibleSegments[random(0, eligibleCount)];
+            groundEntity->setData(&groundDefinitions[randomIndex]);
+        }
+
         // pick a new random section
-        groundEntity->setData(&groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]);
+        //groundEntity->setData(&groundDefinitions[random(0, GROUND_DEFINITION_COUNT)]);
     }
+}
+
+int EntityManager_Ground::calculateDifficultyLevel() {
+    int difficultyLevel = 0;
+    return difficultyLevel;
 }
 
 int EntityManager_Ground::findMaxRightX() {

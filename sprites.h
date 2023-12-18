@@ -766,7 +766,7 @@ const unsigned char PROGMEM character_calvin_run[] =
  
  
  
- 
+ /*
  
 const unsigned char PROGMEM character_nola_fall[] =
 {
@@ -912,7 +912,7 @@ const unsigned char PROGMEM character_nola_run[] =
 
  
 
- 
+ */
  
  
  
