@@ -22,27 +22,16 @@ struct EnemyTypeDefinition {
 
 // !!! the EnemyType enum and the enemyDefinitions must be in the same order!
 enum EnemyType : uint8_t {
-    COIN_ENEMY,
+    NONE,
     TROLL,
     SPIDER,
     // leave this.
     TOTAL_ENEMIES
 };
 
-const EnemyDefinition enemyDefinitionForCoin = {
-        EnemyType::COIN_ENEMY,
-        0,
-};
-
 const EnemyTypeDefinition enemyTypeDefinitions[EnemyType::TOTAL_ENEMIES] = {
         {
-                // 0 - coin
-                0,  // y
-                8, // sprite width
-                8, // sprite height
-                4, // collider x
-                4, // collider y
-                6// collider radius
+          // intentionally blank
         },
         {
                 // 1 - troll
