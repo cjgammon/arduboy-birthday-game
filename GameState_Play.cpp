@@ -16,7 +16,7 @@ int groundLevel = 28;
 
 float globalSpeedMultiplier = 0.95;
 float maxSpeed = 2.2;
-float timeToReachMaxSpeedInSeconds = 80.0;
+float timeToReachMaxSpeedInSeconds = 30.0; //80.0;
 float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (timeToReachMaxSpeedInSeconds * 60.0);
 bool autoSpeedupEnabled = true;
 bool gameover = false;
@@ -166,6 +166,13 @@ void GameState_Play::draw() {
 
     arduboy.setCursor(screenWidth - getTextWidthInPixels(scoreStr), 0);
     arduboy.print(scoreStr);
+
+#ifdef DEBUG_DRAW_VARS
+    arduboy.setCursor(0, 0);
+    arduboy.print(globalSpeedMultiplier);
+    arduboy.setCursor(0, 8);
+    arduboy.print(groundManager.calculateDifficultyLevel());
+#endif
 }
 
 void GameState_Play::cleanup()

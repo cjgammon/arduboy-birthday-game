@@ -118,18 +118,23 @@ void EntityManager_Ground::recycleGroundEntity(int index) {
 
 int EntityManager_Ground::calculateDifficultyLevel() {
     int difficultyLevel = 0;
+    float maximumSpeed = 2.2;
+    float initialSpeed = 0.95; //make sure this matches the initial value in GameState_Play.cpp
 
-    if (globalSpeedMultiplier > 2.0) {
-      difficultyLevel = 1;
-    } else if (globalSpeedMultiplier > 1.7) {
-      difficultyLevel = 2;
-    } else if (globalSpeedMultiplier > 1.5) {
+    //todo instead base it relative to max speed as fractions
+    double normalizedSpeed = (globalSpeedMultiplier - initialSpeed) / (maximumSpeed - initialSpeed);
+
+    if (normalizedSpeed > 0.9) {
       difficultyLevel = 3;
-    } else if (globalSpeedMultiplier > 1.2) {
+    } else if (normalizedSpeed > 0.7) {
       difficultyLevel = 2;
-    } else if (globalSpeedMultiplier > 1.0) {
+    } else if (normalizedSpeed > 0.5) {
+      difficultyLevel = 3;
+    } else if (normalizedSpeed > 0.4) {
+      difficultyLevel = 2;
+    } else if (normalizedSpeed > 0.2) {
       difficultyLevel = 1;
-    }
+    } 
 
     return difficultyLevel;
 }
