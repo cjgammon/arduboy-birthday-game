@@ -37,7 +37,7 @@ extern int lives;
 extern int score;
 extern float globalSpeedMultiplier;
 
-#define CHEAT_MODE_ENABLED
+//#define CHEAT_MODE_ENABLED
 
 #ifdef CHEAT_MODE_ENABLED
 enum CheatMode : uint8_t {

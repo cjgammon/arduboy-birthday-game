@@ -40,19 +40,10 @@ void GameState_Play::init() {
     playerCharacter->setGround(groundLevel);
     playerCharacter->setState(CharacterState::WALK);
 
-#ifdef LIVES_ENABLED
-    int maxLives = playerCharacter->getLives();
-    lives = maxLives;
-    gameUI.init(name, maxLives, maxLives);
-#else
-    gameUI.init(name);
-#endif
-
     groundManager.init();
 }
 
 void GameState_Play::update() {
-    // manage speed up
 #ifdef DEBUG_SPEED_CONTROLS
     if (arduboy.justPressed(RIGHT_BUTTON))
     {
@@ -78,9 +69,6 @@ void GameState_Play::update() {
         globalSpeedMultiplier = maxSpeed;
       }
     }
-
-
-    // Update logic
 
     if (arduboy.justPressed(B_BUTTON)) {
       stateChangeCallback(STATE_START_MENU);
@@ -132,7 +120,11 @@ void GameState_Play::update() {
       if (collidingCoin != nullptr)
       {
         collidingCoin->enabled = false;
-        gameUI.incScore();
+        score ++;
+#ifdef SOUND_ENABLED
+      sound.tone(score %2 == 0 ? NOTE_B7 : NOTE_AS7, 40);// coin collect
+#endif
+
       }
     }
 
@@ -149,7 +141,6 @@ void GameState_Play::playerDie() {
     gameover = true;
 
     //check hiscore
-    int score = gameUI.getScore();
     int playerHighScore = playerCharacter->getHighScore();
     if (score > playerHighScore) {
 
@@ -159,7 +150,6 @@ void GameState_Play::playerDie() {
 }
 
 void GameState_Play::draw() {
-    gameUI.draw();
     groundManager.draw();
     playerCharacter->draw();
 
@@ -169,6 +159,30 @@ void GameState_Play::draw() {
       arduboy.setCursor(x, y);
       arduboy.print("GAME OVER");
     }
+
+    //draw score
+    if (score < 99999) {
+      char scoreStr[6]; // 5 digits + 1 for the null terminator
+      snprintf(scoreStr, sizeof(scoreStr), "%05d", score); // Format the score as a 5-digit number, padding with zeros
+      arduboy.setCursor(screenWidth - getTextWidthInPixels(scoreStr), 0);
+      arduboy.print(scoreStr);
+    } else {
+      int numDigits = 0;
+      int tempScore = score;
+      while (tempScore > 0) {
+          tempScore /= 10;
+          numDigits++;
+      }
+      arduboy.setCursor(screenWidth - (numDigits * CHAR_WIDTH), 0);
+      arduboy.print(score);
+    }
+
+#ifdef DEBUG_DRAW_VARS
+    arduboy.setCursor(0, 0);
+    arduboy.print(globalSpeedMultiplier);
+    arduboy.setCursor(0, 8);
+    arduboy.print(groundManager.calculateDifficultyLevel());
+#endif
 }
 
 void GameState_Play::cleanup()
@@ -180,4 +194,5 @@ void GameState_Play::cleanup()
   }
 
   groundManager.cleanup();
+
 }

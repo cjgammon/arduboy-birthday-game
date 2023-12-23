@@ -20,13 +20,13 @@ public:
     static const int MAX_ENTITIES = 3; // Maximum number of entities (adjust as needed)
     Entity* entities[MAX_ENTITIES]; // Store all entities
     int numEntities; // Number of currently added entities
+    int calculateDifficultyLevel();
 
 private:
     void createGroundEntities();
     void addEntity(Entity* entity);
     void recycleGroundEntity(int index);
     int findMaxRightX();
-    int calculateDifficultyLevel();
     const SegmentDefinition* selectSegmentBasedOnDifficulty();
 };
 
