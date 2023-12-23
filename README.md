@@ -27,6 +27,8 @@ sh shell/upload.sh
 
 ### resources
 
+[online emulator](https://felipemanga.github.io/ProjectABE/)
+
 [tile sheet converter](http://www.bloggingadeadhorse.com/TeamARGTileSheetConverter/)
 
 [image converter](http://www.bloggingadeadhorse.com/TeamARGImgConverter/)
