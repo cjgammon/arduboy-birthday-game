@@ -14,7 +14,8 @@ int lives = 3;
 float speed = 2;
 int groundLevel = 28;
 
-float globalSpeedMultiplier = 0.95;
+float initialSpeed = 0.95;
+float globalSpeedMultiplier = initialSpeed;
 float maxSpeed = 2.2;
 float timeToReachMaxSpeedInSeconds = 80.0;
 float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (timeToReachMaxSpeedInSeconds * 60.0);
@@ -24,7 +25,7 @@ bool gameover = false;
 void GameState_Play::init() {
 
     // Initialization code
-    globalSpeedMultiplier = 0.95;
+    globalSpeedMultiplier = initialSpeed;
     cameraX = 0;
     speed = 2;
     gameover = false;

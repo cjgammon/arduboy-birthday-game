@@ -36,6 +36,8 @@ extern int lives;
 
 extern int score;
 extern float globalSpeedMultiplier;
+extern float maxSpeed;
+extern float initialSpeed;
 
 //#define CHEAT_MODE_ENABLED
 
