@@ -161,11 +161,21 @@ void GameState_Play::draw() {
     }
 
     //draw score
-    char scoreStr[6]; // 5 digits + 1 for the null terminator
-    sprintf(scoreStr, "%05d", score); // Format the score as a 5-digit number, padding with zeros
-
-    arduboy.setCursor(screenWidth - getTextWidthInPixels(scoreStr), 0);
-    arduboy.print(scoreStr);
+    if (score < 99999) {
+      char scoreStr[6]; // 5 digits + 1 for the null terminator
+      snprintf(scoreStr, sizeof(scoreStr), "%05d", score); // Format the score as a 5-digit number, padding with zeros
+      arduboy.setCursor(screenWidth - getTextWidthInPixels(scoreStr), 0);
+      arduboy.print(scoreStr);
+    } else {
+      int numDigits = 0;
+      int tempScore = score;
+      while (tempScore > 0) {
+          tempScore /= 10;
+          numDigits++;
+      }
+      arduboy.setCursor(screenWidth - (numDigits * CHAR_WIDTH), 0);
+      arduboy.print(score);
+    }
 
 #ifdef DEBUG_DRAW_VARS
     arduboy.setCursor(0, 0);
