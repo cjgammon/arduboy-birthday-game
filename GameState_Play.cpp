@@ -16,7 +16,7 @@ int groundLevel = 28;
 
 float globalSpeedMultiplier = 0.95;
 float maxSpeed = 2.2;
-float timeToReachMaxSpeedInSeconds = 30.0; //80.0;
+float timeToReachMaxSpeedInSeconds = 80.0;
 float speedMultiplierIncreasePerFrame = (maxSpeed - globalSpeedMultiplier) / (timeToReachMaxSpeedInSeconds * 60.0);
 bool autoSpeedupEnabled = true;
 bool gameover = false;
