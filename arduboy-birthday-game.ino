@@ -42,6 +42,7 @@ void setup() {
   //arduboy.systemButtons();
 #ifdef SOUND_ENABLED
   arduboy.audio.begin();
+  arduboy.audio.off(); //set off initially
 #endif
   arduboy.setFrameRate(60);
 
